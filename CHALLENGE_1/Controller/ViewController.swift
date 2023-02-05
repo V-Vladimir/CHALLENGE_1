@@ -11,9 +11,15 @@ class ViewController: UIViewController {
     var questionsModel = CQuestions()
     
     private let backgroundImageView: UIImageView = {
-       let image = UIImage(named: "backgroundImage")
         let imageView = UIImageView()
-        imageView.image = image
+        imageView.image = UIImage(named: "backgroundImage")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let mainImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "mainImage")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -28,6 +34,7 @@ class ViewController: UIViewController {
     private func setupViews() {
         
         view.addSubview(backgroundImageView)
+        view.addSubview(mainImage)
        
         
     }
@@ -45,6 +52,13 @@ extension ViewController {
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60.0),
+            mainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            mainImage.widthAnchor.constraint(equalToConstant: 225),
+            mainImage.heightAnchor.constraint(equalToConstant: 225)
         ])
         
     }
