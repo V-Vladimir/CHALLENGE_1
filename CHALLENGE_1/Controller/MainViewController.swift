@@ -9,13 +9,13 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    let imageForButtonBlue = UIImage(named: "Rectangle")
+    //var colors = GradientsColors()
     
     var BackgroundImage: UIImageView = {
         var view = UIImageView()
         view.image = UIImage(named: "Frame")
         view.translatesAutoresizingMaskIntoConstraints = false
-
+        
         return view
     }()
     var mainImage: UIImageView = {
@@ -28,18 +28,15 @@ class MainViewController: UIViewController {
     var quatinLabel: UILabel = {
         var view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.tintColor = .white
         view.text = "What year was the year, when first deodorant was invented in our life  What year was the year, when first deodorant was invented in our life?What year was the year, when first deodorant was invented in our life??"
         view.font = UIFont(name: "Roboto-Medium", size: 24)
         view.numberOfLines = 0
-        view.lineBreakMode = .byWordWrapping
         
         return view
     }()
     var quatinNumberLabel: UILabel = {
         var view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.tintColor = .white
         view.text = "Question 2"
         view.font = UIFont(name: "Roboto-Medium", size: 24)
         view.numberOfLines = 0
@@ -58,47 +55,45 @@ class MainViewController: UIViewController {
         
         return view
     }()
+    
+    //-MARK: Кнопки с вариантими ответов
+    
     var buttonA: UIButton = {
         var view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setTitle("ButtonA", for: .normal)
-        view.setBackgroundImage(UIImage(named: "react"), for: .normal)
-        view.layer.cornerRadius = 16
-        
         
         return view
     }()
+    
     var buttonB: UIButton = {
         var view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setTitle("ButtonB", for: .normal)
-        view.setBackgroundImage(UIImage(named: "react"), for: .normal)
-        view.layer.cornerRadius = 16
-        
-        
         
         return view
     }()
+    
     var buttonC: UIButton = {
         var view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setTitle("ButtonC", for: .normal)
-        view.setBackgroundImage(UIImage(named: "react"), for: .normal)
+        view.titleLabel?.font = .systemFont(ofSize: 25)
+        view.tintColor = .white
         view.layer.cornerRadius = 16
-        
-        
         
         return view
     }()
+    
     var buttonD: UIButton = {
         var view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setTitle("ButtonD", for: .normal)
-        view.setBackgroundImage(UIImage(named: "react"), for: .normal)
-        view.layer.cornerRadius = 16
         
         return view
     }()
+    
+    //-MARK: Кнопки с подсказками
     var podskazka50: UIButton = {
         var view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -110,40 +105,54 @@ class MainViewController: UIViewController {
         var view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setImage(UIImage(named: "PodskazkaZal"), for: .normal)
-
+        
         return view
     }()
     var podskazkaZvonok: UIButton = {
         var view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setImage(UIImage(named: "PodskazkaZvonok"), for: .normal)
-
+        
         return view
     }()
     
-//    func applyGradients() {
-//        let gradient = CAGradientLayer()
-//
-//        let colorTop = #colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1).cgColor
-//        let bottomColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
-//
-//        gradient.colors = [colorTop,bottomColor]
-//        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
-//        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
-//        gradient.frame = buttonD.bounds
-//
-//        buttonD.layer.addSublayer(gradient)
-//        buttonD.setTitleColor(UIColor.white, for: .normal)
-//
-//    }
     
+    //MARK: Функция Градиента 
+    func applyGradients(sender: UIButton) {
+        
+        let gradient = CAGradientLayer()
+
+        let colorTop = #colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1).cgColor
+        let bottomColor = #colorLiteral(red: 0.1125075445, green: 0.2618700266, blue: 0.281789422, alpha: 1).cgColor
+
+        gradient.colors = [colorTop,bottomColor,colorTop]
+        gradient.locations = [0.0, 0.5, 1.0]
+        gradient.cornerRadius = 16
+        gradient.frame = sender.bounds
+        
+       
+        sender.layer.addSublayer(gradient)
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
         uzerIntefaseConstrates()
-        //applyGradients()
+  
     }
+    //-MARK: неоюходим для получения градиента после инициализации NSLayotConstranes
+    override func viewDidLayoutSubviews() {
+         super.viewDidLayoutSubviews()
+        
+        self.applyGradients(sender: buttonA)
+        self.applyGradients(sender: buttonB)
+        self.applyGradients(sender: buttonC)
+        self.applyGradients(sender: buttonD)
+        
+        }
     
+    // -MARK: NSLayoutConstrates (Ящик пандоры)
     func uzerIntefaseConstrates() {
         view.addSubview(BackgroundImage)
         NSLayoutConstraint.activate([
