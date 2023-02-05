@@ -37,12 +37,31 @@ class MainViewController: UIViewController {
        let label = UILabel()
         label.text = "to Who Wants \nto be a Millionare"
         label.numberOfLines = 2
-        label.font = .robotoMedium36()
+        label.font = .robotoMedium32()
         label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let rulesButton: UIButton = {
+        let title = String.getSpecialString(text: "Правила игры")
+        let button = UIButton(type: .system)
+        button.setAttributedTitle(title, for: .normal)
+        button.setTitleColor(.specialGreenColor, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let startButton: UIButton = {
+        let title = String.getSpecialString(text: "Начать игру")
+        let button = UIButton(type: .system)
+        button.setAttributedTitle(title, for: .normal)
+        button.setTitleColor(.specialGreenColor, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +76,12 @@ class MainViewController: UIViewController {
         view.addSubview(mainImage)
         view.addSubview(welcomeLabel)
         view.addSubview(nameLabel)
+        view.addSubview(rulesButton)
+        view.addSubview(startButton)
         
     }
+    
+    
     
 }
 
@@ -92,6 +115,17 @@ extension MainViewController {
             nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        NSLayoutConstraint.activate([
+            rulesButton.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 100),
+            rulesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            startButton.topAnchor.constraint(equalTo: rulesButton.bottomAnchor, constant: 6),
+            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
     }
     
 }
+
