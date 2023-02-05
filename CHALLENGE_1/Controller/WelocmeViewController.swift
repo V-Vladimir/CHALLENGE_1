@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class WelocmeViewController: UIViewController {
     var questionsModel = CQuestions()
     
     private let backgroundImageView: UIImageView = {
@@ -87,7 +87,7 @@ class MainViewController: UIViewController {
 
 
 //MARK: - Set Constraints
-extension MainViewController {
+extension WelocmeViewController {
     
     private func setConstraints() {
         
@@ -121,7 +121,7 @@ extension MainViewController {
         ])
         
         NSLayoutConstraint.activate([
-            startButton.topAnchor.constraint(equalTo: rulesButton.bottomAnchor, constant: 6),
+            startButton.topAnchor.constraint(equalTo: rulesButton.bottomAnchor, constant: 5),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
