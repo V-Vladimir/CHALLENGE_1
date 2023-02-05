@@ -13,9 +13,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .green
+        setupViews()
+        setConstraints()
     }
 
-
+    private func setupViews() {
+        view.backgroundColor = .green
+    }
+    
 }
 
+
+//MARK: - Set Constraints
+extension ViewController {
+    
+    private func setConstraints() {
+        
+    }
+    
+}
