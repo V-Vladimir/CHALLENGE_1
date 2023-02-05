@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
     }()
     
     private let rulesButton: UIButton = {
-        let title = String.getSpecialString(text: "Правила игры")
+        let title = String.getSpecialString(text: "Правила игры",with: .specialGreenColor)
         let button = UIButton(type: .system)
         button.setAttributedTitle(title, for: .normal)
         button.setTitleColor(.specialGreenColor, for: .normal)
@@ -54,7 +54,7 @@ class MainViewController: UIViewController {
     }()
     
     private let startButton: UIButton = {
-        let title = String.getSpecialString(text: "Начать игру")
+        let title = String.getSpecialString(text: "Начать игру", with: .specialGreenColor)
         let button = UIButton(type: .system)
         button.setAttributedTitle(title, for: .normal)
         button.setTitleColor(.specialGreenColor, for: .normal)

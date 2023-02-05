@@ -9,10 +9,10 @@ import UIKit
 
 extension String {
     
-    static func getSpecialString(text: String) -> NSAttributedString {
+    static func getSpecialString(text: String, with color: UIColor) -> NSAttributedString {
         return NSAttributedString(string: text, attributes: [
             .font: UIFont.robotoMedium24() ?? UIFont.systemFont(ofSize: 24),
-            .foregroundColor: UIColor.specialGreenColor,
+            .foregroundColor: color,
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ])
     }
