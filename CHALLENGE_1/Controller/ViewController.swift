@@ -8,6 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var questionsModel = CQuestions()
 
     override func viewDidLoad() {
         super.viewDidLoad()
