@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     var questionsModel = CQuestions()
     
     private let backgroundImageView: UIImageView = {
@@ -23,6 +23,26 @@ class ViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
+    private let welcomeLabel: UILabel = {
+       let label = UILabel()
+        label.text = "Welcome"
+        label.textColor = .white
+        label.font = .robotoMedium18()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let nameLabel: UILabel = {
+       let label = UILabel()
+        label.text = "to Who Wants \nto be a Millionare"
+        label.numberOfLines = 2
+        label.font = .robotoMedium36()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +55,8 @@ class ViewController: UIViewController {
         
         view.addSubview(backgroundImageView)
         view.addSubview(mainImage)
-       
+        view.addSubview(welcomeLabel)
+        view.addSubview(nameLabel)
         
     }
     
@@ -43,7 +64,7 @@ class ViewController: UIViewController {
 
 
 //MARK: - Set Constraints
-extension ViewController {
+extension MainViewController {
     
     private func setConstraints() {
         
@@ -59,6 +80,16 @@ extension ViewController {
             mainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             mainImage.widthAnchor.constraint(equalToConstant: 225),
             mainImage.heightAnchor.constraint(equalToConstant: 225)
+        ])
+        
+        NSLayoutConstraint.activate([
+            welcomeLabel.topAnchor.constraint(equalTo: mainImage.bottomAnchor, constant: 15),
+            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 10),
+            nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
     }
