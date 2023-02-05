@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C3A13DB3298FC64600AE2302 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A13DB2298FC64600AE2302 /* MainViewController.swift */; };
+		C3A13DB5298FD79F00AE2302 /* GradientsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A13DB4298FD79F00AE2302 /* GradientsColors.swift */; };
 		CC715943298F80CB00400F0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715942298F80CB00400F0B /* AppDelegate.swift */; };
 		CC715945298F80CB00400F0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715944298F80CB00400F0B /* SceneDelegate.swift */; };
 		CC715947298F80CB00400F0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715946298F80CB00400F0B /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		C3A13DB2298FC64600AE2302 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		C3A13DB4298FD79F00AE2302 /* GradientsColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientsColors.swift; sourceTree = "<group>"; };
 		CC71593F298F80CB00400F0B /* CHALLENGE_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CHALLENGE_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC715942298F80CB00400F0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC715944298F80CB00400F0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			children = (
 				CC715946298F80CB00400F0B /* ViewController.swift */,
 				C3A13DB2298FC64600AE2302 /* MainViewController.swift */,
+				C3A13DB4298FD79F00AE2302 /* GradientsColors.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				CC715943298F80CB00400F0B /* AppDelegate.swift in Sources */,
 				CC715945298F80CB00400F0B /* SceneDelegate.swift in Sources */,
 				C3A13DB3298FC64600AE2302 /* MainViewController.swift in Sources */,
+				C3A13DB5298FD79F00AE2302 /* GradientsColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

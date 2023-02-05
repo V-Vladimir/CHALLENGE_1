@@ -13,14 +13,14 @@ class MainViewController: UIViewController {
     
     var BackgroundImage: UIImageView = {
         var view = UIImageView()
-        view.image = UIImage(named: "bacground")
+        view.image = UIImage(named: "Frame")
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return view
     }()
     var mainImage: UIImageView = {
         var view = UIImageView()
-        view.image = UIImage(named: "mainImage")
+        view.image = UIImage(named: "MainLabelMillionair")
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -59,45 +59,43 @@ class MainViewController: UIViewController {
         return view
     }()
     var buttonA: UIButton = {
-        var view = UIButton()
+        var view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "Rectangle"), for: .normal)
+        view.setTitle("ButtonA", for: .normal)
+        view.setBackgroundImage(UIImage(named: "react"), for: .normal)
         view.layer.cornerRadius = 16
-        view.backgroundColor = .black
-        view.contentMode = .scaleToFill
         
         
         return view
     }()
     var buttonB: UIButton = {
-        var view = UIButton()
+        var view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "Rectangle"), for: .normal)
+        view.setTitle("ButtonB", for: .normal)
+        view.setBackgroundImage(UIImage(named: "react"), for: .normal)
         view.layer.cornerRadius = 16
-        view.backgroundColor = .black
         
         
         
         return view
     }()
     var buttonC: UIButton = {
-        var view = UIButton()
+        var view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "Rectangle"), for: .normal)
+        view.setTitle("ButtonC", for: .normal)
+        view.setBackgroundImage(UIImage(named: "react"), for: .normal)
         view.layer.cornerRadius = 16
-        view.backgroundColor = .black
         
         
         
         return view
     }()
     var buttonD: UIButton = {
-        var view = UIButton()
+        var view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "Rectangle"), for: .normal)
+        view.setTitle("ButtonD", for: .normal)
+        view.setBackgroundImage(UIImage(named: "react"), for: .normal)
         view.layer.cornerRadius = 16
-        view.backgroundColor = .black
-        
         
         return view
     }()
@@ -123,12 +121,29 @@ class MainViewController: UIViewController {
         return view
     }()
     
-    
+//    func applyGradients() {
+//        let gradient = CAGradientLayer()
+//
+//        let colorTop = #colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1).cgColor
+//        let bottomColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1).cgColor
+//
+//        gradient.colors = [colorTop,bottomColor]
+//        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+//        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+//        gradient.frame = buttonD.bounds
+//
+//        buttonD.layer.addSublayer(gradient)
+//        buttonD.setTitleColor(UIColor.white, for: .normal)
+//
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .gray
         uzerIntefaseConstrates()
+        //applyGradients()
     }
+    
     func uzerIntefaseConstrates() {
         view.addSubview(BackgroundImage)
         NSLayoutConstraint.activate([
@@ -141,13 +156,13 @@ class MainViewController: UIViewController {
         NSLayoutConstraint.activate([
             mainImage.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,constant: 7),
             mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainImage.widthAnchor.constraint(equalToConstant: 87),
-            mainImage.heightAnchor.constraint(equalToConstant: 87)
+            mainImage.widthAnchor.constraint(equalToConstant: 95),
+            mainImage.heightAnchor.constraint(equalToConstant: 95)
         ])
         view.addSubview(quatinLabel)
         NSLayoutConstraint.activate([
-            quatinLabel.topAnchor.constraint(equalTo: mainImage.topAnchor),
-            quatinLabel.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 128),
+            quatinLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            quatinLabel.leftAnchor.constraint(equalTo: mainImage.rightAnchor,constant: 7),
             quatinLabel.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -7),
             quatinLabel.widthAnchor.constraint(equalToConstant: 281),
             quatinLabel.heightAnchor.constraint(equalToConstant: 100)
@@ -165,45 +180,49 @@ class MainViewController: UIViewController {
         view.addSubview(buttonA)
         NSLayoutConstraint.activate([
             buttonA.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 180),
-            buttonA.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonA.heightAnchor.constraint(equalToConstant: 54)
+            buttonA.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+            buttonA.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+            buttonA.heightAnchor.constraint(equalToConstant: 65)
         ])
         view.addSubview(buttonB)
         NSLayoutConstraint.activate([
             buttonB.topAnchor.constraint(equalTo: buttonA.bottomAnchor,constant: 32),
-            buttonB.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonB.heightAnchor.constraint(equalToConstant: 54)
+            buttonB.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+            buttonB.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+            buttonB.heightAnchor.constraint(equalToConstant: 65)
         ])
         view.addSubview(buttonC)
         NSLayoutConstraint.activate([
             buttonC.topAnchor.constraint(equalTo: buttonB.bottomAnchor,constant: 32),
-            buttonC.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonC.heightAnchor.constraint(equalToConstant: 54)
+            buttonC.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+            buttonC.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+            buttonC.heightAnchor.constraint(equalToConstant: 65)
         ])
         view.addSubview(buttonD)
         NSLayoutConstraint.activate([
+            buttonD.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
             buttonD.topAnchor.constraint(equalTo: buttonC.bottomAnchor,constant: 32),
-            buttonD.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonD.heightAnchor.constraint(equalToConstant: 54)
+            buttonD.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+            buttonD.heightAnchor.constraint(equalToConstant: 65),
         ])
         view.addSubview(podskazka50)
         NSLayoutConstraint.activate([
             podskazka50.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            podskazka50.topAnchor.constraint(equalTo: buttonD.bottomAnchor,constant: 150),
+            podskazka50.topAnchor.constraint(equalTo: buttonD.bottomAnchor,constant: 130),
             podskazka50.widthAnchor.constraint(equalToConstant: 105),
             podskazka50.heightAnchor.constraint(equalToConstant: 80)
         ])
         view.addSubview(podskazkaZal)
         NSLayoutConstraint.activate([
             podskazkaZal.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            podskazkaZal.topAnchor.constraint(equalTo: buttonD.bottomAnchor,constant: 150),
+            podskazkaZal.topAnchor.constraint(equalTo: buttonD.bottomAnchor,constant: 130),
             podskazkaZal.widthAnchor.constraint(equalToConstant: 105),
             podskazkaZal.heightAnchor.constraint(equalToConstant: 80)
         ])
         view.addSubview(podskazkaZvonok)
         NSLayoutConstraint.activate([
             podskazkaZvonok.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-            podskazkaZvonok.topAnchor.constraint(equalTo: buttonD.bottomAnchor,constant: 150),
+            podskazkaZvonok.topAnchor.constraint(equalTo: buttonD.bottomAnchor,constant: 130),
             podskazkaZvonok.widthAnchor.constraint(equalToConstant: 105),
             podskazkaZvonok.heightAnchor.constraint(equalToConstant: 80)
         ])
