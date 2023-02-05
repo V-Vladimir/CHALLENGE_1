@@ -44,11 +44,12 @@ class WelocmeViewController: UIViewController {
         return label
     }()
     
-    private let rulesButton: UIButton = {
+    private lazy var rulesButton: UIButton = {
         let title = String.getSpecialString(text: "Правила игры",with: .specialGreenColor)
         let button = UIButton(type: .system)
         button.setAttributedTitle(title, for: .normal)
         button.setTitleColor(.specialGreenColor, for: .normal)
+        button.addTarget(self, action: #selector(touchRules), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -81,10 +82,15 @@ class WelocmeViewController: UIViewController {
         
     }
     
+    //MARK: - Selectors
     
+    @objc
+    private func touchRules() {
+        let ruleVC = RuleViewController()
+        present(ruleVC, animated: true)
+    }
     
 }
-
 
 //MARK: - Set Constraints
 extension WelocmeViewController {
