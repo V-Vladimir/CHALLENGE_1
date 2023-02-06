@@ -97,21 +97,21 @@ class MainViewController: UIViewController {
     var podskazka50: UIButton = {
         var view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "Podskazka50"), for: .normal)
+        view.setImage(UIImage(named: "fifty"), for: .normal)
         
         return view
     }()
     var podskazkaZal: UIButton = {
         var view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "PodskazkaZal"), for: .normal)
+        view.setImage(UIImage(named: "mistake"), for: .normal)
         
         return view
     }()
     var podskazkaZvonok: UIButton = {
         var view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "PodskazkaZvonok"), for: .normal)
+        view.setImage(UIImage(named: "phoneCall"), for: .normal)
         
         return view
     }()
