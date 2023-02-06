@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18512B40298FD17700F71511 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18512B3F298FD17700F71511 /* ProgressViewController.swift */; };
 		CC715943298F80CB00400F0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715942298F80CB00400F0B /* AppDelegate.swift */; };
 		CC715945298F80CB00400F0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715944298F80CB00400F0B /* SceneDelegate.swift */; };
 		CC715947298F80CB00400F0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715946298F80CB00400F0B /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18512B3F298FD17700F71511 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		CC71593F298F80CB00400F0B /* CHALLENGE_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CHALLENGE_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC715942298F80CB00400F0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC715944298F80CB00400F0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				CC715946298F80CB00400F0B /* ViewController.swift */,
+				18512B3F298FD17700F71511 /* ProgressViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18512B40298FD17700F71511 /* ProgressViewController.swift in Sources */,
 				CC715947298F80CB00400F0B /* ViewController.swift in Sources */,
 				CC715958298F85C500400F0B /* Question.swift in Sources */,
 				CC715943298F80CB00400F0B /* AppDelegate.swift in Sources */,
