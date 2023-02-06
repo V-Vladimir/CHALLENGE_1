@@ -20,25 +20,21 @@ class ProgressViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIStackView())
-    let labelText: UILabel = {
-        $0.text = "Вопрос 1                         100"
-        $0.textColor = .white
-        $0.font = .systemFont(ofSize: 20)
-        $0.numberOfLines = 0
+    let imageIcon: UIImageView = {
+        $0.image = UIImage(named: "image1")
+        $0.contentMode = .scaleAspectFit
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
-    }(UILabel())
-    
+    }(UIImageView())
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addBackground()
         makeLabels()
         setupConstraints()
-        
-        
     }
     func makeLabels(){
-        for _ in 0..<15{
+        for i in 0..<15{
+            //create question cell
             let questionCell: UIImageView = {
             let width = UIScreen.main.bounds.size.width
             $0.image = UIImage(named: "Rectangle violet")
@@ -46,7 +42,17 @@ class ProgressViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalToConstant: width * (1 - CGFloat(2) * 0.035)).isActive = true
             return $0
-        }(UIImageView())
+            }(UIImageView())
+            //create label and subView it on question cell
+            let labelText: UILabel = {
+                $0.text = "Вопрос \(amountsOfWin.count - i)                         \(amountsOfWin[amountsOfWin.count - i - 1])"
+                $0.textColor = .white
+                $0.font = .systemFont(ofSize: 20)
+                $0.numberOfLines = 0
+                $0.translatesAutoresizingMaskIntoConstraints = false
+                return $0
+                }(UILabel())
+            
         questionCell.addSubview(labelText)
         labelText.centerYAnchor.constraint(equalTo: questionCell.centerYAnchor).isActive = true
         labelText.centerXAnchor.constraint(equalTo: questionCell.centerXAnchor).isActive = true
@@ -80,7 +86,12 @@ extension ProgressViewController{
             stack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-
+        ])
+        view.addSubview(imageIcon)
+        NSLayoutConstraint.activate([
+            imageIcon.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1),
+            imageIcon.bottomAnchor.constraint(equalTo: stack.safeAreaLayoutGuide.topAnchor),
+            imageIcon.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }
