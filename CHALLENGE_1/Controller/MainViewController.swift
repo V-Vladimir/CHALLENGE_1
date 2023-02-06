@@ -9,7 +9,11 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    //var colors = GradientsColors()
+    var buttonA = CustomButton()
+    var buttonB = CustomButton()
+    var buttonC = CustomButton()
+    var buttonD = CustomButton()
+
     
     var BackgroundImage: UIImageView = {
         var view = UIImageView()
@@ -56,42 +60,7 @@ class MainViewController: UIViewController {
         return view
     }()
     
-    //-MARK: Кнопки с вариантими ответов
-    
-    var buttonA: UIButton = {
-        var view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setTitle("ButtonA", for: .normal)
-        
-        return view
-    }()
-    
-    var buttonB: UIButton = {
-        var view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setTitle("ButtonB", for: .normal)
-        
-        return view
-    }()
-    
-    var buttonC: UIButton = {
-        var view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setTitle("ButtonC", for: .normal)
-        view.titleLabel?.font = .systemFont(ofSize: 25)
-        view.tintColor = .white
-        view.layer.cornerRadius = 16
-        
-        return view
-    }()
-    
-    var buttonD: UIButton = {
-        var view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setTitle("ButtonD", for: .normal)
-        
-        return view
-    }()
+
     
     //-MARK: Кнопки с подсказками
     var podskazka50: UIButton = {
@@ -117,40 +86,42 @@ class MainViewController: UIViewController {
     }()
     
     
-    //MARK: Функция Градиента 
-    func applyGradients(sender: UIButton) {
-        
-        let gradient = CAGradientLayer()
-
-        let colorTop = #colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1).cgColor
-        let bottomColor = #colorLiteral(red: 0.1125075445, green: 0.2618700266, blue: 0.281789422, alpha: 1).cgColor
-
-        gradient.colors = [colorTop,bottomColor,colorTop]
-        gradient.locations = [0.0, 0.5, 1.0]
-        gradient.cornerRadius = 16
-        gradient.frame = sender.bounds
-        
-       
-        sender.layer.addSublayer(gradient)
-
-    }
-
+    //-MARK: Функция Градиента
+    
+        func applyGradients(sender: UIButton) {
+    
+            let gradient = CAGradientLayer()
+    
+            let colorTop = #colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1).cgColor
+            let bottomColor = #colorLiteral(red: 0.1125075445, green: 0.2618700266, blue: 0.281789422, alpha: 1).cgColor
+    
+            gradient.colors = [colorTop,bottomColor,colorTop]
+            gradient.locations = [0.0, 0.5, 1.0]
+            gradient.cornerRadius = 16
+            gradient.frame = sender.bounds
+    
+    
+            sender.layer.addSublayer(gradient)
+    
+        }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
         uzerIntefaseConstrates()
-  
+        
     }
+    
     //-MARK: неоюходим для получения градиента после инициализации NSLayotConstranes
     override func viewDidLayoutSubviews() {
-         super.viewDidLayoutSubviews()
+        super.viewDidLayoutSubviews()
+                self.applyGradients(sender: buttonA)
+                self.applyGradients(sender: buttonB)
+                self.applyGradients(sender: buttonC)
+                self.applyGradients(sender: buttonD)
         
-        self.applyGradients(sender: buttonA)
-        self.applyGradients(sender: buttonB)
-        self.applyGradients(sender: buttonC)
-        self.applyGradients(sender: buttonD)
         
-        }
+    }
     
     // -MARK: NSLayoutConstrates (Ящик пандоры)
     func uzerIntefaseConstrates() {
@@ -237,4 +208,3 @@ class MainViewController: UIViewController {
         ])
     }
 }
-
