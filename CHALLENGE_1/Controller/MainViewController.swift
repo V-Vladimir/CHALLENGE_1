@@ -13,14 +13,14 @@ class MainViewController: UIViewController {
     
     var BackgroundImage: UIImageView = {
         var view = UIImageView()
-        view.image = UIImage(named: "Frame")
+        view.image = UIImage(named: "backgroundImage")
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
     var mainImage: UIImageView = {
         var view = UIImageView()
-        view.image = UIImage(named: "MainLabelMillionair")
+        view.image = UIImage(named: "mainImage")
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
