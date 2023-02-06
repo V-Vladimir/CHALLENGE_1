@@ -11,14 +11,14 @@ class FinalView: UIView {
 
     let backgroundImage:UIImageView = {
         let backgroundImage = UIImageView()
-        backgroundImage.image = UIImage(named: "Frame")
+        backgroundImage.image = UIImage(named: "backgroundImage")
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImage
     }()
     
     let titleImage: UIImageView = {
        let titleImage = UIImageView()
-        titleImage.image = UIImage(named: "Logo")
+        titleImage.image = UIImage(named: "mainImage")
         titleImage.translatesAutoresizingMaskIntoConstraints = false
         return titleImage
     }()
