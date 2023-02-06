@@ -60,10 +60,11 @@ class WelocmeViewController: UIViewController {
         button.setAttributedTitle(title, for: .normal)
         button.setTitleColor(.specialGreenColor, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(navigationToMainView), for: .touchUpInside)
         return button
     }()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -71,6 +72,11 @@ class WelocmeViewController: UIViewController {
         setConstraints()
     }
 
+    override func viewWillDisappear(_ boolFlag :Bool) {
+        super.viewWillDisappear(boolFlag)
+        self.navigationController?.viewControllers.remove(at: 0)
+    }
+    
     private func setupViews() {
         
         view.addSubview(backgroundImageView)
@@ -79,7 +85,6 @@ class WelocmeViewController: UIViewController {
         view.addSubview(nameLabel)
         view.addSubview(rulesButton)
         view.addSubview(startButton)
-        
     }
     
     //MARK: - Selectors
@@ -90,6 +95,11 @@ class WelocmeViewController: UIViewController {
         present(ruleVC, animated: true)
     }
     
+    @objc
+    private func navigationToMainView() {
+        let mainVC = MainViewController()
+        self.navigationController?.pushViewController(mainVC, animated: true)
+    }
 }
 
 //MARK: - Set Constraints
