@@ -18,6 +18,9 @@
 		CC715958298F85C500400F0B /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715957298F85C500400F0B /* Question.swift */; };
 		CC71595E2991245700400F0B /* FinalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC71595D2991245700400F0B /* FinalController.swift */; };
 		CC715960299124FE00400F0B /* FinalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC71595F299124FE00400F0B /* FinalView.swift */; };
+		CC7159622991471D00400F0B /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7159612991471D00400F0B /* AnswerButton.swift */; };
+		CC715964299161B000400F0B /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = CC715963299161AF00400F0B /* questions.json */; };
+		CC7159662992390200400F0B /* PeoplesHelperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7159652992390100400F0B /* PeoplesHelperView.swift */; };
 		D85E549D29900B2600BE7980 /* UIFont + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E549C29900B2600BE7980 /* UIFont + Extensions.swift */; };
 		D85E54A129900BE900BE7980 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D85E549F29900BE900BE7980 /* Roboto-Bold.ttf */; };
 		D85E54A229900BE900BE7980 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D85E54A029900BE900BE7980 /* Roboto-Medium.ttf */; };
@@ -40,6 +43,9 @@
 		CC715957298F85C500400F0B /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		CC71595D2991245700400F0B /* FinalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalController.swift; sourceTree = "<group>"; };
 		CC71595F299124FE00400F0B /* FinalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalView.swift; sourceTree = "<group>"; };
+		CC7159612991471D00400F0B /* AnswerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
+		CC715963299161AF00400F0B /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
+		CC7159652992390100400F0B /* PeoplesHelperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeoplesHelperView.swift; sourceTree = "<group>"; };
 		D85E549C29900B2600BE7980 /* UIFont + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extensions.swift"; sourceTree = "<group>"; };
 		D85E549F29900BE900BE7980 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		D85E54A029900BE900BE7980 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -78,6 +84,7 @@
 		CC715941298F80CB00400F0B /* CHALLENGE_1 */ = {
 			isa = PBXGroup;
 			children = (
+				CC715963299161AF00400F0B /* questions.json */,
 				D85E5499298FB70B00BE7980 /* Applications */,
 				CC715959298F85D400400F0B /* Model */,
 				CC71595A298F85F800400F0B /* View */,
@@ -114,6 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				CC71595F299124FE00400F0B /* FinalView.swift */,
+				CC7159612991471D00400F0B /* AnswerButton.swift */,
+				CC7159652992390100400F0B /* PeoplesHelperView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC715964299161B000400F0B /* questions.json in Resources */,
 				D85E54A229900BE900BE7980 /* Roboto-Medium.ttf in Resources */,
 				CC71594F298F80CD00400F0B /* LaunchScreen.storyboard in Resources */,
 				CC71594C298F80CD00400F0B /* Assets.xcassets in Resources */,
@@ -233,6 +243,8 @@
 				D85E549D29900B2600BE7980 /* UIFont + Extensions.swift in Sources */,
 				CC715947298F80CB00400F0B /* WelocmeViewController.swift in Sources */,
 				D85E54A829903D1F00BE7980 /* RuleViewController.swift in Sources */,
+				CC7159662992390200400F0B /* PeoplesHelperView.swift in Sources */,
+				CC7159622991471D00400F0B /* AnswerButton.swift in Sources */,
 				CC715958298F85C500400F0B /* Question.swift in Sources */,
 				D85E54A42990184D00BE7980 /* UIColor + Extensions.swift in Sources */,
 				CC715960299124FE00400F0B /* FinalView.swift in Sources */,

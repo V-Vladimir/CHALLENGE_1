@@ -102,11 +102,11 @@ class MainViewController: UIViewController {
         return view
     }()
     var podskazkaZal: UIButton = {
-        var view = UIButton()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "mistake"), for: .normal)
-        
-        return view
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "mistake"), for: .normal)
+        button.addTarget(self, action: #selector(presentModalController), for: .touchUpInside)
+        return button
     }()
     var podskazkaZvonok: UIButton = {
         var view = UIButton()
@@ -135,6 +135,14 @@ class MainViewController: UIViewController {
 
     }
 
+    @objc func presentModalController() {
+        let vc = CustomModalViewController()
+        vc.setCQuestionsValue(question)
+        vc.modalPresentationStyle = .overCurrentContext
+        // keep false
+        // modal animation will be handled in VC itself
+        self.present(vc, animated: false)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
