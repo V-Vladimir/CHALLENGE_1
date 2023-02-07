@@ -35,31 +35,37 @@ class ProgressViewController: UIViewController {
     func makeLabels(){
         for i in 0..<15{
             //create question cell
-            let questionCell: UIImageView = {
+            let questionCell = UIImageView()
             let width = UIScreen.main.bounds.size.width
-            $0.image = UIImage(named: "Rectangle violet")
-            $0.contentMode = .scaleToFill
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.widthAnchor.constraint(equalToConstant: width * (1 - CGFloat(2) * 0.035)).isActive = true
-            return $0
-            }(UIImageView())
+            questionCell.image = UIImage(named: "Rectangle violet")
+            questionCell.contentMode = .scaleToFill
+            questionCell.translatesAutoresizingMaskIntoConstraints = false
+            questionCell.widthAnchor.constraint(equalToConstant: width * (1 - CGFloat(2) * 0.035)).isActive = true
             //create label and subView it on question cell
-            let labelText: UILabel = {
-                $0.text = "Вопрос \(amountsOfWin.count - i)                         \(amountsOfWin[amountsOfWin.count - i - 1])"
-                $0.textColor = .white
-                $0.font = .systemFont(ofSize: 20)
-                $0.numberOfLines = 0
-                $0.translatesAutoresizingMaskIntoConstraints = false
-                return $0
-                }(UILabel())
+            let labelTextNumberOfQuestion = UILabel()
+            labelTextNumberOfQuestion.text = "Вопрос \(amountsOfWin.count - i)"
+            labelTextNumberOfQuestion.textColor = .white
+            labelTextNumberOfQuestion.font = .systemFont(ofSize: 20)
+            labelTextNumberOfQuestion.numberOfLines = 0
+            labelTextNumberOfQuestion.translatesAutoresizingMaskIntoConstraints = false
             
-        questionCell.addSubview(labelText)
-        labelText.centerYAnchor.constraint(equalTo: questionCell.centerYAnchor).isActive = true
-        labelText.centerXAnchor.constraint(equalTo: questionCell.centerXAnchor).isActive = true
-        stack.addArrangedSubview(questionCell)
+            let labelAmountOfMoney = UILabel()
+            labelAmountOfMoney.text = "\(amountsOfWin[amountsOfWin.count - i - 1])  RUB"
+            labelAmountOfMoney.textColor = .white
+            labelAmountOfMoney.font = .systemFont(ofSize: 20)
+            labelAmountOfMoney.numberOfLines = 0
+            labelAmountOfMoney.translatesAutoresizingMaskIntoConstraints = false
+            
+            questionCell.addSubview(labelTextNumberOfQuestion)
+            questionCell.addSubview(labelAmountOfMoney)
+            labelTextNumberOfQuestion.leadingAnchor.constraint(equalToSystemSpacingAfter: questionCell.leadingAnchor, multiplier: 3).isActive = true
+            labelTextNumberOfQuestion.centerYAnchor.constraint(equalTo: questionCell.centerYAnchor).isActive = true
+            questionCell.trailingAnchor.constraint(equalToSystemSpacingAfter: labelAmountOfMoney.trailingAnchor, multiplier: 3).isActive = true
+            labelAmountOfMoney.centerYAnchor.constraint(equalTo: questionCell.centerYAnchor).isActive = true
+            
+            stack.addArrangedSubview(questionCell)
         }
     }
-
 }
 
 extension UIView {
