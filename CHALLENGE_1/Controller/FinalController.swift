@@ -40,6 +40,7 @@ class FinalController: UIViewController {
     }
 
     @objc  func buttonTapped(sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
         //code for segue
     }
     

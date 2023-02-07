@@ -31,8 +31,9 @@ class ProgressViewController: UIViewController {
         self.view.addBackground()
         makeLabels()
         setupConstraints()
+        self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
     }
-    func makeLabels(){
+    func makeLabels() {
         for i in 0..<15{
             //create question cell
             let questionCell = UIImageView()
@@ -66,6 +67,9 @@ class ProgressViewController: UIViewController {
             stack.addArrangedSubview(questionCell)
         }
     }
+    @objc func toBackView() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 extension UIView {
@@ -84,6 +88,15 @@ extension UIView {
         self.sendSubviewToBack(imageViewBackground)
     }
 }
+extension UIView {
+  func addTapGesture(tapNumber: Int, target: Any, action: Selector) {
+    let tap = UITapGestureRecognizer(target: target, action: action)
+    tap.numberOfTapsRequired = tapNumber
+    addGestureRecognizer(tap)
+    isUserInteractionEnabled = true
+  }
+}
+
 extension ProgressViewController{
     func setupConstraints(){
         view.addSubview(stack)

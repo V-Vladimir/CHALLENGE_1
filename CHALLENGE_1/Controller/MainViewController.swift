@@ -9,7 +9,17 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    private let question = CQuestions()
+    private var progressView = ProgressViewController()
     //var colors = GradientsColors()
+    
+    lazy var contentStackView: UIStackView = {
+        let stackView = UIStackView()//(arrangedSubviews: [AnswerButton("1"), AnswerButton("2"), AnswerButton("3"), AnswerButton("4")])
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 20.0
+        return stackView
+    }()
     
     var BackgroundImage: UIImageView = {
         var view = UIImageView()
@@ -56,15 +66,16 @@ class MainViewController: UIViewController {
         return view
     }()
     
+    let answerButtons = [AnswerButton](arrayLiteral: AnswerButton(0, "1"), AnswerButton(1, "2"), AnswerButton(2, "3"), AnswerButton(3, "4"))
     //-MARK: Кнопки с вариантими ответов
     
     var buttonA: UIButton = {
         var view = UIButton(type: .system)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setTitle("ButtonA", for: .normal)
-        
         return view
     }()
+    
     
     var buttonB: UIButton = {
         var view = UIButton(type: .system)
@@ -81,7 +92,6 @@ class MainViewController: UIViewController {
         view.titleLabel?.font = .systemFont(ofSize: 25)
         view.tintColor = .white
         view.layer.cornerRadius = 16
-        
         return view
     }()
     
@@ -98,7 +108,6 @@ class MainViewController: UIViewController {
         var view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setImage(UIImage(named: "fifty"), for: .normal)
-        
         return view
     }()
     var podskazkaZal: UIButton = {
@@ -121,7 +130,6 @@ class MainViewController: UIViewController {
     func applyGradients(sender: UIButton) {
         
         let gradient = CAGradientLayer()
-
         let colorTop = #colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1).cgColor
         let bottomColor = #colorLiteral(red: 0.1125075445, green: 0.2618700266, blue: 0.281789422, alpha: 1).cgColor
 
@@ -130,8 +138,8 @@ class MainViewController: UIViewController {
         gradient.cornerRadius = 16
         gradient.frame = sender.bounds
         
-       
-        sender.layer.addSublayer(gradient)
+        //sender.layer.addSublayer(gradient)
+        sender.layer.insertSublayer(gradient, at: 0)
 
     }
 
@@ -143,23 +151,56 @@ class MainViewController: UIViewController {
         // modal animation will be handled in VC itself
         self.present(vc, animated: false)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
         uzerIntefaseConstrates()
+        showQuestion()
   
     }
     //-MARK: неоюходим для получения градиента после инициализации NSLayotConstranes
     override func viewDidLayoutSubviews() {
-         super.viewDidLayoutSubviews()
+        super.viewDidLayoutSubviews()
         
-        self.applyGradients(sender: buttonA)
-        self.applyGradients(sender: buttonB)
-        self.applyGradients(sender: buttonC)
-        self.applyGradients(sender: buttonD)
-        
+//        self.applyGradients(sender: buttonA)
+//        self.applyGradients(sender: buttonB)
+//        self.applyGradients(sender: buttonC)
+//        self.applyGradients(sender: buttonD)
+        for button in answerButtons {
+            //contentStackView.addArrangedSubview(button)
+            button.applyGradients()
+            button.addTarget(self, action: #selector(pushAnswerButton), for: .touchUpInside)
         }
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showQuestion()
+    }
+    
+    func showQuestion() {
+        let question = self.question.getAciveQuestion()
+        quatinLabel.text = question.question
+        quatinNumberLabel.text = "Qusetion \(self.question.getPosition())"
+        for index in Range(0...3) {
+            answerButtons[index].setText(question.answers[index])
+        }
+    }
+    
+    @objc func pushAnswerButton(_ sender:UIButton) {
+        print(sender.tag)
+        if self.question.checkAnswer(sender.tag) {
+            _ = self.question.nextQuestion()
+            self.navigationController!.pushViewController(progressView, animated: true)
+        } else {
+            var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
+            navStackArray.insert(FinalController(), at: navStackArray.count)
+            navStackArray.insert(progressView, at: navStackArray.count)
+            self.navigationController!.setViewControllers(navStackArray, animated:true)
+        }
+    }
+
     // -MARK: NSLayoutConstrates (Ящик пандоры)
     func uzerIntefaseConstrates() {
         view.addSubview(BackgroundImage)
@@ -194,52 +235,64 @@ class MainViewController: UIViewController {
             summQuation.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 120),
             summQuation.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
         ])
-        view.addSubview(buttonA)
+        
+        view.addSubview(contentStackView)
+        for button in answerButtons {
+            contentStackView.addArrangedSubview(button)
+        }
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            buttonA.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 180),
-            buttonA.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            buttonA.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-            buttonA.heightAnchor.constraint(equalToConstant: 65)
+            contentStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 180),
+            contentStackView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+            contentStackView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+            contentStackView.heightAnchor.constraint(equalToConstant: 65 * 5)
         ])
-        view.addSubview(buttonB)
-        NSLayoutConstraint.activate([
-            buttonB.topAnchor.constraint(equalTo: buttonA.bottomAnchor,constant: 32),
-            buttonB.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            buttonB.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-            buttonB.heightAnchor.constraint(equalToConstant: 65)
-        ])
-        view.addSubview(buttonC)
-        NSLayoutConstraint.activate([
-            buttonC.topAnchor.constraint(equalTo: buttonB.bottomAnchor,constant: 32),
-            buttonC.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            buttonC.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-            buttonC.heightAnchor.constraint(equalToConstant: 65)
-        ])
-        view.addSubview(buttonD)
-        NSLayoutConstraint.activate([
-            buttonD.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            buttonD.topAnchor.constraint(equalTo: buttonC.bottomAnchor,constant: 32),
-            buttonD.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-            buttonD.heightAnchor.constraint(equalToConstant: 65),
-        ])
+//        view.addSubview(buttonA)
+//        NSLayoutConstraint.activate([
+//            buttonA.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 180),
+//            buttonA.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+//            buttonA.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+//            buttonA.heightAnchor.constraint(equalToConstant: 65)
+//        ])
+//        view.addSubview(buttonB)
+//        NSLayoutConstraint.activate([
+//            buttonB.topAnchor.constraint(equalTo: buttonA.bottomAnchor,constant: 32),
+//            buttonB.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+//            buttonB.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+//            buttonB.heightAnchor.constraint(equalToConstant: 65)
+//        ])
+//        view.addSubview(buttonC)
+//        NSLayoutConstraint.activate([
+//            buttonC.topAnchor.constraint(equalTo: buttonB.bottomAnchor,constant: 32),
+//            buttonC.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+//            buttonC.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+//            buttonC.heightAnchor.constraint(equalToConstant: 65)
+//        ])
+//        view.addSubview(buttonD)
+//        NSLayoutConstraint.activate([
+//            buttonD.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+//            buttonD.topAnchor.constraint(equalTo: buttonC.bottomAnchor,constant: 32),
+//            buttonD.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+//            buttonD.heightAnchor.constraint(equalToConstant: 65),
+//        ])
         view.addSubview(podskazka50)
         NSLayoutConstraint.activate([
             podskazka50.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            podskazka50.topAnchor.constraint(equalTo: buttonD.bottomAnchor,constant: 130),
+            podskazka50.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -30),
             podskazka50.widthAnchor.constraint(equalToConstant: 105),
             podskazka50.heightAnchor.constraint(equalToConstant: 80)
         ])
         view.addSubview(podskazkaZal)
         NSLayoutConstraint.activate([
             podskazkaZal.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            podskazkaZal.topAnchor.constraint(equalTo: buttonD.bottomAnchor,constant: 130),
+            podskazkaZal.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -30),
             podskazkaZal.widthAnchor.constraint(equalToConstant: 105),
             podskazkaZal.heightAnchor.constraint(equalToConstant: 80)
         ])
         view.addSubview(podskazkaZvonok)
         NSLayoutConstraint.activate([
             podskazkaZvonok.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-            podskazkaZvonok.topAnchor.constraint(equalTo: buttonD.bottomAnchor,constant: 130),
+            podskazkaZvonok.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -30),
             podskazkaZvonok.widthAnchor.constraint(equalToConstant: 105),
             podskazkaZvonok.heightAnchor.constraint(equalToConstant: 80)
         ])

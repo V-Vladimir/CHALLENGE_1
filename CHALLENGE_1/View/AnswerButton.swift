@@ -14,12 +14,16 @@ class AnswerButton : UIButton {
     convenience init(frame:CGRect, text:String) {
         self.init(frame: frame)
     }
-    convenience init(_ text:String) {
+    convenience init(_ tag:Int, _ text:String) {
         self.init()
+        self.tag = tag
         self.setTitle(text, for: .normal)
     }
     func setBackColor(_ color:UIColor) {
         self.backColor = color
+    }
+    func setText(_ text:String) {
+        self.setTitle(text, for: .normal)
     }
     
     //MARK: Функция Градиента
