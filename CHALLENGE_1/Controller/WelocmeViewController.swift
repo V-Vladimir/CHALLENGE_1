@@ -71,7 +71,7 @@ class WelocmeViewController: UIViewController {
         setupViews()
         setConstraints()
     }
-
+    
     override func viewWillDisappear(_ boolFlag :Bool) {
         super.viewWillDisappear(boolFlag)
         self.navigationController?.viewControllers.remove(at: 0)

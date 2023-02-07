@@ -132,7 +132,6 @@ class MainViewController: UIViewController {
         
        
         sender.layer.addSublayer(gradient)
-
     }
 
     override func viewDidLoad() {

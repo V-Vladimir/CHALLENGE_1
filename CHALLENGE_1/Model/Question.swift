@@ -14,7 +14,7 @@ struct Question {
     let rightAnswerIndex: Int
 }
 
-class CQuestions {
+public class CQuestions {
     private var questions: [Question] = []
     init() {
         for numbers in 1...15 {
@@ -24,5 +24,8 @@ class CQuestions {
         for item in questions {
             assert(item.answers.count == 4)
         }
+    }
+    public func returnAns() -> Int {
+        return 13
     }
 }
