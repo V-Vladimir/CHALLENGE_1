@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    var preMadeSounds = PreMadeSounds()
+    
     //var colors = GradientsColors()
     
     var BackgroundImage: UIImageView = {
@@ -139,7 +141,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .gray
         uzerIntefaseConstrates()
-  
     }
     //-MARK: неоюходим для получения градиента после инициализации NSLayotConstranes
     override func viewDidLayoutSubviews() {
