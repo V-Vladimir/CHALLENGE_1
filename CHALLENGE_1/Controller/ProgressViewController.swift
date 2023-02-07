@@ -21,7 +21,7 @@ class ProgressViewController: UIViewController {
         return $0
     }(UIStackView())
     let imageIcon: UIImageView = {
-        $0.image = UIImage(named: "image1")
+        $0.image = UIImage(named: "mainImage")
         $0.contentMode = .scaleAspectFit
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
@@ -75,7 +75,7 @@ extension UIView {
         let height = UIScreen.main.bounds.size.height
 
         let imageViewBackground = UIImageView(frame: CGRectMake(0, 0, width, height))
-        imageViewBackground.image = UIImage(named: "background")
+        imageViewBackground.image = UIImage(named: "backgroundImage")
 
         // you can change the content mode:
         imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFill
