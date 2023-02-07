@@ -17,31 +17,54 @@ class FinalController: UIViewController {
         button.backgroundColor = #colorLiteral(red: 0.2319103479, green: 0.7549440265, blue: 0.2910608053, alpha: 1)
         button.setTitle("PlAY AGAIN", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "ArialMT", size: 36)
+        button.titleLabel?.font = UIFont.robotoMedium32()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 20
         button.addTarget(nil, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
     
+    
+    //load view from FinalView
     override func loadView() {
         view = finalView
-        // if you'd like to  change titles
-        
-        //finalView.textInformation.text = "you're score is 12 "
-        //finalView.finalResultText.text = "LOSE"
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(playAgainButton)
-    setConstraints()
-
+        setConstraints()
+        showResult(isWin: true, questionNumber: 0)
     }
 
-    @objc  func buttonTapped(sender: UIButton) {
+    func showResult(isWin: Bool, questionNumber: Int) {
+        if isWin == false {
+            finalView.textInformation.text = " вы проиграли на \(questionNumber) вопросе"
+            finalView.finalResultText.text = "LOSE"
+        } else if isWin == true {
+            finalView.textInformation.text = " Вы выйграли! вы ответили на все вопросы!"
+            finalView.finalResultText.text = "WIN"
+        }
+        
+    }
+    
+    //MARK: - Selectors
+   
+    @objc  func buttonTapped() {
         //code for segue
+      //переход работает в modal formate
+        let welcomeVC = WelocmeViewController()
+       let navVC = UINavigationController(rootViewController: welcomeVC)
+        self.modalPresentationStyle = .fullScreen
+        present(navVC,animated: true)
     }
+    
+}
+
+//MARK: - Set Constraints
+
+extension FinalController {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
@@ -52,5 +75,6 @@ class FinalController: UIViewController {
             playAgainButton.heightAnchor.constraint(equalToConstant: 87),
         ])
     }
+    
+    
 }
-

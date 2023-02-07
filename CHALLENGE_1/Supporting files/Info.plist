@@ -6,6 +6,7 @@
 	<array>
 		<string>Roboto-Bold.ttf</string>
 		<string>Roboto-Medium.ttf</string>
+		<string>Syne-Regular.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

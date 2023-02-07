@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5643100129901D4300D94513 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		56F65DFC2991791A003FA9F8 /* Syne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 568D42DE29916EC2004BF7ED /* Syne-Regular.ttf */; };
 		C3A13DB3298FC64600AE2302 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A13DB2298FC64600AE2302 /* MainViewController.swift */; };
 		C3A13DB5298FD79F00AE2302 /* GradientsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A13DB4298FD79F00AE2302 /* GradientsColors.swift */; };
 		CC715943298F80CB00400F0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715942298F80CB00400F0B /* AppDelegate.swift */; };
@@ -27,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		568D42DE29916EC2004BF7ED /* Syne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Syne-Regular.ttf"; path = "../../../../../Downloads/Syne/Syne-Regular.ttf"; sourceTree = "<group>"; };
+		56F65DFB2991790E003FA9F8 /* Syne-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Syne-Medium.ttf"; path = "../../../../../Downloads/Syne-2/static/Syne-Medium.ttf"; sourceTree = "<group>"; };
 		C3A13DB2298FC64600AE2302 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C3A13DB4298FD79F00AE2302 /* GradientsColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientsColors.swift; sourceTree = "<group>"; };
 		CC71593F298F80CB00400F0B /* CHALLENGE_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CHALLENGE_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +153,8 @@
 			children = (
 				D85E549F29900BE900BE7980 /* Roboto-Bold.ttf */,
 				D85E54A029900BE900BE7980 /* Roboto-Medium.ttf */,
+				56F65DFB2991790E003FA9F8 /* Syne-Medium.ttf */,
+				568D42DE29916EC2004BF7ED /* Syne-Regular.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 			files = (
 				D85E54A229900BE900BE7980 /* Roboto-Medium.ttf in Resources */,
 				CC71594F298F80CD00400F0B /* LaunchScreen.storyboard in Resources */,
+				56F65DFC2991791A003FA9F8 /* Syne-Regular.ttf in Resources */,
 				CC71594C298F80CD00400F0B /* Assets.xcassets in Resources */,
 				D85E54A129900BE900BE7980 /* Roboto-Bold.ttf in Resources */,
 			);

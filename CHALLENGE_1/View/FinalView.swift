@@ -27,9 +27,10 @@ class FinalView: UIView {
        let textLabel = UILabel()
         textLabel.text = "You losed on {attempt} attempt"
         textLabel.textColor = .white
-        textLabel.font = UIFont(name: "ArialMT", size: 24)
+        textLabel.font = UIFont.robotoMedium24()
         textLabel.textAlignment = .center
         textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.adjustsFontSizeToFitWidth = true
         return textLabel
     }()
     
@@ -37,7 +38,7 @@ class FinalView: UIView {
        let textLabel = UILabel()
         textLabel.text = "LOSE"
         textLabel.textColor = .red
-        textLabel.font = UIFont(name: "ArialMT", size: 50)
+        textLabel.font = UIFont.syneRegular60()
         textLabel.textAlignment = .center
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         return textLabel
