@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class ProgressViewController: UIViewController {
     let amountsOfWin = ["100","200","300","500","1000"
                         ,"2000","4000","8000","16000","32000"
@@ -20,12 +19,16 @@ class ProgressViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIStackView())
+    
     let imageIcon: UIImageView = {
         $0.image = UIImage(named: "mainImage")
         $0.contentMode = .scaleAspectFit
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIImageView())
+    
+    let currentPosition = 4
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addBackground()
@@ -33,15 +36,17 @@ class ProgressViewController: UIViewController {
         setupConstraints()
         self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
     }
-    func makeLabels() {
-        for i in 0..<15{
+    
+    func makeLabels(){
+        for i in 0..<amountsOfWin.count {
             //create question cell
             let questionCell = UIImageView()
             let width = UIScreen.main.bounds.size.width
-            questionCell.image = UIImage(named: "Rectangle violet")
+            questionCell.image = UIImage(named: checkColorOfRectangle(i))
             questionCell.contentMode = .scaleToFill
             questionCell.translatesAutoresizingMaskIntoConstraints = false
-            questionCell.widthAnchor.constraint(equalToConstant: width * (1 - CGFloat(2) * 0.035)).isActive = true
+            questionCell.widthAnchor.constraint(equalToConstant: width * (1 - CGFloat(5) * 0.035)).isActive = true
+            
             //create label and subView it on question cell
             let labelTextNumberOfQuestion = UILabel()
             labelTextNumberOfQuestion.text = "Вопрос \(amountsOfWin.count - i)"
@@ -51,7 +56,7 @@ class ProgressViewController: UIViewController {
             labelTextNumberOfQuestion.translatesAutoresizingMaskIntoConstraints = false
             
             let labelAmountOfMoney = UILabel()
-            labelAmountOfMoney.text = "\(amountsOfWin[amountsOfWin.count - i - 1])  RUB"
+            labelAmountOfMoney.text = "\(amountsOfWin[amountsOfWin.count - i - 1]) \(checkLastQuestion(i))"
             labelAmountOfMoney.textColor = .white
             labelAmountOfMoney.font = .systemFont(ofSize: 20)
             labelAmountOfMoney.numberOfLines = 0
@@ -59,12 +64,39 @@ class ProgressViewController: UIViewController {
             
             questionCell.addSubview(labelTextNumberOfQuestion)
             questionCell.addSubview(labelAmountOfMoney)
+            
+            
             labelTextNumberOfQuestion.leadingAnchor.constraint(equalToSystemSpacingAfter: questionCell.leadingAnchor, multiplier: 3).isActive = true
             labelTextNumberOfQuestion.centerYAnchor.constraint(equalTo: questionCell.centerYAnchor).isActive = true
+            
+            
             questionCell.trailingAnchor.constraint(equalToSystemSpacingAfter: labelAmountOfMoney.trailingAnchor, multiplier: 3).isActive = true
             labelAmountOfMoney.centerYAnchor.constraint(equalTo: questionCell.centerYAnchor).isActive = true
             
             stack.addArrangedSubview(questionCell)
+        }
+    }
+
+    func checkColorOfRectangle(_ index: Int) -> String{
+        let position = amountsOfWin.count - index
+        if(position == 5) || (position == 10){
+            return "Rectangle blue"
+        }
+        else if (position == 15){
+            return "Rectangle yellow"
+        }
+        else if (position == currentPosition){
+            return "Rectangle green"
+        }
+        else{
+            return "Rectangle violet"
+        }
+    }
+    func checkLastQuestion(_ index: Int) -> String{
+        if(index + 1 == 1){
+            return ""
+        } else {
+            return "RUB"
         }
     }
     @objc func toBackView() {
@@ -72,7 +104,7 @@ class ProgressViewController: UIViewController {
     }
 }
 
-extension UIView {
+private extension UIView {
     func addBackground() {
         // screen width and height:
         let width = UIScreen.main.bounds.size.width

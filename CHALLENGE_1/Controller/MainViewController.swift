@@ -78,23 +78,6 @@ class MainViewController: UIViewController {
     }()
     
     let answerButtons = [AnswerButton](arrayLiteral: AnswerButton(0, "1"), AnswerButton(1, "2"), AnswerButton(2, "3"), AnswerButton(3, "4"))
-    
-    //MARK: Функция Градиента 
-    func applyGradients(sender: UIButton) {
-        
-        let gradient = CAGradientLayer()
-        let colorTop = #colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1).cgColor
-        let bottomColor = #colorLiteral(red: 0.1125075445, green: 0.2618700266, blue: 0.281789422, alpha: 1).cgColor
-
-        gradient.colors = [colorTop,bottomColor,colorTop]
-        gradient.locations = [0.0, 0.5, 1.0]
-        gradient.cornerRadius = 16
-        gradient.frame = sender.bounds
-        
-        //sender.layer.addSublayer(gradient)
-        sender.layer.insertSublayer(gradient, at: 0)
-
-    }
 
     @objc func presentModalController(_ sender: HelperButton) {
         sender.setDisableImage()
