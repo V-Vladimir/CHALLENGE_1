@@ -10,6 +10,9 @@ import UIKit
 class MainViewController: UIViewController {
     
     var questionVariant = ["A", "B", "C", "D"]
+    var buttons: [UIButton] = []
+    var helperButtons: [UIButton] = []
+
     
     var stack: UIStackView = {
         var view = UIStackView()
@@ -100,12 +103,14 @@ class MainViewController: UIViewController {
 
     func makeQuestionButtons() {
         
+        
         for i in questionVariant {
             let button = UIButton(type: .system)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.tintColor = .white
             button.layer.cornerRadius = 16
-            button.backgroundColor = .gray
+            button.tag = i.hash
+            buttons.append(button)
             
             let labelAmountOfMoney = UILabel()
             labelAmountOfMoney.text = "\(i)"
@@ -116,6 +121,7 @@ class MainViewController: UIViewController {
             view.addSubview(labelAmountOfMoney)
             labelAmountOfMoney.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
             labelAmountOfMoney.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            
             stack.addArrangedSubview(button)
         }
     }
@@ -123,10 +129,10 @@ class MainViewController: UIViewController {
         
         let imagesNames = ["fifty", "mistake", "phoneCall"]
         
-        for i in 0...2 {
+        for i in imagesNames {
             let button = UIButton(type: .system)
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.setImage(UIImage(named: imagesNames[i]), for: .normal)
+            button.setImage(UIImage(named: i), for: .normal)
             
             button.widthAnchor.constraint(equalToConstant: 105).isActive = true
             button.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -134,9 +140,12 @@ class MainViewController: UIViewController {
             podskazkaStack.addArrangedSubview(button)
         }
     }
-//    //-MARK: неоюходим для получения градиента после инициализации NSLayotConstranes
+//    //-MARK: необходим для получения градиента после инициализации NSLayotConstranes
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        buttons.forEach { button in
+            self.applyGradients(sender: button)
+        }
 
 
     }
