@@ -5,11 +5,24 @@
 //  Created by Vladimir Vdovchenko on 06.02.2023.
 //
 
-import Foundation
 import UIKit
 
-class AnswerButton : UIButton {
+final class AnswerButton : UIButton {
     private var backColor:UIColor!
+
+    let textAnswer: UILabel = {
+        $0.contentMode = .scaleAspectFit
+        $0.textColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    
+    let labelTag: UILabel = {
+        $0.contentMode = .scaleAspectFit
+        $0.textColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
     
     convenience init(frame:CGRect, text:String) {
         self.init(frame: frame)
@@ -17,13 +30,14 @@ class AnswerButton : UIButton {
     convenience init(_ tag:Int, _ text:String) {
         self.init()
         self.tag = tag
-        self.setTitle(text, for: .normal)
-    }
-    func setBackColor(_ color:UIColor) {
-        self.backColor = color
+        let charVal = String("A").unicodeScalars
+        let asciiVal = Int(charVal[charVal.startIndex].value)
+        self.labelTag.text = "\(Character(UnicodeScalar(asciiVal + tag)!))"
+        self.addSubview(labelTag)
+        self.addSubview(textAnswer)
     }
     func setText(_ text:String) {
-        self.setTitle(text, for: .normal)
+        self.textAnswer.text = text
     }
     
     //MARK: Функция Градиента
@@ -36,8 +50,16 @@ class AnswerButton : UIButton {
         gradient.locations = [0.0, 0.5, 1.0]
         gradient.cornerRadius = 16
         gradient.frame = self.bounds
-        
         self.layer.insertSublayer(gradient, at: 0)
+    }
+    //-MARK: неоюходим для получения градиента после инициализации NSLayotConstranes
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        labelTag.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        labelTag.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+        textAnswer.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+        textAnswer.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.applyGradients()
     }
 }
 
