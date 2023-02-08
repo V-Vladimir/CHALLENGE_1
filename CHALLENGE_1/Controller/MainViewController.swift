@@ -114,13 +114,13 @@ class MainViewController: UIViewController {
             
             let labelAmountOfMoney = UILabel()
             labelAmountOfMoney.text = "\(i)"
-            labelAmountOfMoney.textColor = .white
-            labelAmountOfMoney.font = .systemFont(ofSize: 20)
+            labelAmountOfMoney.textColor = .red
+            labelAmountOfMoney.font = .systemFont(ofSize: 30)
             labelAmountOfMoney.translatesAutoresizingMaskIntoConstraints = false
             
-            view.addSubview(labelAmountOfMoney)
-            labelAmountOfMoney.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            labelAmountOfMoney.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            button.addSubview(labelAmountOfMoney)
+            labelAmountOfMoney.topAnchor.constraint(equalTo: button.topAnchor,constant: 18).isActive = true
+            labelAmountOfMoney.leftAnchor.constraint(equalTo: button.leftAnchor,constant: 5).isActive = true
             
             stack.addArrangedSubview(button)
         }
