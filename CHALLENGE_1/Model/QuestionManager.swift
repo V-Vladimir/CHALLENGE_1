@@ -7,10 +7,20 @@
 
 import Foundation
 
+enum EnumHelper {
+    case mistake
+    case fiftyAndFiftyActive
+    case peoplesHall
+}
+
 final class CQuestions {
     private var questions:[Question] = []
-    private var isMistake = false
     private var currentPosition:Int = 1
+    
+    //helper flags
+    private var isMistake = false
+    private var isFiftyAndFiftyActive = false
+    private var isPeoplesHall = false
     
     init() {
         loadQuestions()
@@ -44,11 +54,12 @@ final class CQuestions {
     
     // return correct answer
     func getFiftyAndFiftyIndex() -> [Int] {
+        self.isFiftyAndFiftyActive = true
         let question = getAciveQuestion()
         var arrayAnswerIndex = Array(repeating: question.rightAnswerIndex, count: 2)
         repeat {
             arrayAnswerIndex[1] = Int.random(in: 0..<4)
-        } while arrayAnswerIndex[1] != arrayAnswerIndex[0]
+        } while arrayAnswerIndex[1] == question.rightAnswerIndex
         return arrayAnswerIndex
     }
     
@@ -82,9 +93,11 @@ final class CQuestions {
     func getAciveQuestion() -> Question {
         return questions[currentPosition]
     }
+    
     func getPosition() -> Int {
         return currentPosition
     }
+    
     func nextQuestion() -> Question {
         currentPosition+=1
         return getAciveQuestion()
@@ -92,6 +105,13 @@ final class CQuestions {
     
     func isMakeMistake() -> Bool {
         return isMistake
+    }
+    func activeMistakeHelp() {
+        isMistake = true
+    }
+    
+    func activeHelpers() -> [Int] {
+        return []
     }
     
 }

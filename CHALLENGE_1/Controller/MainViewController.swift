@@ -108,6 +108,8 @@ class MainViewController: UIViewController {
         var view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setImage(UIImage(named: "fifty"), for: .normal)
+        view.addTarget(self, action: #selector(pushFiftyAndFifty), for: .touchUpInside)
+        
         return view
     }()
     var podskazkaZal: UIButton = {
@@ -152,6 +154,26 @@ class MainViewController: UIViewController {
         self.present(vc, animated: false)
     }
     
+    @objc func pushFiftyAndFifty() {
+        let arrayIndex = question.getFiftyAndFiftyIndex()
+        print("\(arrayIndex)")
+        for index in Range(0...3) {
+            if !arrayIndex.contains(index) {
+                answerButtons[index].setText("")
+            }
+        }
+    }
+    func setActiveHelperButton(){
+        let arrayButton = question.activeHelpers()
+        for item in arrayButton {
+//            switch item {
+//            case 0:
+//                //podskazka50.set
+//
+//            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
@@ -194,10 +216,17 @@ class MainViewController: UIViewController {
             _ = self.question.nextQuestion()
             self.navigationController!.pushViewController(progressView, animated: true)
         } else {
-            var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
-            navStackArray.insert(FinalController(), at: navStackArray.count)
-            navStackArray.insert(progressView, at: navStackArray.count)
-            self.navigationController!.setViewControllers(navStackArray, animated:true)
+            if !self.question.isMakeMistake() {
+                //toDo animation in 2-3 sec
+                question.activeMistakeHelp()
+                _ = self.question.nextQuestion()
+                self.navigationController!.pushViewController(progressView, animated: true)
+            } else {
+                var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
+                navStackArray.insert(FinalController(), at: navStackArray.count)
+                navStackArray.insert(progressView, at: navStackArray.count)
+                self.navigationController!.setViewControllers(navStackArray, animated:true)
+            }
         }
     }
 
