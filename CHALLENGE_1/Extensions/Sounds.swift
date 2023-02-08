@@ -9,12 +9,27 @@ import UIKit
 import AVFoundation
 
 class PreMadeSounds {
+   
+   
     
-    var soundsGame: AVAudioPlayer?
-    var soundAnswer: AVAudioPlayer?
-    var soundGoing:  AVAudioPlayer?
+  
+    private var soundsGame: AVAudioPlayer?
+    private var soundAnswer: AVAudioPlayer?
+    private var soundGoing:  AVAudioPlayer?
     
-    func timeGoing() {
+    func timeGoing(AVPlayer: AVAudioPlayer?) {
+        guard let path = Bundle.main.path(forResource: "timeGoing.mp3", ofType: nil) else { return }
+        let url = URL(fileURLWithPath: path)
+        do {
+            soundsGame = try AVAudioPlayer(contentsOf: url)
+            soundsGame?.play()
+        } catch {
+            
+        }
+    }
+    
+    
+    func timeGing() {
         guard let path = Bundle.main.path(forResource: "timeGoing.mp3", ofType: nil) else { return }
         let url = URL(fileURLWithPath: path)
         do {
@@ -29,10 +44,10 @@ class PreMadeSounds {
     }
     
     
+    
     //напишите название необходимой мелодии
     func answer(nameSoundMP3: String) {
-        
-        
+
         let pathAnswer = Bundle.main.path(forResource: nameSoundMP3, ofType: nil) ?? "nil sound"
        
         let urlAnswer = URL(fileURLWithPath: pathAnswer)

@@ -9,7 +9,6 @@ import UIKit
 
 class WelocmeViewController: UIViewController {
     var questionsModel = CQuestions()
-    
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "backgroundImage")
