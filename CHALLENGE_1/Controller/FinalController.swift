@@ -8,7 +8,6 @@
 import UIKit
 
 class FinalController: UIViewController {
-    var questionsModel = CQuestions()
     let finalView = FinalView()
     
     let playAgainButton: UIButton = {

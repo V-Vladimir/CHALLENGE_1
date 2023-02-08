@@ -8,7 +8,6 @@
 import UIKit
 
 final class AnswerButton : UIButton {
-    private var backColor:UIColor!
 
     let textAnswer: UILabel = {
         $0.contentMode = .scaleAspectFit

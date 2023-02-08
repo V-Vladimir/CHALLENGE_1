@@ -8,7 +8,6 @@
 import UIKit
 
 class WelocmeViewController: UIViewController {
-    var questionsModel = CQuestions()
     
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -63,7 +62,6 @@ class WelocmeViewController: UIViewController {
         button.addTarget(self, action: #selector(navigationToMainView), for: .touchUpInside)
         return button
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

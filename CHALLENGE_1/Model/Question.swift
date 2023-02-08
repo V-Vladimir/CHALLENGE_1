@@ -17,7 +17,8 @@ struct Question {
         for i in 0..<2 {
             tmpAnswers.insert(tmpAnswers.remove(at: i), at: Int.random(in:0...2))
         }
-        rightAnswerIndex = Int.random(in: 0..<4)
+        //rightAnswerIndex = Int.random(in: 0..<4)
+        rightAnswerIndex = 3
         tmpAnswers.insert(correctAnswer, at: rightAnswerIndex)
         answers = tmpAnswers
     }

@@ -11,6 +11,7 @@ class MainViewController: UIViewController {
     
     private let question = CQuestions()
     private var progressView = ProgressViewController()
+    private var mistakeButton:HelperButton?
     //var colors = GradientsColors()
     
     lazy var contentStackView: UIStackView = {
@@ -20,6 +21,16 @@ class MainViewController: UIViewController {
         stackView.spacing = 20.0
         return stackView
     }()
+    
+    var podskazkaStack: UIStackView = {
+        var view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.distribution = .fillEqually
+        view.axis = .horizontal
+        view.spacing = 34
+        return view
+    }()
+
     
     var BackgroundImage: UIImageView = {
         var view = UIImageView()
@@ -67,66 +78,6 @@ class MainViewController: UIViewController {
     }()
     
     let answerButtons = [AnswerButton](arrayLiteral: AnswerButton(0, "1"), AnswerButton(1, "2"), AnswerButton(2, "3"), AnswerButton(3, "4"))
-    //-MARK: Кнопки с вариантими ответов
-    
-    var buttonA: UIButton = {
-        var view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setTitle("ButtonA", for: .normal)
-        return view
-    }()
-    
-    
-    var buttonB: UIButton = {
-        var view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setTitle("ButtonB", for: .normal)
-        
-        return view
-    }()
-    
-    var buttonC: UIButton = {
-        var view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setTitle("ButtonC", for: .normal)
-        view.titleLabel?.font = .systemFont(ofSize: 25)
-        view.tintColor = .white
-        view.layer.cornerRadius = 16
-        return view
-    }()
-    
-    var buttonD: UIButton = {
-        var view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setTitle("ButtonD", for: .normal)
-        
-        return view
-    }()
-    
-    //-MARK: Кнопки с подсказками
-    var podskazka50: UIButton = {
-        var view = UIButton()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "fifty"), for: .normal)
-        view.addTarget(self, action: #selector(pushFiftyAndFifty), for: .touchUpInside)
-        
-        return view
-    }()
-    var podskazkaZal: UIButton = {
-        var button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "mistake"), for: .normal)
-        button.addTarget(self, action: #selector(presentModalController), for: .touchUpInside)
-        return button
-    }()
-    var podskazkaZvonok: UIButton = {
-        var view = UIButton()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(UIImage(named: "phoneCall"), for: .normal)
-        
-        return view
-    }()
-    
     
     //MARK: Функция Градиента 
     func applyGradients(sender: UIButton) {
@@ -145,7 +96,8 @@ class MainViewController: UIViewController {
 
     }
 
-    @objc func presentModalController() {
+    @objc func presentModalController(_ sender: HelperButton) {
+        sender.setDisableImage()
         let vc = CustomModalViewController()
         vc.setCQuestionsValue(question)
         vc.modalPresentationStyle = .overCurrentContext
@@ -154,7 +106,8 @@ class MainViewController: UIViewController {
         self.present(vc, animated: false)
     }
     
-    @objc func pushFiftyAndFifty() {
+    @objc func pushFiftyAndFifty(_ sender: HelperButton) {
+        sender.setDisableImage()
         let arrayIndex = question.getFiftyAndFiftyIndex()
         print("\(arrayIndex)")
         for index in Range(0...3) {
@@ -163,45 +116,25 @@ class MainViewController: UIViewController {
             }
         }
     }
-    func setActiveHelperButton(){
-        let arrayButton = question.activeHelpers()
-        for item in arrayButton {
-//            switch item {
-//            case 0:
-//                //podskazka50.set
-//
-//            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
         uzerIntefaseConstrates()
-        showQuestion()
-  
-    }
-    //-MARK: неоюходим для получения градиента после инициализации NSLayotConstranes
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-//        self.applyGradients(sender: buttonA)
-//        self.applyGradients(sender: buttonB)
-//        self.applyGradients(sender: buttonC)
-//        self.applyGradients(sender: buttonD)
+        //showQuestion()
         for button in answerButtons {
-            //contentStackView.addArrangedSubview(button)
-            button.applyGradients()
             button.addTarget(self, action: #selector(pushAnswerButton), for: .touchUpInside)
         }
+  
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        showQuestion()
+        loadCurrentQuestion()
     }
     
-    func showQuestion() {
+    func loadCurrentQuestion() {
         let question = self.question.getAciveQuestion()
         quatinLabel.text = question.question
         quatinNumberLabel.text = "Qusetion \(self.question.getPosition())"
@@ -217,6 +150,7 @@ class MainViewController: UIViewController {
             self.navigationController!.pushViewController(progressView, animated: true)
         } else {
             if !self.question.isMakeMistake() {
+                mistakeButton!.setDisableImage() //<--- toDo
                 //toDo animation in 2-3 sec
                 question.activeMistakeHelp()
                 _ = self.question.nextQuestion()
@@ -264,7 +198,7 @@ class MainViewController: UIViewController {
             summQuation.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 120),
             summQuation.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
         ])
-        
+
         view.addSubview(contentStackView)
         for button in answerButtons {
             contentStackView.addArrangedSubview(button)
@@ -276,54 +210,23 @@ class MainViewController: UIViewController {
             contentStackView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
             contentStackView.heightAnchor.constraint(equalToConstant: 65 * 5)
         ])
-//        view.addSubview(buttonA)
-//        NSLayoutConstraint.activate([
-//            buttonA.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 180),
-//            buttonA.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-//            buttonA.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-//            buttonA.heightAnchor.constraint(equalToConstant: 65)
-//        ])
-//        view.addSubview(buttonB)
-//        NSLayoutConstraint.activate([
-//            buttonB.topAnchor.constraint(equalTo: buttonA.bottomAnchor,constant: 32),
-//            buttonB.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-//            buttonB.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-//            buttonB.heightAnchor.constraint(equalToConstant: 65)
-//        ])
-//        view.addSubview(buttonC)
-//        NSLayoutConstraint.activate([
-//            buttonC.topAnchor.constraint(equalTo: buttonB.bottomAnchor,constant: 32),
-//            buttonC.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-//            buttonC.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-//            buttonC.heightAnchor.constraint(equalToConstant: 65)
-//        ])
-//        view.addSubview(buttonD)
-//        NSLayoutConstraint.activate([
-//            buttonD.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-//            buttonD.topAnchor.constraint(equalTo: buttonC.bottomAnchor,constant: 32),
-//            buttonD.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-//            buttonD.heightAnchor.constraint(equalToConstant: 65),
-//        ])
-        view.addSubview(podskazka50)
+        
+        view.addSubview(podskazkaStack)
+        let fiftyButton = HelperButton("fifty", "fifty-used")
+        fiftyButton.addTarget(self, action: #selector(pushFiftyAndFifty), for: .touchUpInside)
+        let peopleButton = HelperButton("phoneCall", "phoneCall-used")
+        peopleButton.addTarget(self, action: #selector(presentModalController), for: .touchUpInside)
+        mistakeButton = HelperButton("mistake", "mistake-used")
+        
+        podskazkaStack.addArrangedSubview(fiftyButton)
+        podskazkaStack.addArrangedSubview(peopleButton)
+        podskazkaStack.addArrangedSubview(mistakeButton!)
+
+        podskazkaStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            podskazka50.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            podskazka50.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -30),
-            podskazka50.widthAnchor.constraint(equalToConstant: 105),
-            podskazka50.heightAnchor.constraint(equalToConstant: 80)
-        ])
-        view.addSubview(podskazkaZal)
-        NSLayoutConstraint.activate([
-            podskazkaZal.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            podskazkaZal.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -30),
-            podskazkaZal.widthAnchor.constraint(equalToConstant: 105),
-            podskazkaZal.heightAnchor.constraint(equalToConstant: 80)
-        ])
-        view.addSubview(podskazkaZvonok)
-        NSLayoutConstraint.activate([
-            podskazkaZvonok.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-            podskazkaZvonok.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -30),
-            podskazkaZvonok.widthAnchor.constraint(equalToConstant: 105),
-            podskazkaZvonok.heightAnchor.constraint(equalToConstant: 80)
+            podskazkaStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -10),
+            podskazkaStack.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+            podskazkaStack.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
         ])
     }
 }

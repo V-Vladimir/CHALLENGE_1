@@ -16,7 +16,7 @@ enum EnumHelper {
 final class CQuestions {
     private var questions:[Question] = []
     private var currentPosition:Int = 1
-    
+    private var activeAnswer:[Int] = []
     //helper flags
     private var isMistake = false
     private var isFiftyAndFiftyActive = false
@@ -25,6 +25,7 @@ final class CQuestions {
     init() {
         loadQuestions()
     }
+    
     func reload() {
         questions = []
         loadQuestions()
@@ -56,11 +57,11 @@ final class CQuestions {
     func getFiftyAndFiftyIndex() -> [Int] {
         self.isFiftyAndFiftyActive = true
         let question = getAciveQuestion()
-        var arrayAnswerIndex = Array(repeating: question.rightAnswerIndex, count: 2)
+        activeAnswer = Array(repeating: question.rightAnswerIndex, count: 2)
         repeat {
-            arrayAnswerIndex[1] = Int.random(in: 0..<4)
-        } while arrayAnswerIndex[1] == question.rightAnswerIndex
-        return arrayAnswerIndex
+            activeAnswer[1] = Int.random(in: 0..<4)
+        } while activeAnswer[1] == question.rightAnswerIndex
+        return activeAnswer
     }
     
     func checkAnswer(_ index:Int) -> Bool {
@@ -87,6 +88,17 @@ final class CQuestions {
         if correctAnswerIndex != 0 {
             array.swapAt(correctAnswerIndex, 0)
         }
+        if (!activeAnswer.isEmpty) {
+            var index = 0
+            for i in 0..<4 {
+                if !activeAnswer.contains(i) {
+                    array[activeAnswer[index]]+=array[i]
+                    index+=1
+                    array[i]=0
+                }
+            }
+        }
+
         return array
     }
     
@@ -100,6 +112,7 @@ final class CQuestions {
     
     func nextQuestion() -> Question {
         currentPosition+=1
+        activeAnswer = []
         return getAciveQuestion()
     }
     
