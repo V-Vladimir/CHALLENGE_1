@@ -13,9 +13,9 @@ struct Question {
     let rightAnswerIndex: Int
     init(_ question: String, _ wrongAnswers:[String], _ correctAnswer: String) {
         self.question = question
-        var tmpAnswers: [String] = []
-        for _ in wrongAnswers {
-            tmpAnswers.append(wrongAnswers.randomElement() ?? "")
+        var tmpAnswers: [String] = wrongAnswers
+        for i in 0..<2 {
+            tmpAnswers.insert(tmpAnswers.remove(at: i), at: Int.random(in:0...2))
         }
         rightAnswerIndex = Int.random(in: 0..<4)
         tmpAnswers.insert(correctAnswer, at: rightAnswerIndex)
