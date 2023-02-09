@@ -29,7 +29,7 @@ final class AnswerButton : UIButton {
     convenience init(_ tag:Int, _ text:String) {
         self.init()
         self.tag = tag
-        let charVal = String("A").unicodeScalars
+        let charVal = String("1").unicodeScalars
         let asciiVal = Int(charVal[charVal.startIndex].value)
         self.labelTag.text = "\(Character(UnicodeScalar(asciiVal + tag)!))"
         self.addSubview(labelTag)

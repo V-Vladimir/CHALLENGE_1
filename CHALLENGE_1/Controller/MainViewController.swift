@@ -40,13 +40,6 @@ class MainViewController: UIViewController {
         
         return view
     }()
-    var mainImage: UIImageView = {
-        var view = UIImageView()
-        view.image = UIImage(named: "mainImage")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
     var quatinLabel: UILabel = {
         var view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -155,19 +148,11 @@ class MainViewController: UIViewController {
             BackgroundImage.rightAnchor.constraint(equalTo: view.rightAnchor),
             BackgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        view.addSubview(mainImage)
-        NSLayoutConstraint.activate([
-            mainImage.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,constant: 7),
-            mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainImage.widthAnchor.constraint(equalToConstant: 95),
-            mainImage.heightAnchor.constraint(equalToConstant: 95)
-        ])
         view.addSubview(quatinLabel)
         NSLayoutConstraint.activate([
             quatinLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            quatinLabel.leftAnchor.constraint(equalTo: mainImage.rightAnchor,constant: 7),
-            quatinLabel.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -7),
-            quatinLabel.widthAnchor.constraint(equalToConstant: 281),
+            quatinLabel.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+            quatinLabel.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
             quatinLabel.heightAnchor.constraint(equalToConstant: 100)
         ])
         view.addSubview(quatinNumberLabel)
