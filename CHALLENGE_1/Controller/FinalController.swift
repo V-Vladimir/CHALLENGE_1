@@ -19,7 +19,7 @@ class FinalController: UIViewController {
         button.titleLabel?.font = UIFont.robotoMedium32()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 20
-//        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -37,11 +37,8 @@ class FinalController: UIViewController {
         showResult(isWin: true, questionNumber: 0)
     }
 
-    @objc  func buttonTapped(sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
     func showResult(isWin: Bool, questionNumber: Int) {
-        if isWin == false {
+        if isWin {
             finalView.textInformation.text = " вы проиграли на \(questionNumber) вопросе"
             finalView.finalResultText.text = "LOSE"
         } else if isWin == true {
@@ -54,12 +51,7 @@ class FinalController: UIViewController {
     //MARK: - Selectors
    
     @objc  func buttonTapped() {
-        //code for segue
-      //переход работает в modal formate
-        let welcomeVC = WelocmeViewController()
-       let navVC = UINavigationController(rootViewController: welcomeVC)
-        self.modalPresentationStyle = .fullScreen
-        present(navVC,animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
