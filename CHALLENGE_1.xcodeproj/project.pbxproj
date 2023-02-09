@@ -37,6 +37,7 @@
 		D85E54A42990184D00BE7980 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E54A32990184D00BE7980 /* UIColor + Extensions.swift */; };
 		D85E54A629901E9500BE7980 /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E54A529901E9500BE7980 /* String + Extensions.swift */; };
 		D85E54A829903D1F00BE7980 /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E54A729903D1F00BE7980 /* RuleViewController.swift */; };
+		D8FFD72B2995807500FFCED5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FFD72A2995807500FFCED5 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		D85E54A32990184D00BE7980 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
 		D85E54A529901E9500BE7980 /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		D85E54A729903D1F00BE7980 /* RuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
+		D8FFD72A2995807500FFCED5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			children = (
 				CC715957298F85C500400F0B /* Question.swift */,
 				CC7159672992CB0F00400F0B /* QuestionManager.swift */,
+				D8FFD72A2995807500FFCED5 /* Player.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8FFD72B2995807500FFCED5 /* Player.swift in Sources */,
 				CC71597029953D7300400F0B /* UIView + Extensions.swift in Sources */,
 				18512B40298FD17700F71511 /* ProgressViewController.swift in Sources */,
 				CC715947298F80CB00400F0B /* WelocmeViewController.swift in Sources */,
