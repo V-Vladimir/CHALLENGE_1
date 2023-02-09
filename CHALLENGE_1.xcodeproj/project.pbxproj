@@ -29,6 +29,7 @@
 		CC7159682992CB0F00400F0B /* QuestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7159672992CB0F00400F0B /* QuestionManager.swift */; };
 		CC71596A2993E3BD00400F0B /* HelperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7159692993E3BD00400F0B /* HelperButton.swift */; };
 		CC71596E2994E0A700400F0B /* new_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CC71596D2994E0A700400F0B /* new_sound.mp3 */; };
+		CC71597029953D7300400F0B /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC71596F29953D7300400F0B /* UIView + Extensions.swift */; };
 		D85E549D29900B2600BE7980 /* UIFont + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E549C29900B2600BE7980 /* UIFont + Extensions.swift */; };
 		D85E54A129900BE900BE7980 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D85E549F29900BE900BE7980 /* Roboto-Bold.ttf */; };
 		D85E54A229900BE900BE7980 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D85E54A029900BE900BE7980 /* Roboto-Medium.ttf */; };
@@ -64,6 +65,7 @@
 		CC7159672992CB0F00400F0B /* QuestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionManager.swift; sourceTree = "<group>"; };
 		CC7159692993E3BD00400F0B /* HelperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperButton.swift; sourceTree = "<group>"; };
 		CC71596D2994E0A700400F0B /* new_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = new_sound.mp3; sourceTree = "<group>"; };
+		CC71596F29953D7300400F0B /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		D85E549C29900B2600BE7980 /* UIFont + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extensions.swift"; sourceTree = "<group>"; };
 		D85E549F29900BE900BE7980 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		D85E54A029900BE900BE7980 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -88,7 +90,6 @@
 			children = (
 				CC71596D2994E0A700400F0B /* new_sound.mp3 */,
 				565609382992B3B50033EC81 /* timeGoing.mp3 */,
-				CC71596B2994DF8B00400F0B /* new_sound.mp3 */,
 				565609372992B3B50033EC81 /* answerCorrect.mp3 */,
 				5656093A2992B3B50033EC81 /* answerWrong.mp3 */,
 				565609392992B3B50033EC81 /* answerAccepted.mp3 */,
@@ -197,6 +198,7 @@
 				D85E54A32990184D00BE7980 /* UIColor + Extensions.swift */,
 				D85E54A529901E9500BE7980 /* String + Extensions.swift */,
 				5656093F2992B4E00033EC81 /* Sounds.swift */,
+				CC71596F29953D7300400F0B /* UIView + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,7 +272,6 @@
 			files = (
 				CC71596E2994E0A700400F0B /* new_sound.mp3 in Resources */,
 				CC715964299161B000400F0B /* questions.json in Resources */,
-				CC71596C2994DF8B00400F0B /* new_sound.mp3 in Resources */,
 				5656093D2992B3B50033EC81 /* answerAccepted.mp3 in Resources */,
 				5656093B2992B3B50033EC81 /* answerCorrect.mp3 in Resources */,
 				D85E54A229900BE900BE7980 /* Roboto-Medium.ttf in Resources */,
@@ -289,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC71597029953D7300400F0B /* UIView + Extensions.swift in Sources */,
 				18512B40298FD17700F71511 /* ProgressViewController.swift in Sources */,
 				CC715947298F80CB00400F0B /* WelocmeViewController.swift in Sources */,
 				D85E549D29900B2600BE7980 /* UIFont + Extensions.swift in Sources */,

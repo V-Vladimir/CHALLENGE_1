@@ -104,31 +104,6 @@ class ProgressViewController: UIViewController {
     }
 }
 
-private extension UIView {
-    func addBackground() {
-        // screen width and height:
-        let width = UIScreen.main.bounds.size.width
-        let height = UIScreen.main.bounds.size.height
-
-        let imageViewBackground = UIImageView(frame: CGRectMake(0, 0, width, height))
-        imageViewBackground.image = UIImage(named: "backgroundImage")
-
-        // you can change the content mode:
-        imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFill
-
-        self.addSubview(imageViewBackground)
-        self.sendSubviewToBack(imageViewBackground)
-    }
-}
-extension UIView {
-  func addTapGesture(tapNumber: Int, target: Any, action: Selector) {
-    let tap = UITapGestureRecognizer(target: target, action: action)
-    tap.numberOfTapsRequired = tapNumber
-    addGestureRecognizer(tap)
-    isUserInteractionEnabled = true
-  }
-}
-
 extension ProgressViewController{
     func setupConstraints(){
         view.addSubview(stack)

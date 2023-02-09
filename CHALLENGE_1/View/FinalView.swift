@@ -8,13 +8,6 @@
 import UIKit
 
 class FinalView: UIView {
-
-    let backgroundImage:UIImageView = {
-        let backgroundImage = UIImageView()
-        backgroundImage.image = UIImage(named: "backgroundImage")
-        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-        return backgroundImage
-    }()
     
     let titleImage: UIImageView = {
        let titleImage = UIImageView()
@@ -47,8 +40,9 @@ class FinalView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.addBackground()
         addView()
-    setConstraints()
+        setConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -56,7 +50,6 @@ class FinalView: UIView {
     }
     
     func addView() {
-        addSubview(backgroundImage)
         addSubview(titleImage)
         addSubview(textInformation)
         addSubview(finalResultText)
@@ -64,12 +57,6 @@ class FinalView: UIView {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            
-            backgroundImage.topAnchor.constraint(equalTo: topAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
             titleImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 19),
             titleImage.centerXAnchor.constraint(equalTo: centerXAnchor),
             titleImage.widthAnchor.constraint(equalToConstant: 201),

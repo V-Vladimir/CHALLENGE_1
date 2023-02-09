@@ -31,15 +31,6 @@ class MainViewController: UIViewController {
         view.spacing = 34
         return view
     }()
-
-    
-    var BackgroundImage: UIImageView = {
-        var view = UIImageView()
-        view.image = UIImage(named: "backgroundImage")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
     var quatinLabel: UILabel = {
         var view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -98,6 +89,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addBackground()
         view.backgroundColor = .gray
         uzerIntefaseConstrates()
         for button in answerButtons {
@@ -142,13 +134,6 @@ class MainViewController: UIViewController {
 
     // -MARK: NSLayoutConstrates (Ящик пандоры)
     func uzerIntefaseConstrates() {
-        view.addSubview(BackgroundImage)
-        NSLayoutConstraint.activate([
-            BackgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            BackgroundImage.leftAnchor.constraint(equalTo: view.leftAnchor),
-            BackgroundImage.rightAnchor.constraint(equalTo: view.rightAnchor),
-            BackgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
         view.addSubview(quatinLabel)
         NSLayoutConstraint.activate([
             quatinLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

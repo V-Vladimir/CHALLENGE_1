@@ -8,14 +8,6 @@
 import UIKit
 
 class WelocmeViewController: UIViewController {
-    
-    private let backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "backgroundImage")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     private let mainImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainImage")
@@ -65,6 +57,7 @@ class WelocmeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addBackground()
         // Do any additional setup after loading the view.
         setupViews()
         setConstraints()
@@ -76,8 +69,6 @@ class WelocmeViewController: UIViewController {
     }
     
     private func setupViews() {
-        
-        view.addSubview(backgroundImageView)
         view.addSubview(mainImage)
         view.addSubview(welcomeLabel)
         view.addSubview(nameLabel)
@@ -104,14 +95,6 @@ class WelocmeViewController: UIViewController {
 extension WelocmeViewController {
     
     private func setConstraints() {
-        
-        NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-        
         NSLayoutConstraint.activate([
             mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60.0),
             mainImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -138,7 +121,6 @@ extension WelocmeViewController {
             startButton.topAnchor.constraint(equalTo: rulesButton.bottomAnchor, constant: 5),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        
     }
     
 }

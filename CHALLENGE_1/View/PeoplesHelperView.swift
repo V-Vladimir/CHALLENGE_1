@@ -113,8 +113,8 @@ class CustomModalViewController: UIViewController {
     }
     
     func setupView() {
-        view.backgroundColor = .clear
     }
+    
     func setCQuestionsValue(_ question: CQuestions) {
         let arrayPercent = question.getPeoplePercent()
         var count:Int = 0
@@ -132,6 +132,7 @@ class CustomModalViewController: UIViewController {
     func setupConstraints() {
         // Add subviews
         view.addSubview(dimmedView)
+        containerView.addBackground()
         view.addSubview(contentStackView)
         
         

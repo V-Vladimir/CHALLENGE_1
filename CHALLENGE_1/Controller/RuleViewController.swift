@@ -9,15 +9,6 @@ import UIKit
 
 class RuleViewController: UIViewController {
     
-    private let backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "backgroundImage")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    
-    
     private let ruleLabel: UILabel = {
        let label = UILabel()
         label.text = "Правила"
@@ -40,13 +31,12 @@ class RuleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.addBackground()
         setupViews()
         setConstraints()
     }
     
     private func setupViews() {
-        view.addSubview(backgroundImageView)
         view.addSubview(ruleLabel)
         view.addSubview(textRule)
     }
@@ -54,14 +44,6 @@ class RuleViewController: UIViewController {
     //MARK: - Set constraints
     
     private func setConstraints() {
-        
-        NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-        
         NSLayoutConstraint.activate([
             ruleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             ruleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
