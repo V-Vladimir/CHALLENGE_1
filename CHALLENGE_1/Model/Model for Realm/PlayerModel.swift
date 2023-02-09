@@ -9,9 +9,7 @@ import Foundation
 import RealmSwift
 
 class PlayerModel: Object {
-    
-    @Persisted var playerName = "Default Player"
+    @Persisted var playerName: String = "Default Player"
     @Persisted var levelQuestion: Int = 1
     @Persisted var date: Date
-    
 }

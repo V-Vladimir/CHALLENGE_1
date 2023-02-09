@@ -15,6 +15,8 @@ class MainViewController: UIViewController {
     private var mistakeButton:HelperButton?
     var preMadeSounds = PreMadeSounds()
     
+    let finalVC = FinalController()
+    
     let baseStack: UIStackView = {
         $0.axis = .vertical
         //$0.alignment = .center
@@ -127,10 +129,12 @@ class MainViewController: UIViewController {
         }
         alertController.addAction(cancelAction)
 
-        let destroyAction = UIAlertAction(title: "Transfer", style: .destructive) { (action) in
-            var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
-            navStackArray.insert(FinalController(), at: navStackArray.count)
-            self.navigationController!.setViewControllers(navStackArray, animated:true)
+        let destroyAction = UIAlertAction(title: "Transfer", style: .destructive) { [weak self] (action) in
+            
+            guard let strongLink = self else { return }
+            var navStackArray : [UIViewController]! = [strongLink.navigationController!.viewControllers[0]]
+            navStackArray.insert(strongLink.finalVC, at: navStackArray.count)
+            strongLink.navigationController!.setViewControllers(navStackArray, animated:true)
         }
         alertController.addAction(destroyAction)
         self.present(alertController, animated: true)
@@ -151,7 +155,7 @@ class MainViewController: UIViewController {
             }
             //toDo animation in 2-3 sec
             var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
-            navStackArray.insert(FinalController(), at: navStackArray.count)
+            navStackArray.insert(finalVC, at: navStackArray.count)
             navStackArray.insert(progressView, at: navStackArray.count)
             self.navigationController!.setViewControllers(navStackArray, animated:true)
         }
