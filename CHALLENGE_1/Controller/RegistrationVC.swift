@@ -75,8 +75,7 @@ class RegistrationVC: UIViewController {
         
         let mainVC = MainViewController()
         mainVC.question.player.name = name
-        mainVC.modalPresentationStyle = .fullScreen
-        present(mainVC, animated: true)
+        self.navigationController?.pushViewController(mainVC, animated: true)
     }
     
 }

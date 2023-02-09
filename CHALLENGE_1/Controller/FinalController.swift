@@ -10,11 +10,11 @@ import UIKit
 class FinalController: UIViewController {
     let finalView = FinalView()
     
-    let playAgainButton: UIButton = {
+    private lazy var playAgainButton: UIButton = {
         
         let button = UIButton(type: .system)
         button.backgroundColor = #colorLiteral(red: 0.2319103479, green: 0.7549440265, blue: 0.2910608053, alpha: 1)
-        button.setTitle("PlAY AGAIN", for: .normal)
+        button.setTitle("PLAY AGAIN", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.robotoMedium32()
         button.translatesAutoresizingMaskIntoConstraints = false

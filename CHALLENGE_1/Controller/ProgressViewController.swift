@@ -101,7 +101,6 @@ class ProgressViewController: UIViewController {
     }
     @objc func toBackView() {
         self.navigationController?.popViewController(animated: true)
-        //dismiss(animated: true)
     }
 }
 
