@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-     let question = CQuestions()
+     var question = CQuestions()
     private let giveMoneyButton = GiveMyMoneyButton("0")
     private var progressView = ProgressViewController()
     private var mistakeButton:HelperButton?
@@ -139,7 +139,9 @@ class MainViewController: UIViewController {
     @objc func pushAnswerButton(_ sender:AnswerButton) {
         if self.question.checkAnswer(sender.tag) {
             _ = self.question.nextQuestion()
-            self.navigationController!.pushViewController(progressView, animated: true)
+            self.navigationController?.pushViewController(progressView, animated: true)
+            
+            //present(progressView, animated: true)
         } else {
             if !self.question.isMakeMistake() {
                 mistakeButton!.setDisableImage()

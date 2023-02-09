@@ -15,10 +15,10 @@ enum EnumHelper {
 
 final class CQuestions {
     
-    var player = Player()
+    var player  = Player()
     
     private var questions:[Question] = []
-    //private var currentPosition:Int = 1
+    private var currentPosition = 1 { didSet { player.questionLevel += 1 } }
     private var activeAnswer:[Int] = []
     //helper flags
     private var isMistake = false
@@ -26,14 +26,14 @@ final class CQuestions {
     private var isPeoplesHall = false
     
     init() {
-        player.reset()
         loadQuestions()
     }
     
     func reload() {
         questions = []
         loadQuestions()
-        player.questionLevel = 1
+        currentPosition = 1
+        player.reset()
     }
     
     private func loadQuestions() {
@@ -74,9 +74,9 @@ final class CQuestions {
     }
     
     func getPeoplePercent() -> [Int] {
-        let correctAnswerIndex = questions[player.questionLevel].rightAnswerIndex
+        let correctAnswerIndex = questions[currentPosition].rightAnswerIndex
         var array:[Int] = [0,0,0,0]
-        let smartPercent = Int(100.0 - Float(player.questionLevel) * 4.4)
+        let smartPercent = Int(100.0 - Float(currentPosition) * 4.4)
         let stupidPercentStep:Int = Int((100 - smartPercent) / 3)
         for _ in Range(1 ... 100) {
             switch Int.random(in: 0..<100){
@@ -108,15 +108,15 @@ final class CQuestions {
     }
     
     func getActiveQuestion() -> Question {
-        return questions[player.questionLevel]
+        return questions[currentPosition]
     }
     
     func getPosition() -> Int {
-        return player.questionLevel
+        return currentPosition
     }
     
     func nextQuestion() -> Question {
-        player.questionLevel+=1
+        currentPosition+=1
         activeAnswer = []
         return getActiveQuestion()
     }
