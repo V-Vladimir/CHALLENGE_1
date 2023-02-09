@@ -40,6 +40,8 @@
 		D8FFD72B2995807500FFCED5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FFD72A2995807500FFCED5 /* Player.swift */; };
 		D8FFD72E2995875700FFCED5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D8FFD72D2995875700FFCED5 /* Realm */; };
 		D8FFD7302995875700FFCED5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8FFD72F2995875700FFCED5 /* RealmSwift */; };
+		D8FFD732299588A500FFCED5 /* RegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FFD731299588A500FFCED5 /* RegistrationVC.swift */; };
+		D8FFD734299597F900FFCED5 /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FFD733299597F900FFCED5 /* UIViewController + Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		D85E54A529901E9500BE7980 /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		D85E54A729903D1F00BE7980 /* RuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
 		D8FFD72A2995807500FFCED5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		D8FFD731299588A500FFCED5 /* RegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
+		D8FFD733299597F900FFCED5 /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 				CC715946298F80CB00400F0B /* WelocmeViewController.swift */,
 				D85E54A729903D1F00BE7980 /* RuleViewController.swift */,
 				CC71595D2991245700400F0B /* FinalController.swift */,
+				D8FFD731299588A500FFCED5 /* RegistrationVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				D85E54A529901E9500BE7980 /* String + Extensions.swift */,
 				CC71596F29953D7300400F0B /* UIView + Extensions.swift */,
 				5656093F2992B4E00033EC81 /* Sounds.swift */,
+				D8FFD733299597F900FFCED5 /* UIViewController + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -317,6 +323,7 @@
 				CC71597229956B8600400F0B /* GiveMyMoneyButton.swift in Sources */,
 				CC7159662992390200400F0B /* PeoplesHelperView.swift in Sources */,
 				CC7159622991471D00400F0B /* AnswerButton.swift in Sources */,
+				D8FFD732299588A500FFCED5 /* RegistrationVC.swift in Sources */,
 				CC715958298F85C500400F0B /* Question.swift in Sources */,
 				565609402992B4E00033EC81 /* Sounds.swift in Sources */,
 				D85E54A42990184D00BE7980 /* UIColor + Extensions.swift in Sources */,
@@ -328,6 +335,7 @@
 				C3A13DB5298FD79F00AE2302 /* GradientsColors.swift in Sources */,
 				CC7159682992CB0F00400F0B /* QuestionManager.swift in Sources */,
 				D85E54A629901E9500BE7980 /* String + Extensions.swift in Sources */,
+				D8FFD734299597F900FFCED5 /* UIViewController + Extensions.swift in Sources */,
 				CC71596A2993E3BD00400F0B /* HelperButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

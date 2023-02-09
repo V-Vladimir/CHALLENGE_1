@@ -45,7 +45,7 @@ class WelocmeViewController: UIViewController {
         return button
     }()
     
-    private let startButton: UIButton = {
+    private lazy var startButton: UIButton = {
         let title = String.getSpecialString(text: "Начать игру", with: .specialGreenColor)
         let button = UIButton(type: .system)
         button.setAttributedTitle(title, for: .normal)
@@ -86,7 +86,7 @@ class WelocmeViewController: UIViewController {
     
     @objc
     private func navigationToMainView() {
-        let mainVC = MainViewController()
+        let mainVC = RegistrationVC()
         self.navigationController?.pushViewController(mainVC, animated: true)
     }
 }
