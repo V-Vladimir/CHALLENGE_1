@@ -36,9 +36,9 @@ class FinalView: UIView {
     
     let finalResultText: UILabel = {
        let textLabel = UILabel()
-        textLabel.text = "LOSE"
+        textLabel.text = "lose"
         textLabel.textColor = .red
-        textLabel.font = UIFont.syneRegular60()
+        textLabel.font = UIFont(name: "Roboto-Bold", size: 60)
         textLabel.textAlignment = .center
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         return textLabel

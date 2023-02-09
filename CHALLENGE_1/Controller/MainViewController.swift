@@ -12,7 +12,8 @@ class MainViewController: UIViewController {
     private let question = CQuestions()
     private var progressView = ProgressViewController()
     private var mistakeButton:HelperButton?
-    var preMadeSounds = PreMadeSounds()
+    private var soundManager = SoundManager()
+    
     //var colors = GradientsColors()
     
     lazy var contentStackView: UIStackView = {
@@ -109,11 +110,21 @@ class MainViewController: UIViewController {
             button.addTarget(self, action: #selector(pushAnswerButton), for: .touchUpInside)
         }
     }
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadCurrentQuestion()
+       
+        soundManager.startTimer()
+
+    }
+    
+    
+    func timeIsOver() {
+            var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
+            navStackArray.insert(FinalController(), at: navStackArray.count)
+            navStackArray.insert(progressView, at: navStackArray.count)
+            self.navigationController!.setViewControllers(navStackArray, animated:true)
     }
     
     func loadCurrentQuestion() {
@@ -128,20 +139,26 @@ class MainViewController: UIViewController {
     @objc func pushAnswerButton(_ sender:UIButton) {
         print(sender.tag)
         if self.question.checkAnswer(sender.tag) {
+            soundManager.answer(urlSound: .answerCorrect)
             _ = self.question.nextQuestion()
             self.navigationController!.pushViewController(progressView, animated: true)
         } else {
             if !self.question.isMakeMistake() {
+                soundManager.answer(urlSound: .answerWrong)
                 mistakeButton!.setDisableImage() //<--- toDo
                 //toDo animation in 2-3 sec
                 question.activeMistakeHelp()
                 _ = self.question.nextQuestion()
                 self.navigationController!.pushViewController(progressView, animated: true)
             } else {
+                soundManager.answer(urlSound: .answerWrong)
                 var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
                 navStackArray.insert(FinalController(), at: navStackArray.count)
                 navStackArray.insert(progressView, at: navStackArray.count)
-                self.navigationController!.setViewControllers(navStackArray, animated:true)
+                
+                self.navigationController!
+                    .setViewControllers(navStackArray, animated:true)
+                
             }
         }
     }

@@ -9,7 +9,7 @@ import UIKit
 
 class FinalController: UIViewController {
     let finalView = FinalView()
-    
+    let qustions = CQuestions()
     let playAgainButton: UIButton = {
         
         let button = UIButton(type: .system)
@@ -34,16 +34,18 @@ class FinalController: UIViewController {
         super.viewDidLoad()
         view.addSubview(playAgainButton)
         setConstraints()
-        showResult(isWin: true, questionNumber: 0)
+        showResult(isWin: false, questionNumber: qustions.getPosition() + 1)
+        
     }
 
     func showResult(isWin: Bool, questionNumber: Int) {
         if isWin {
+            finalView.textInformation.text =
+            "Вы выйграли! вы ответили на все вопросы!"
+            finalView.finalResultText.text = "WIN"
+        } else if !isWin {
             finalView.textInformation.text = " вы проиграли на \(questionNumber) вопросе"
             finalView.finalResultText.text = "LOSE"
-        } else if isWin == true {
-            finalView.textInformation.text = " Вы выйграли! вы ответили на все вопросы!"
-            finalView.finalResultText.text = "WIN"
         }
         
     }
