@@ -56,7 +56,7 @@ final class CQuestions {
     // return correct answer
     func getFiftyAndFiftyIndex() -> [Int] {
         self.isFiftyAndFiftyActive = true
-        let question = getAciveQuestion()
+        let question = getActiveQuestion()
         activeAnswer = Array(repeating: question.rightAnswerIndex, count: 2)
         repeat {
             activeAnswer[1] = Int.random(in: 0..<4)
@@ -65,7 +65,7 @@ final class CQuestions {
     }
     
     func checkAnswer(_ index:Int) -> Bool {
-        return (index == getAciveQuestion().rightAnswerIndex) ? true : false
+        return (index == getActiveQuestion().rightAnswerIndex) ? true : false
     }
     
     func getPeoplePercent() -> [Int] {
@@ -102,7 +102,7 @@ final class CQuestions {
         return array
     }
     
-    func getAciveQuestion() -> Question {
+    func getActiveQuestion() -> Question {
         return questions[currentPosition]
     }
     
@@ -113,7 +113,7 @@ final class CQuestions {
     func nextQuestion() -> Question {
         currentPosition+=1
         activeAnswer = []
-        return getAciveQuestion()
+        return getActiveQuestion()
     }
     
     func isMakeMistake() -> Bool {

@@ -8,7 +8,7 @@
 import UIKit
 
 final class AnswerButton : UIButton {
-
+    let gradient = CAGradientLayer()
     let textAnswer: UILabel = {
         $0.contentMode = .scaleAspectFit
         $0.textColor = .white
@@ -26,6 +26,7 @@ final class AnswerButton : UIButton {
     convenience init(frame:CGRect, text:String) {
         self.init(frame: frame)
     }
+    
     convenience init(_ tag:Int, _ text:String) {
         self.init()
         self.tag = tag
@@ -34,22 +35,24 @@ final class AnswerButton : UIButton {
         self.labelTag.text = "\(Character(UnicodeScalar(asciiVal + tag)!))"
         self.addSubview(labelTag)
         self.addSubview(textAnswer)
+        setGradientCollor(#colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1), #colorLiteral(red: 0.1125075445, green: 0.2618700266, blue: 0.281789422, alpha: 1))
     }
+    
     func setText(_ text:String) {
         self.textAnswer.text = text
     }
     
+    func setGradientCollor(_ colorTop:UIColor, _ bottomColor:UIColor) {
+        gradient.colors = [colorTop.cgColor, bottomColor.cgColor, colorTop.cgColor]
+    }
+    
     //MARK: Функция Градиента
     func applyGradients() {
-        let gradient = CAGradientLayer()
-        let colorTop = #colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1).cgColor
-        let bottomColor = #colorLiteral(red: 0.1125075445, green: 0.2618700266, blue: 0.281789422, alpha: 1).cgColor
-
-        gradient.colors = [colorTop,bottomColor,colorTop]
         gradient.locations = [0.0, 0.5, 1.0]
         gradient.cornerRadius = 16
         gradient.frame = self.bounds
         self.layer.insertSublayer(gradient, at: 0)
+        
     }
     //-MARK: неоюходим для получения градиента после инициализации NSLayotConstranes
     override func layoutSubviews() {
@@ -59,6 +62,11 @@ final class AnswerButton : UIButton {
         textAnswer.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
         textAnswer.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         self.applyGradients()
+    }
+    
+    func setMistakeStatus() {
+        setGradientCollor(.red, #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1))
+        self.isEnabled = false
     }
 }
 
