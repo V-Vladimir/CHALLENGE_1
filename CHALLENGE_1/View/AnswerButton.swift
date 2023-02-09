@@ -35,11 +35,17 @@ final class AnswerButton : UIButton {
         self.labelTag.text = "\(Character(UnicodeScalar(asciiVal + tag)!))"
         self.addSubview(labelTag)
         self.addSubview(textAnswer)
-        setGradientCollor(#colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1), #colorLiteral(red: 0.1125075445, green: 0.2618700266, blue: 0.281789422, alpha: 1))
+        setDefaultStatus()
     }
     
     func setText(_ text:String) {
         self.textAnswer.text = text
+        if text.isEmpty {
+            setEmptyStatus()
+        } else {
+            setDefaultStatus()
+            self.isEnabled = true
+        }
     }
     
     func setGradientCollor(_ colorTop:UIColor, _ bottomColor:UIColor) {
@@ -63,9 +69,17 @@ final class AnswerButton : UIButton {
         textAnswer.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         self.applyGradients()
     }
+    func setDefaultStatus() {
+        setGradientCollor(#colorLiteral(red: 0.199926585, green: 0.3648718894, blue: 0.4936357737, alpha: 1), #colorLiteral(red: 0.1125075445, green: 0.2618700266, blue: 0.281789422, alpha: 1))
+    }
     
     func setMistakeStatus() {
         setGradientCollor(.red, #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1))
+        self.isEnabled = false
+    }
+
+    func setEmptyStatus() {
+        setGradientCollor(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
         self.isEnabled = false
     }
 }
