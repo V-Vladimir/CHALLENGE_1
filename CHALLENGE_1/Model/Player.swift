@@ -9,14 +9,15 @@ import Foundation
 
 struct Player {
     
-    var name = "Defult player"
-    var questionLevel = 1
-    var money = 0
-    var date: Date
-    
-    init(name: String = "Defult player") {
-        self.name = name
-        self.date = Date()
+    var name = "Defult player" {
+        didSet { date = Date() }
     }
+    var questionLevel = 1
+    private(set) var date = Date()
     
+    mutating func reset() {
+        name = "Defult player"
+        questionLevel = 1
+        date = Date()
+    }
 }
