@@ -40,18 +40,13 @@ class MainViewController: UIViewController {
         
         return view
     }()
-    var mainImage: UIImageView = {
-        var view = UIImageView()
-        view.image = UIImage(named: "mainImage")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
     var quatinLabel: UILabel = {
         var view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.text = "What year was the year, when first deodorant was invented in our life  What year was the year, when first deodorant was invented in our life?What year was the year, when first deodorant was invented in our life??"
         view.font = UIFont(name: "Roboto-Medium", size: 24)
+        view.adjustsFontSizeToFitWidth = true
+        view.minimumScaleFactor = 0.5
         view.numberOfLines = 0
         
         return view
@@ -154,29 +149,21 @@ class MainViewController: UIViewController {
             BackgroundImage.rightAnchor.constraint(equalTo: view.rightAnchor),
             BackgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        view.addSubview(mainImage)
-        NSLayoutConstraint.activate([
-            mainImage.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor,constant: 7),
-            mainImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainImage.widthAnchor.constraint(equalToConstant: 95),
-            mainImage.heightAnchor.constraint(equalToConstant: 95)
-        ])
         view.addSubview(quatinLabel)
         NSLayoutConstraint.activate([
             quatinLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            quatinLabel.leftAnchor.constraint(equalTo: mainImage.rightAnchor,constant: 7),
-            quatinLabel.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -7),
-            quatinLabel.widthAnchor.constraint(equalToConstant: 281),
-            quatinLabel.heightAnchor.constraint(equalToConstant: 100)
+            quatinLabel.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
+            quatinLabel.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+            quatinLabel.heightAnchor.constraint(equalToConstant: 150)
         ])
         view.addSubview(quatinNumberLabel)
         NSLayoutConstraint.activate([
-            quatinNumberLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 120),
+            quatinNumberLabel.topAnchor.constraint(equalTo: quatinLabel.bottomAnchor,constant: 45),
             quatinNumberLabel.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
         ])
         view.addSubview(summQuation)
         NSLayoutConstraint.activate([
-            summQuation.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 120),
+            summQuation.topAnchor.constraint(equalTo: quatinLabel.bottomAnchor,constant: 45),
             summQuation.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
         ])
 
@@ -186,7 +173,7 @@ class MainViewController: UIViewController {
         }
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 180),
+            contentStackView.topAnchor.constraint(equalTo: summQuation.bottomAnchor,constant: 70),
             contentStackView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
             contentStackView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
             contentStackView.heightAnchor.constraint(equalToConstant: 65 * 5)
