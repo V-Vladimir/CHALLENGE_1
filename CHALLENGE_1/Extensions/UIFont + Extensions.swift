@@ -9,6 +9,14 @@ import UIKit
 
 extension UIFont {
     
+    //regular
+    
+    static func syneRegular60() -> UIFont? {
+        return UIFont.init(name: "Syne-Regular", size: 60)
+    }
+    
+    //medium
+    
     static func robotoMedium32() -> UIFont? {
         return UIFont.init(name: "Roboto-Medium", size: 32)
     }

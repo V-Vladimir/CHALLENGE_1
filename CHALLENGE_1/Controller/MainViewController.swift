@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     private let question = CQuestions()
     private var progressView = ProgressViewController()
     private var mistakeButton:HelperButton?
+    var preMadeSounds = PreMadeSounds()
     //var colors = GradientsColors()
     
     lazy var contentStackView: UIStackView = {
@@ -104,11 +105,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .gray
         uzerIntefaseConstrates()
-        //showQuestion()
         for button in answerButtons {
             button.addTarget(self, action: #selector(pushAnswerButton), for: .touchUpInside)
         }
-  
     }
 
     
