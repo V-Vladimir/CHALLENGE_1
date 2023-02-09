@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    private let question = CQuestions()
+     let question = CQuestions()
     private let giveMoneyButton = GiveMyMoneyButton("0")
     private var progressView = ProgressViewController()
     private var mistakeButton:HelperButton?

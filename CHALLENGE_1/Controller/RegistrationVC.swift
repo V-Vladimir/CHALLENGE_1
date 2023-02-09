@@ -69,7 +69,14 @@ class RegistrationVC: UIViewController {
     //MARK: - Selector
     @objc
     private func saveName() {
-        guard let name = textField.text else { return }
+        guard textField.text?.count != 0, let name = textField.text else {
+            alertOk(title: "Ошибка", message: "Поле не может быть пустым")
+            return }
+        
+        let mainVC = MainViewController()
+        mainVC.question.player.name = name
+        mainVC.modalPresentationStyle = .fullScreen
+        present(mainVC, animated: true)
     }
     
 }
