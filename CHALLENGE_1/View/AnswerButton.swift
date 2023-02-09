@@ -58,8 +58,8 @@ final class AnswerButton : UIButton {
         gradient.cornerRadius = 16
         gradient.frame = self.bounds
         self.layer.insertSublayer(gradient, at: 0)
-        
     }
+    
     //-MARK: неоюходим для получения градиента после инициализации NSLayotConstranes
     override func layoutSubviews() {
         super.layoutSubviews()

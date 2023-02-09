@@ -10,13 +10,22 @@ import UIKit
 class MainViewController: UIViewController {
     
     private let question = CQuestions()
+    private let giveMoneyButton = GiveMyMoneyButton("0")
     private var progressView = ProgressViewController()
     private var mistakeButton:HelperButton?
     var preMadeSounds = PreMadeSounds()
-    //var colors = GradientsColors()
+    
+    let baseStack: UIStackView = {
+        $0.axis = .vertical
+        //$0.alignment = .center
+        $0.distribution = .equalCentering
+        $0.spacing = 20
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UIStackView())
     
     lazy var contentStackView: UIStackView = {
-        let stackView = UIStackView()//(arrangedSubviews: [AnswerButton("1"), AnswerButton("2"), AnswerButton("3"), AnswerButton("4")])
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.spacing = 20.0
@@ -31,7 +40,17 @@ class MainViewController: UIViewController {
         view.spacing = 34
         return view
     }()
-    var quatinLabel: UILabel = {
+    
+    var headerStack: UIStackView = {
+        var view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.distribution = .fillEqually
+        view.axis = .horizontal
+        view.spacing = 34
+        return view
+    }()
+    
+    var questionLabel: UILabel = {
         var view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.text = "What year was the year, when first deodorant was invented in our life  What year was the year, when first deodorant was invented in our life?What year was the year, when first deodorant was invented in our life??"
@@ -46,17 +65,6 @@ class MainViewController: UIViewController {
         var view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.text = "Question 2"
-        view.font = UIFont(name: "Roboto-Medium", size: 24)
-        view.numberOfLines = 0
-        view.lineBreakMode = .byWordWrapping
-        
-        return view
-    }()
-    var summQuation: UILabel = {
-        var view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.tintColor = .white
-        view.text = "500 RUB"
         view.font = UIFont(name: "Roboto-Medium", size: 24)
         view.numberOfLines = 0
         view.lineBreakMode = .byWordWrapping
@@ -95,9 +103,9 @@ class MainViewController: UIViewController {
         for button in answerButtons {
             button.addTarget(self, action: #selector(pushAnswerButton), for: .touchUpInside)
         }
+        giveMoneyButton.addTarget(self, action: #selector(pushMoney), for: .touchUpInside)
     }
 
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadCurrentQuestion()
@@ -105,15 +113,30 @@ class MainViewController: UIViewController {
     
     func loadCurrentQuestion() {
         let question = self.question.getActiveQuestion()
-        quatinLabel.text = question.question
+        questionLabel.text = question.question
         quatinNumberLabel.text = "Qusetion \(self.question.getPosition())"
         for index in Range(0...3) {
             answerButtons[index].setText(question.answers[index])
         }
     }
     
+    @objc func pushMoney() {
+        let alertController = UIAlertController(title: "Money", message: "Do you have my money?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Return", style: .cancel) { (action) in
+            print("Go back")
+        }
+        alertController.addAction(cancelAction)
+
+        let destroyAction = UIAlertAction(title: "Transfer", style: .destructive) { (action) in
+            var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
+            navStackArray.insert(FinalController(), at: navStackArray.count)
+            self.navigationController!.setViewControllers(navStackArray, animated:true)
+        }
+        alertController.addAction(destroyAction)
+        self.present(alertController, animated: true)
+    }
+        
     @objc func pushAnswerButton(_ sender:AnswerButton) {
-        print(sender.tag)
         if self.question.checkAnswer(sender.tag) {
             _ = self.question.nextQuestion()
             self.navigationController!.pushViewController(progressView, animated: true)
@@ -134,37 +157,28 @@ class MainViewController: UIViewController {
 
     // -MARK: NSLayoutConstrates (Ящик пандоры)
     func uzerIntefaseConstrates() {
-        view.addSubview(quatinLabel)
+        view.addSubview(baseStack)
         NSLayoutConstraint.activate([
-            quatinLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            quatinLabel.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            quatinLabel.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-            quatinLabel.heightAnchor.constraint(equalToConstant: 150)
+            baseStack.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20),
+            baseStack.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20),
+            baseStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            baseStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-        view.addSubview(quatinNumberLabel)
-        NSLayoutConstraint.activate([
-            quatinNumberLabel.topAnchor.constraint(equalTo: quatinLabel.bottomAnchor,constant: 45),
-            quatinNumberLabel.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-        ])
-        view.addSubview(summQuation)
-        NSLayoutConstraint.activate([
-            summQuation.topAnchor.constraint(equalTo: quatinLabel.bottomAnchor,constant: 45),
-            summQuation.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-        ])
-
-        view.addSubview(contentStackView)
+        baseStack.addArrangedSubview(questionLabel)
+        baseStack.addArrangedSubview(headerStack)
+        
+        headerStack.addArrangedSubview(quatinNumberLabel)
+        headerStack.addArrangedSubview(giveMoneyButton)
+        
+        giveMoneyButton.setText("500000 RUB")
+        
+        baseStack.addArrangedSubview(contentStackView)
         for button in answerButtons {
             contentStackView.addArrangedSubview(button)
         }
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: summQuation.bottomAnchor,constant: 70),
-            contentStackView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            contentStackView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
-            contentStackView.heightAnchor.constraint(equalToConstant: 65 * 5)
-        ])
+        baseStack.addArrangedSubview(podskazkaStack)
         
-        view.addSubview(podskazkaStack)
         let fiftyButton = HelperButton("fifty", "fifty-used")
         fiftyButton.addTarget(self, action: #selector(pushFiftyAndFifty), for: .touchUpInside)
         let peopleButton = HelperButton("phoneCall", "phoneCall-used")
@@ -176,10 +190,20 @@ class MainViewController: UIViewController {
         podskazkaStack.addArrangedSubview(mistakeButton!)
 
         podskazkaStack.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            podskazkaStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -10),
-            podskazkaStack.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 20),
-            podskazkaStack.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+            questionLabel.topAnchor.constraint(equalTo: baseStack.safeAreaLayoutGuide.topAnchor),
+            questionLabel.heightAnchor.constraint(equalToConstant: 190),
+
+            headerStack.heightAnchor.constraint(equalToConstant: 50),
+            headerStack.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 10),
+
+            contentStackView.topAnchor.constraint(equalTo: headerStack.bottomAnchor, constant: 20),
+            contentStackView.bottomAnchor.constraint(equalTo: podskazkaStack.topAnchor, constant: -20),
+                  
+            podskazkaStack.bottomAnchor.constraint(equalTo: baseStack.bottomAnchor),
+            podskazkaStack.heightAnchor.constraint(equalToConstant: 150)
+            
         ])
     }
 }
