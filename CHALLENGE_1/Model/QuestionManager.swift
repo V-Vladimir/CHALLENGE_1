@@ -126,5 +126,13 @@ final class CQuestions {
     func activeHelpers() -> [Int] {
         return []
     }
+    func getSumQuestion() -> String {
+        let amountsOfWin = ["100","200","300","500","1000"
+                            ,"2000","4000","8000","16000","32000"
+                            ,"64000","125000","250000","500000"
+                            ,"1 Миллион"]
+        let quNumber = amountsOfWin[currentPosition - 1]
+        return quNumber
+    }
     
 }

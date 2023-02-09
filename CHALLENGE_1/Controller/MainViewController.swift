@@ -115,6 +115,7 @@ class MainViewController: UIViewController {
         let question = self.question.getActiveQuestion()
         quatinLabel.text = question.question
         quatinNumberLabel.text = "Qusetion \(self.question.getPosition())"
+        summQuation.text = "\(self.question.getSumQuestion()) RUB"
         for index in Range(0...3) {
             answerButtons[index].setText(question.answers[index])
         }
