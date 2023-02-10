@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController {
+    private let localRealm = try! Realm()
+    private var playerModel = PlayerModel()
     
-     var question = CQuestions()
+    var question = CQuestions()
     private let giveMoneyButton = GiveMyMoneyButton("0")
     private var progressView = ProgressViewController()
     private var mistakeButton:HelperButton?
@@ -212,5 +215,24 @@ class MainViewController: UIViewController {
             
         ])
     }
+    
+    //MARK: - Setup for Realm
+    
+    private func createModel() {
+        playerModel.playerName = question.player.name
+        playerModel.levelQuestion = question.player.questionLevel
+        playerModel.date = question.player.date
+    }
+    
+    private func saveModel() {
+        RealmManager.shared.savePlayerModel(playerModel)
+        playerModel = PlayerModel()
+        resetPlayerModel()
+    }
+    
+    private func resetPlayerModel() {
+        question.player.reset()
+    }
+    
 }
 
