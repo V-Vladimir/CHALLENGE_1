@@ -14,7 +14,10 @@ enum EnumHelper {
 }
 
 final class CQuestions {
-    
+    private let amountsOfWin = ["100","200","300","500","1000"
+                                ,"2000","4000","8000","16000","32000"
+                                ,"64000","125000","250000","500000"
+                                ,"1 Миллион"]
     var player  = Player()
     
     private var questions:[Question] = []
@@ -130,6 +133,13 @@ final class CQuestions {
     
     func activeHelpers() -> [Int] {
         return []
+    }
+    func getSumQuestion() -> String {
+        if (currentPosition == 1) {
+            return ""
+        }
+        let quNumber = "\(amountsOfWin[currentPosition - 2]) RUB"
+        return quNumber
     }
     
 }

@@ -125,6 +125,7 @@ class MainViewController: UIViewController {
         for index in Range(0...3) {
             answerButtons[index].setText(question.answers[index])
         }
+        giveMoneyButton.setText(self.question.getSumQuestion())
     }
     
     @objc func pushMoney() {
@@ -180,8 +181,6 @@ class MainViewController: UIViewController {
         
         headerStack.addArrangedSubview(quatinNumberLabel)
         headerStack.addArrangedSubview(giveMoneyButton)
-        
-        giveMoneyButton.setText("500000 RUB")
         
         baseStack.addArrangedSubview(contentStackView)
         for button in answerButtons {

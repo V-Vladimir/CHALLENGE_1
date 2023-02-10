@@ -20,7 +20,7 @@ final class GiveMyMoneyButton: UIButton {
     }
     func setText(_ text:String) {
         self.setTitle(text, for: .normal)
-        //self.textAnswer.text = text
+        self.isHidden = text.isEmpty
     }
     
     //MARK: Функция Градиента
