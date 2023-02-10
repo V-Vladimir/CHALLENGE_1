@@ -12,6 +12,8 @@ class RatingVC: UIViewController {
     private let localRealm = try! Realm()
     private var playerArray: Results<PlayerModel>! = nil
     
+    private let cellId = "idCell"
+    
     private let tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = .white
@@ -34,7 +36,7 @@ class RatingVC: UIViewController {
     private func setupViews() {
         view.addBackground()
         view.addSubview(tableView)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "idTestCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
     }
     
     private func setDelegates() {
@@ -62,7 +64,7 @@ extension RatingVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idTestCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         return cell
     }
     
