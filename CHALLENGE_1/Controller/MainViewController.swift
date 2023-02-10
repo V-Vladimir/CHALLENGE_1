@@ -219,7 +219,6 @@ class MainViewController: UIViewController {
     }
     
     //MARK: - Setup for Realm
-    
     private func createModel() {
         playerModel.playerName = question.player.name
         playerModel.levelQuestion = question.player.questionLevel

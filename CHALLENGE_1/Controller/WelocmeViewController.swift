@@ -55,6 +55,13 @@ class WelocmeViewController: UIViewController {
         return button
     }()
     
+    private lazy var ratingButton: UIButton = {
+       let button = UIButton()
+        button.setImage(UIImage(named: "rating"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addBackground()
@@ -74,6 +81,7 @@ class WelocmeViewController: UIViewController {
         view.addSubview(nameLabel)
         view.addSubview(rulesButton)
         view.addSubview(startButton)
+        view.addSubview(ratingButton)
     }
     
     //MARK: - Selectors
@@ -120,6 +128,11 @@ extension WelocmeViewController {
         NSLayoutConstraint.activate([
             startButton.topAnchor.constraint(equalTo: rulesButton.bottomAnchor, constant: 5),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            ratingButton.topAnchor.constraint(equalTo: startButton.bottomAnchor, constant: 100),
+            ratingButton.centerXAnchor.constraint(equalTo: startButton.centerXAnchor)
         ])
     }
     
