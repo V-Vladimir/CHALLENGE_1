@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18437E09299537F50028403A /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18437E08299537F50028403A /* ProgressCell.swift */; };
 		18512B40298FD17700F71511 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18512B3F298FD17700F71511 /* ProgressViewController.swift */; };
 		5656093B2992B3B50033EC81 /* answerCorrect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 565609372992B3B50033EC81 /* answerCorrect.mp3 */; };
 		5656093C2992B3B50033EC81 /* timeGoing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 565609382992B3B50033EC81 /* timeGoing.mp3 */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18437E08299537F50028403A /* ProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 		18512B3F298FD17700F71511 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		565609352992B3840033EC81 /* Syne-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Syne-Medium.ttf"; sourceTree = "<group>"; };
 		565609362992B3840033EC81 /* Syne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Syne-Regular.ttf"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				CC7159612991471D00400F0B /* AnswerButton.swift */,
 				CC7159652992390100400F0B /* PeoplesHelperView.swift */,
 				CC7159692993E3BD00400F0B /* HelperButton.swift */,
+				18437E08299537F50028403A /* ProgressCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				CC71595E2991245700400F0B /* FinalController.swift in Sources */,
 				CC715945298F80CB00400F0B /* SceneDelegate.swift in Sources */,
 				C3A13DB3298FC64600AE2302 /* MainViewController.swift in Sources */,
+				18437E09299537F50028403A /* ProgressCell.swift in Sources */,
 				C3A13DB5298FD79F00AE2302 /* GradientsColors.swift in Sources */,
 				CC7159682992CB0F00400F0B /* QuestionManager.swift in Sources */,
 				D85E54A629901E9500BE7980 /* String + Extensions.swift in Sources */,

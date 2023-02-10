@@ -11,6 +11,7 @@ class ProgressViewController: UIViewController {
                         ,"2000","4000","8000","16000","32000"
                         ,"64000","125000","250000","500000"
                         ,"1 Миллион"]
+    var imagePosition: [UIImageView] = []
     let stack: UIStackView = {
         $0.axis = .vertical
         $0.alignment = .center
@@ -19,7 +20,7 @@ class ProgressViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIStackView())
-    
+    var question = CQuestions()
     let imageIcon: UIImageView = {
         $0.image = UIImage(named: "mainImage")
         $0.contentMode = .scaleAspectFit
@@ -27,7 +28,7 @@ class ProgressViewController: UIViewController {
         return $0
     }(UIImageView())
     
-    let currentPosition = 4
+    var currentPosition = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,13 @@ class ProgressViewController: UIViewController {
         setupConstraints()
         self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        changeColorOfCell()
+    }
+    func changeColorOfCell(){
+        
+    }
     func makeLabels(){
         for i in 0..<amountsOfWin.count {
             //create question cell
@@ -46,6 +53,7 @@ class ProgressViewController: UIViewController {
             questionCell.contentMode = .scaleToFill
             questionCell.translatesAutoresizingMaskIntoConstraints = false
             questionCell.widthAnchor.constraint(equalToConstant: width * (1 - CGFloat(5) * 0.035)).isActive = true
+            self.imagePosition.append(questionCell)
             
             //create label and subView it on question cell
             let labelTextNumberOfQuestion = UILabel()
@@ -102,6 +110,7 @@ class ProgressViewController: UIViewController {
     @objc func toBackView() {
         self.navigationController?.popViewController(animated: true)
     }
+    
 }
 
 extension ProgressViewController{
