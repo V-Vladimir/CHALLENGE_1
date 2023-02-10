@@ -38,6 +38,8 @@
 		D85E54A629901E9500BE7980 /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E54A529901E9500BE7980 /* String + Extensions.swift */; };
 		D85E54A829903D1F00BE7980 /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E54A729903D1F00BE7980 /* RuleViewController.swift */; };
 		D8E4318D29964A0600433492 /* RatingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4318C29964A0600433492 /* RatingVC.swift */; };
+		D8E431902996543D00433492 /* RatingCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4318F2996543D00433492 /* RatingCustomCell.swift */; };
+		D8E431922996571700433492 /* UIStackView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E431912996571700433492 /* UIStackView + Extension.swift */; };
 		D8FFD72B2995807500FFCED5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FFD72A2995807500FFCED5 /* Player.swift */; };
 		D8FFD72E2995875700FFCED5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D8FFD72D2995875700FFCED5 /* Realm */; };
 		D8FFD7302995875700FFCED5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8FFD72F2995875700FFCED5 /* RealmSwift */; };
@@ -83,6 +85,8 @@
 		D85E54A529901E9500BE7980 /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		D85E54A729903D1F00BE7980 /* RuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
 		D8E4318C29964A0600433492 /* RatingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingVC.swift; sourceTree = "<group>"; };
+		D8E4318F2996543D00433492 /* RatingCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCustomCell.swift; sourceTree = "<group>"; };
+		D8E431912996571700433492 /* UIStackView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extension.swift"; sourceTree = "<group>"; };
 		D8FFD72A2995807500FFCED5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D8FFD731299588A500FFCED5 /* RegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
 		D8FFD733299597F900FFCED5 /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 		CC71595A298F85F800400F0B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8E4318E2996540E00433492 /* Cell */,
 				CC71595F299124FE00400F0B /* FinalView.swift */,
 				CC7159612991471D00400F0B /* AnswerButton.swift */,
 				CC7159652992390100400F0B /* PeoplesHelperView.swift */,
@@ -224,6 +229,7 @@
 				CC71596F29953D7300400F0B /* UIView + Extensions.swift */,
 				5656093F2992B4E00033EC81 /* Sounds.swift */,
 				D8FFD733299597F900FFCED5 /* UIViewController + Extensions.swift */,
+				D8E431912996571700433492 /* UIStackView + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -235,6 +241,14 @@
 				565609342992B3780033EC81 /* Fonts */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D8E4318E2996540E00433492 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D8E4318F2996543D00433492 /* RatingCustomCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		D8FFD7352995A93B00FFCED5 /* Model for Realm */ = {
@@ -344,6 +358,7 @@
 				CC715947298F80CB00400F0B /* WelocmeViewController.swift in Sources */,
 				D85E549D29900B2600BE7980 /* UIFont + Extensions.swift in Sources */,
 				CC715947298F80CB00400F0B /* WelocmeViewController.swift in Sources */,
+				D8E431922996571700433492 /* UIStackView + Extension.swift in Sources */,
 				D85E54A829903D1F00BE7980 /* RuleViewController.swift in Sources */,
 				CC71597229956B8600400F0B /* GiveMyMoneyButton.swift in Sources */,
 				CC7159662992390200400F0B /* PeoplesHelperView.swift in Sources */,
@@ -355,6 +370,7 @@
 				D8FFD73A2995AA3A00FFCED5 /* RealmManager.swift in Sources */,
 				565609402992B4E00033EC81 /* Sounds.swift in Sources */,
 				D85E54A42990184D00BE7980 /* UIColor + Extensions.swift in Sources */,
+				D8E431902996543D00433492 /* RatingCustomCell.swift in Sources */,
 				CC715960299124FE00400F0B /* FinalView.swift in Sources */,
 				CC715943298F80CB00400F0B /* AppDelegate.swift in Sources */,
 				CC71595E2991245700400F0B /* FinalController.swift in Sources */,
