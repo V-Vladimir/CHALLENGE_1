@@ -8,6 +8,8 @@
 import UIKit
 
 class WelocmeViewController: UIViewController {
+    private var soundManager = SoundManager()
+    
     private let mainImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "mainImage")
@@ -71,8 +73,14 @@ class WelocmeViewController: UIViewController {
         setConstraints()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        soundManager.playSound(urlSound: .mainSound)
+    }
+    
     override func viewWillDisappear(_ boolFlag :Bool) {
         super.viewWillDisappear(boolFlag)
+        soundManager.player.stop()
         //self.navigationController?.viewControllers.remove(at: 0)
     }
     

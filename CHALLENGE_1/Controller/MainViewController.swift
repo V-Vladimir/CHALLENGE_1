@@ -11,6 +11,8 @@ import RealmSwift
 class MainViewController: UIViewController {
     private let localRealm = try! Realm()
     private var playerModel = PlayerModel()
+    private var seconds = 30
+    private var timer: Timer?
     
     var question = CQuestions()
     private let giveMoneyButton = GiveMyMoneyButton("0")
@@ -117,19 +119,35 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadCurrentQuestion()
-       
-        soundManager.startTimer()
+        startTimer()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        soundManager.mistakePlay()
+        timer?.invalidate()
+    }
+    
+    //MARK: Timer
+    func startTimer() {
+        soundManager.playSound(urlSound: .timeGoing)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timeGone), userInfo: nil, repeats: true)
+        seconds = 10
+        
+    }
 
+    @objc func timeGone()  {
+        seconds -= 1
+        print(seconds)
+        if seconds == 0 {
+            soundManager.player.stop()
+            soundManager.playSound(urlSound: .answerWrong)
+            timer?.invalidate()
+            loseGame()
+        }
     }
-    
-    
-    func timeIsOver() {
-            var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
-            navStackArray.insert(FinalController(), at: navStackArray.count)
-            navStackArray.insert(progressView, at: navStackArray.count)
-            self.navigationController!.setViewControllers(navStackArray, animated:true)
-    }
-    
+   
     func loadCurrentQuestion() {
         let question = self.question.getActiveQuestion()
         questionLabel.text = question.question
@@ -160,7 +178,6 @@ class MainViewController: UIViewController {
         
     @objc func pushAnswerButton(_ sender:AnswerButton) {
         if self.question.checkAnswer(sender.tag) {
-            soundManager.answer(urlSound: .answerCorrect)
             _ = self.question.nextQuestion()
             self.navigationController?.pushViewController(progressView, animated: true)
             
@@ -168,10 +185,13 @@ class MainViewController: UIViewController {
         } else {
             soundManager.answer(urlSound: .answerWrong)
             if !self.question.isMakeMistake() {
-                mistakeButton!.setDisableImage()
-                self.question.activeMistakeHelp()
-                sender.setMistakeStatus()//<--- toDo
-                return
+                mistakeButton!.setDisableImage() //<--- toDo
+                //toDo animation in 2-3 sec
+                question.activeMistakeHelp()
+                _ = self.question.nextQuestion()
+                self.navigationController!.pushViewController(progressView, animated: true)
+            } else {
+               loseGame()
             }
             //toDo animation in 2-3 sec
             var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
@@ -181,6 +201,14 @@ class MainViewController: UIViewController {
         }
     }
 
+    func loseGame() {
+        var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
+            navStackArray.insert(FinalController(), at: navStackArray.count)
+            navStackArray.insert(progressView, at: navStackArray.count)
+            self.navigationController!.setViewControllers(navStackArray, animated:true)
+    }
+
+    
     // -MARK: NSLayoutConstrates (Ящик пандоры)
     func uzerIntefaseConstrates() {
         view.addSubview(baseStack)

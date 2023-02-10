@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18512B40298FD17700F71511 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18512B3F298FD17700F71511 /* ProgressViewController.swift */; };
+		565609402992B4E00033EC81 /* SoundsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656093F2992B4E00033EC81 /* SoundsManager.swift */; };
 		56C4FDA8299505C0002B8FAF /* answerCorrect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 56C4FDA4299505BF002B8FAF /* answerCorrect.mp3 */; };
 		56C4FDA9299505C0002B8FAF /* answerWrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 56C4FDA5299505BF002B8FAF /* answerWrong.mp3 */; };
 		56C4FDAA299505C0002B8FAF /* timeGoing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 56C4FDA6299505BF002B8FAF /* timeGoing.mp3 */; };
@@ -30,7 +31,6 @@
 		CC71596A2993E3BD00400F0B /* HelperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7159692993E3BD00400F0B /* HelperButton.swift */; };
 		CC71597029953D7300400F0B /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC71596F29953D7300400F0B /* UIView + Extensions.swift */; };
 		CC71597229956B8600400F0B /* GiveMyMoneyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC71597129956B8600400F0B /* GiveMyMoneyButton.swift */; };
-		CC71597429969EA400400F0B /* SoundsManager + timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC71597329969EA300400F0B /* SoundsManager + timer.swift */; };
 		D85E549D29900B2600BE7980 /* UIFont + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E549C29900B2600BE7980 /* UIFont + Extensions.swift */; };
 		D85E54A129900BE900BE7980 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D85E549F29900BE900BE7980 /* Roboto-Bold.ttf */; };
 		D85E54A229900BE900BE7980 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D85E54A029900BE900BE7980 /* Roboto-Medium.ttf */; };
@@ -53,6 +53,7 @@
 		18512B3F298FD17700F71511 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		565609352992B3840033EC81 /* Syne-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Syne-Medium.ttf"; sourceTree = "<group>"; };
 		565609362992B3840033EC81 /* Syne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Syne-Regular.ttf"; sourceTree = "<group>"; };
+		5656093F2992B4E00033EC81 /* SoundsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsManager.swift; sourceTree = "<group>"; };
 		56C4FDA4299505BF002B8FAF /* answerCorrect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = answerCorrect.mp3; sourceTree = "<group>"; };
 		56C4FDA5299505BF002B8FAF /* answerWrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = answerWrong.mp3; sourceTree = "<group>"; };
 		56C4FDA6299505BF002B8FAF /* timeGoing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = timeGoing.mp3; path = CHALLENGE_1/Resources/timeGoing.mp3; sourceTree = SOURCE_ROOT; };
@@ -77,7 +78,6 @@
 		CC7159692993E3BD00400F0B /* HelperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperButton.swift; sourceTree = "<group>"; };
 		CC71596F29953D7300400F0B /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		CC71597129956B8600400F0B /* GiveMyMoneyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveMyMoneyButton.swift; sourceTree = "<group>"; };
-		CC71597329969EA300400F0B /* SoundsManager + timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SoundsManager + timer.swift"; sourceTree = "<group>"; };
 		D85E549C29900B2600BE7980 /* UIFont + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extensions.swift"; sourceTree = "<group>"; };
 		D85E549F29900BE900BE7980 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		D85E54A029900BE900BE7980 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -180,11 +180,11 @@
 		CC715959298F85D400400F0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC71597329969EA300400F0B /* SoundsManager + timer.swift */,
 				D8FFD7352995A93B00FFCED5 /* Model for Realm */,
 				CC715957298F85C500400F0B /* Question.swift */,
 				CC7159672992CB0F00400F0B /* QuestionManager.swift */,
 				D8FFD72A2995807500FFCED5 /* Player.swift */,
+				5656093F2992B4E00033EC81 /* SoundsManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -365,10 +365,10 @@
 				CC7159622991471D00400F0B /* AnswerButton.swift in Sources */,
 				D8FFD7372995A96000FFCED5 /* PlayerModel.swift in Sources */,
 				D8FFD732299588A500FFCED5 /* RegistrationVC.swift in Sources */,
-				CC71597429969EA400400F0B /* SoundsManager + timer.swift in Sources */,
 				CC715958298F85C500400F0B /* Question.swift in Sources */,
 				D8E4318D29964A0600433492 /* RatingVC.swift in Sources */,
 				D8FFD73A2995AA3A00FFCED5 /* RealmManager.swift in Sources */,
+				565609402992B4E00033EC81 /* SoundsManager.swift in Sources */,
 				D85E54A42990184D00BE7980 /* UIColor + Extensions.swift in Sources */,
 				D8E431902996543D00433492 /* RatingCustomCell.swift in Sources */,
 				CC715960299124FE00400F0B /* FinalView.swift in Sources */,
