@@ -116,6 +116,7 @@ class MainViewController: UIViewController {
         print(sender.tag)
         if self.question.checkAnswer(sender.tag) {
             _ = self.question.nextQuestion()
+            progressView.currentPosition = question.getPosition()
             self.navigationController!.pushViewController(progressView, animated: true)
         } else {
             if !self.question.isMakeMistake() {
@@ -127,18 +128,23 @@ class MainViewController: UIViewController {
                 //toDo animation in 2-3 sec
                 question.activeMistakeHelp()
                 _ = self.question.nextQuestion()
+                progressView.currentPosition = question.getPosition()
+
                 self.navigationController!.pushViewController(progressView, animated: true)
             } else {
                 var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
                 navStackArray.insert(FinalController(), at: navStackArray.count)
                 navStackArray.insert(progressView, at: navStackArray.count)
                 progressView.currentPosition = question.getPosition()
+
                 self.navigationController!.setViewControllers(navStackArray, animated:true)
             }
             //toDo animation in 2-3 sec
             var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
             navStackArray.insert(FinalController(), at: navStackArray.count)
             navStackArray.insert(progressView, at: navStackArray.count)
+            progressView.currentPosition = question.getPosition()
+
             self.navigationController!.setViewControllers(navStackArray, animated:true)
         }
     }
