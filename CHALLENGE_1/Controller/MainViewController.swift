@@ -119,12 +119,10 @@ class MainViewController: UIViewController {
             self.navigationController!.pushViewController(progressView, animated: true)
         } else {
             if !self.question.isMakeMistake() {
-<<<<<<< Updated upstream
                 mistakeButton!.setDisableImage()
                 self.question.activeMistakeHelp()
                 sender.setMistakeStatus()//<--- toDo
                 return
-=======
                 mistakeButton!.setDisableImage() //<--- toDo
                 //toDo animation in 2-3 sec
                 question.activeMistakeHelp()
@@ -136,7 +134,6 @@ class MainViewController: UIViewController {
                 navStackArray.insert(progressView, at: navStackArray.count)
                 progressView.currentPosition = question.getPosition()
                 self.navigationController!.setViewControllers(navStackArray, animated:true)
->>>>>>> Stashed changes
             }
             //toDo animation in 2-3 sec
             var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]

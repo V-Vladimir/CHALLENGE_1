@@ -11,7 +11,6 @@ class ProgressViewController: UIViewController {
                         ,"2000","4000","8000","16000","32000"
                         ,"64000","125000","250000","500000"
                         ,"1 Миллион"]
-    var imagePosition: [UIImageView] = []
     let stack: UIStackView = {
         $0.axis = .vertical
         $0.alignment = .center
@@ -20,30 +19,37 @@ class ProgressViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIStackView())
-    var question = CQuestions()
     let imageIcon: UIImageView = {
         $0.image = UIImage(named: "mainImage")
         $0.contentMode = .scaleAspectFit
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIImageView())
-    
+    var progressCell = ProgressCell()
     var currentPosition = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addBackground()
-        makeLabels()
         setupConstraints()
         self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        changeColorOfCell()
+        makeLabels()
     }
-    func changeColorOfCell(){
-        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        deleteCells()
     }
+    func deleteCells(){
+        var i = 0
+        while(stack.arrangedSubviews.count != 0){
+            stack.arrangedSubviews[i].removeFromSuperview()
+            i+=1
+        }
+    }
+
     func makeLabels(){
         for i in 0..<amountsOfWin.count {
             //create question cell
@@ -53,9 +59,9 @@ class ProgressViewController: UIViewController {
             questionCell.contentMode = .scaleToFill
             questionCell.translatesAutoresizingMaskIntoConstraints = false
             questionCell.widthAnchor.constraint(equalToConstant: width * (1 - CGFloat(5) * 0.035)).isActive = true
-            self.imagePosition.append(questionCell)
-            
             //create label and subView it on question cell
+//            progressCell.setProgressCell(checkColorOfRectangle(i))
+//            let questionCell = progressCell.getProgressCell()
             let labelTextNumberOfQuestion = UILabel()
             labelTextNumberOfQuestion.text = "Вопрос \(amountsOfWin.count - i)"
             labelTextNumberOfQuestion.textColor = .white
