@@ -10,7 +10,7 @@ import RealmSwift
 
 class RatingVC: UIViewController {
     private let localRealm = try! Realm()
-    private var playerArray: Results<PlayerModel>! = nil
+    private var playersArray: Results<PlayerModel>! = nil
     
     private let cellId = "idCell"
     
@@ -20,6 +20,7 @@ class RatingVC: UIViewController {
         table.translatesAutoresizingMaskIntoConstraints = false
         table.showsVerticalScrollIndicator = false
         table.bounces = false
+        table.separatorStyle = .none
         table.contentMode = .center
         //table.delaysContentTouches = true
         return table
@@ -30,13 +31,13 @@ class RatingVC: UIViewController {
         setupViews()
         setupConstraints()
         setDelegates()
-        
+        getPlayers()
     }
     
     private func setupViews() {
         view.addBackground()
         view.addSubview(tableView)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(RatingCustomCell.self, forCellReuseIdentifier: cellId)
     }
     
     private func setDelegates() {
@@ -55,16 +56,23 @@ class RatingVC: UIViewController {
         
     }
 
-
+    private func getPlayers() {
+        playersArray = localRealm.objects(PlayerModel.self)
+        tableView.reloadData()
+    }
+    
+    
 }
 
 extension RatingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return playersArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! RatingCustomCell
+        let player = playersArray[indexPath.row]
+        cell.setupInfo(for: player)
         return cell
     }
     
