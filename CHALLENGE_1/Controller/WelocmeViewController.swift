@@ -56,8 +56,9 @@ class WelocmeViewController: UIViewController {
     }()
     
     private lazy var ratingButton: UIButton = {
-       let button = UIButton()
-        button.setImage(UIImage(named: "rating"), for: .normal)
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "rating")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(showRating), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -97,6 +98,14 @@ class WelocmeViewController: UIViewController {
         let mainVC = RegistrationVC()
         self.navigationController?.pushViewController(mainVC, animated: true)
     }
+    
+    @objc
+    private func showRating() {
+        let ratingVc = RatingVC()
+        ratingVc.modalTransitionStyle = .flipHorizontal
+        present(ratingVc, animated: true)
+    }
+    
 }
 
 //MARK: - Set Constraints

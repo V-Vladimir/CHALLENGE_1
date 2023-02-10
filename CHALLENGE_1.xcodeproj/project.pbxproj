@@ -37,6 +37,7 @@
 		D85E54A42990184D00BE7980 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E54A32990184D00BE7980 /* UIColor + Extensions.swift */; };
 		D85E54A629901E9500BE7980 /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E54A529901E9500BE7980 /* String + Extensions.swift */; };
 		D85E54A829903D1F00BE7980 /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E54A729903D1F00BE7980 /* RuleViewController.swift */; };
+		D8E4318D29964A0600433492 /* RatingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4318C29964A0600433492 /* RatingVC.swift */; };
 		D8FFD72B2995807500FFCED5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FFD72A2995807500FFCED5 /* Player.swift */; };
 		D8FFD72E2995875700FFCED5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D8FFD72D2995875700FFCED5 /* Realm */; };
 		D8FFD7302995875700FFCED5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8FFD72F2995875700FFCED5 /* RealmSwift */; };
@@ -81,6 +82,7 @@
 		D85E54A32990184D00BE7980 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
 		D85E54A529901E9500BE7980 /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		D85E54A729903D1F00BE7980 /* RuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
+		D8E4318C29964A0600433492 /* RatingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingVC.swift; sourceTree = "<group>"; };
 		D8FFD72A2995807500FFCED5 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		D8FFD731299588A500FFCED5 /* RegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
 		D8FFD733299597F900FFCED5 /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				D85E54A729903D1F00BE7980 /* RuleViewController.swift */,
 				CC71595D2991245700400F0B /* FinalController.swift */,
 				D8FFD731299588A500FFCED5 /* RegistrationVC.swift */,
+				D8E4318C29964A0600433492 /* RatingVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				D8FFD7372995A96000FFCED5 /* PlayerModel.swift in Sources */,
 				D8FFD732299588A500FFCED5 /* RegistrationVC.swift in Sources */,
 				CC715958298F85C500400F0B /* Question.swift in Sources */,
+				D8E4318D29964A0600433492 /* RatingVC.swift in Sources */,
 				D8FFD73A2995AA3A00FFCED5 /* RealmManager.swift in Sources */,
 				565609402992B4E00033EC81 /* Sounds.swift in Sources */,
 				D85E54A42990184D00BE7980 /* UIColor + Extensions.swift in Sources */,
