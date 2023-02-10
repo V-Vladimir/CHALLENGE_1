@@ -16,8 +16,9 @@ class MainViewController: UIViewController {
     private let giveMoneyButton = GiveMyMoneyButton("0")
     private var progressView = ProgressViewController()
     private var mistakeButton:HelperButton?
-    var preMadeSounds = PreMadeSounds()
-    
+
+    //var preMadeSounds = PreMadeSounds()
+    private var soundManager = SoundManager()
     let finalVC = FinalController()
     
     let baseStack: UIStackView = {
@@ -112,10 +113,21 @@ class MainViewController: UIViewController {
         
         finalVC.delegate = self
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadCurrentQuestion()
+       
+        soundManager.startTimer()
+
+    }
+    
+    
+    func timeIsOver() {
+            var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
+            navStackArray.insert(FinalController(), at: navStackArray.count)
+            navStackArray.insert(progressView, at: navStackArray.count)
+            self.navigationController!.setViewControllers(navStackArray, animated:true)
     }
     
     func loadCurrentQuestion() {
@@ -148,11 +160,13 @@ class MainViewController: UIViewController {
         
     @objc func pushAnswerButton(_ sender:AnswerButton) {
         if self.question.checkAnswer(sender.tag) {
+            soundManager.answer(urlSound: .answerCorrect)
             _ = self.question.nextQuestion()
             self.navigationController?.pushViewController(progressView, animated: true)
             
             //present(progressView, animated: true)
         } else {
+            soundManager.answer(urlSound: .answerWrong)
             if !self.question.isMakeMistake() {
                 mistakeButton!.setDisableImage()
                 self.question.activeMistakeHelp()
