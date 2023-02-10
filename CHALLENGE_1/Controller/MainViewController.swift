@@ -109,6 +109,8 @@ class MainViewController: UIViewController {
             button.addTarget(self, action: #selector(pushAnswerButton), for: .touchUpInside)
         }
         giveMoneyButton.addTarget(self, action: #selector(pushMoney), for: .touchUpInside)
+        
+        finalVC.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -236,3 +238,11 @@ class MainViewController: UIViewController {
     
 }
 
+//MARK: - Setting delegate
+extension MainViewController: FinalControllerDelegate {
+    
+    func saveResults(controller: FinalController) {
+        createModel()
+        saveModel()
+    }
+}

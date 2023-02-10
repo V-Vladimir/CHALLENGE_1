@@ -9,8 +9,10 @@ import UIKit
 import RealmSwift
 
 class FinalController: UIViewController {
-    let finalView = FinalView()
     
+    var delegate: FinalControllerDelegate?
+    
+    let finalView = FinalView()
     private lazy var playAgainButton: UIButton = {
         
         let button = UIButton(type: .system)
@@ -36,6 +38,7 @@ class FinalController: UIViewController {
         view.addSubview(playAgainButton)
         setConstraints()
         showResult(isWin: true, questionNumber: 0)
+        delegate?.saveResults(controller: self)
     }
 
     func showResult(isWin: Bool, questionNumber: Int) {
@@ -74,4 +77,7 @@ extension FinalController {
     
 }
 
-
+//MARK: - Delegate
+protocol FinalControllerDelegate {
+    func saveResults(controller: FinalController)
+}
