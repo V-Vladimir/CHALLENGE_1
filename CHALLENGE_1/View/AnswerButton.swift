@@ -7,7 +7,17 @@
 
 import UIKit
 
-final class AnswerButton : UIButton {
+final class ProgressButton : AnswerButton {
+    //MARK: Функция Градиента
+//    override func applyGradients() {
+//        gradient.locations = [0.0, 0.5, 1.0]
+//        gradient.cornerRadius = 16
+//        gradient.frame = self.bounds
+//        self.layer.insertSublayer(gradient, at: 0)
+//    }
+}
+    
+class AnswerButton : UIButton {
     let gradient = CAGradientLayer()
     let textAnswer: UILabel = {
         $0.contentMode = .scaleAspectFit
@@ -27,15 +37,21 @@ final class AnswerButton : UIButton {
         self.init(frame: frame)
     }
     
-    convenience init(_ tag:Int, _ text:String) {
+    convenience init(_ tag:Int, _ text:String, _ tagText:String = "") {
         self.init()
         self.tag = tag
-        let charVal = String("A").unicodeScalars
-        let asciiVal = Int(charVal[charVal.startIndex].value)
-        self.labelTag.text = "\(Character(UnicodeScalar(asciiVal + tag)!))"
+        if (tagText.isEmpty) {
+            let charVal = String("A").unicodeScalars
+            let asciiVal = Int(charVal[charVal.startIndex].value)
+            self.labelTag.text = "\(Character(UnicodeScalar(asciiVal + tag)!))"
+        } else {
+            self.labelTag.text = tagText
+        }
+
         self.addSubview(labelTag)
         self.addSubview(textAnswer)
         setDefaultStatus()
+        setText(text)
     }
     
     func setText(_ text:String) {

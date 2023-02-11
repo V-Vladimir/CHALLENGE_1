@@ -17,12 +17,18 @@ class MainViewController: UIViewController {
     
     var question = CQuestions()
     private let giveMoneyButton = GiveMyMoneyButton("0")
-    private var progressView = ProgressViewController()
+    private var progressView:ProgressViewController?
     private var mistakeButton:HelperButton?
 
     //var preMadeSounds = PreMadeSounds()
     
     let finalVC = FinalController()
+    
+    convenience init() {
+        self.init(nibName:nil, bundle:nil)
+        progressView = ProgressViewController(question)
+    }
+    
     
     let baseStack: UIStackView = {
         $0.axis = .vertical
@@ -112,13 +118,14 @@ class MainViewController: UIViewController {
         for button in answerButtons {
             button.addTarget(self, action: #selector(finishQuestionTimer), for: .touchUpInside)
         }
-        giveMoneyButton.addTarget(self, action: #selector(pushMoney), for: .touchUpInside)
+        //giveMoneyButton.addTarget(self, action: #selector(pushMoney), for: .touchUpInside)
         
         finalVC.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        _ = self.question.nextQuestion()
         loadCurrentQuestion()
         startQuestionTimer()
         
@@ -189,15 +196,16 @@ class MainViewController: UIViewController {
     
     @objc func nextQuestionController() {
         soundManager.stop()
-        _ = self.question.nextQuestion()
-        self.navigationController?.pushViewController(progressView, animated: true)
+        //progressView!.currentPosition = question.getPosition() + 1
+        progressView?.setCurrentPosition(question.getPosition())
+        self.navigationController?.pushViewController(progressView!, animated: true)
     }
     
     @objc func gameOver() {
         var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
         finalVC.showResult(isWin: false, questionNumber: question.getPosition())
         navStackArray.insert(finalVC, at: navStackArray.count)
-        navStackArray.insert(progressView, at: navStackArray.count)
+        navStackArray.insert(progressView!, at: navStackArray.count)
         self.navigationController!.setViewControllers(navStackArray, animated:true)
     }
         
@@ -211,23 +219,23 @@ class MainViewController: UIViewController {
         giveMoneyButton.setText(self.question.getSumQuestion())
     }
     
-    @objc func pushMoney() {
-        let alertController = UIAlertController(title: "Money", message: "Do you have my money?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Return", style: .cancel) { (action) in
-            print("Go back")
-        }
-        alertController.addAction(cancelAction)
-
-        let destroyAction = UIAlertAction(title: "Transfer", style: .destructive) { [weak self] (action) in
-            guard let strongLink = self else { return }
-            strongLink.timer?.invalidate()
-            var navStackArray : [UIViewController]! = [strongLink.navigationController!.viewControllers[0]]
-            navStackArray.insert(strongLink.finalVC, at: navStackArray.count)
-            strongLink.navigationController!.setViewControllers(navStackArray, animated:true)
-        }
-        alertController.addAction(destroyAction)
-        self.present(alertController, animated: true)
-    }
+//    @objc func pushMoney() {
+//        let alertController = UIAlertController(title: "Money", message: "Do you have my money?", preferredStyle: .alert)
+//        let cancelAction = UIAlertAction(title: "Return", style: .cancel) { (action) in
+//            print("Go back")
+//        }
+//        alertController.addAction(cancelAction)
+//
+//        let destroyAction = UIAlertAction(title: "Transfer", style: .destructive) { [weak self] (action) in
+//            guard let strongLink = self else { return }
+//            strongLink.timer?.invalidate()
+//            var navStackArray : [UIViewController]! = [strongLink.navigationController!.viewControllers[0]]
+//            navStackArray.insert(strongLink.finalVC, at: navStackArray.count)
+//            strongLink.navigationController!.setViewControllers(navStackArray, animated:true)
+//        }
+//        alertController.addAction(destroyAction)
+//        self.present(alertController, animated: true)
+//    }
     
     func isEnableUserInteraction(_ flag:Bool) {
         let _ = self.view.subviews.map { $0.isUserInteractionEnabled = flag }
@@ -236,7 +244,7 @@ class MainViewController: UIViewController {
     func loseGame() {
         var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
             navStackArray.insert(FinalController(), at: navStackArray.count)
-            navStackArray.insert(progressView, at: navStackArray.count)
+            navStackArray.insert(progressView!, at: navStackArray.count)
             self.navigationController!.setViewControllers(navStackArray, animated:true)
     }
 

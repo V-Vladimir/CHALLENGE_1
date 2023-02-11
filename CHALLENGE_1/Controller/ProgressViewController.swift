@@ -6,29 +6,30 @@
 //
 
 import UIKit
-class ProgressViewController: UIViewController {
-    let amountsOfWin = ["100","200","300","500","1000"
-                        ,"2000","4000","8000","16000","32000"
-                        ,"64000","125000","250000","500000"
-                        ,"1 Миллион"]
+final class ProgressViewController: UIViewController {
+    private var question:CQuestions? = nil
     let stack: UIStackView = {
         $0.axis = .vertical
-        $0.alignment = .center
+        //$0.alignment = .center
         $0.distribution = .fillEqually
         $0.spacing = 10
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIStackView())
-    
     let imageIcon: UIImageView = {
         $0.image = UIImage(named: "mainImage")
         $0.contentMode = .scaleAspectFit
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIImageView())
+    var currentPosition = 0
+    var progressCells: [UIImageView] = []
     
-    let currentPosition = 4
-
+    convenience init(_ question: CQuestions) {
+        self.init(nibName:nil, bundle:nil)
+        self.question = question
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addBackground()
@@ -36,63 +37,24 @@ class ProgressViewController: UIViewController {
         setupConstraints()
         self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
     }
-    
-    func makeLabels(){
-        for i in 0..<amountsOfWin.count {
-            //create question cell
-            let questionCell = UIImageView()
-            let width = UIScreen.main.bounds.size.width
-            questionCell.image = UIImage(named: checkColorOfRectangle(i))
-            questionCell.contentMode = .scaleToFill
-            questionCell.translatesAutoresizingMaskIntoConstraints = false
-            questionCell.widthAnchor.constraint(equalToConstant: width * (1 - CGFloat(5) * 0.035)).isActive = true
-            
-            //create label and subView it on question cell
-            let labelTextNumberOfQuestion = UILabel()
-            labelTextNumberOfQuestion.text = "Вопрос \(amountsOfWin.count - i)"
-            labelTextNumberOfQuestion.textColor = .white
-            labelTextNumberOfQuestion.font = .systemFont(ofSize: 20)
-            labelTextNumberOfQuestion.numberOfLines = 0
-            labelTextNumberOfQuestion.translatesAutoresizingMaskIntoConstraints = false
-            
-            let labelAmountOfMoney = UILabel()
-            labelAmountOfMoney.text = "\(amountsOfWin[amountsOfWin.count - i - 1]) \(checkLastQuestion(i))"
-            labelAmountOfMoney.textColor = .white
-            labelAmountOfMoney.font = .systemFont(ofSize: 20)
-            labelAmountOfMoney.numberOfLines = 0
-            labelAmountOfMoney.translatesAutoresizingMaskIntoConstraints = false
-            
-            questionCell.addSubview(labelTextNumberOfQuestion)
-            questionCell.addSubview(labelAmountOfMoney)
-            
-            
-            labelTextNumberOfQuestion.leadingAnchor.constraint(equalToSystemSpacingAfter: questionCell.leadingAnchor, multiplier: 3).isActive = true
-            labelTextNumberOfQuestion.centerYAnchor.constraint(equalTo: questionCell.centerYAnchor).isActive = true
-            
-            
-            questionCell.trailingAnchor.constraint(equalToSystemSpacingAfter: labelAmountOfMoney.trailingAnchor, multiplier: 3).isActive = true
-            labelAmountOfMoney.centerYAnchor.constraint(equalTo: questionCell.centerYAnchor).isActive = true
-            
-            stack.addArrangedSubview(questionCell)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ( stack.arrangedSubviews[currentPosition] as! ProgressButton).setCorrectStatus()
+        ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()
+    }
+    private func makeLabels(){
+        for i in 0..<(question?.countQustion())! {
+            let index = (question?.countQustion())! - i
+            let button = ProgressButton(i, (question?.getSumQuestionText(index - 1))!, "Вопрос \(index)")
+            stack.addArrangedSubview(button)
         }
+        for item in question!.checkPointPosition {
+            ( stack.arrangedSubviews[item] as! ProgressButton).setMistakeStatus()
+        }
+        (stack.arrangedSubviews.first as! ProgressButton).setSelectStatus()
     }
 
-    func checkColorOfRectangle(_ index: Int) -> String{
-        let position = amountsOfWin.count - index
-        if(position == 5) || (position == 10){
-            return "Rectangle blue"
-        }
-        else if (position == 15){
-            return "Rectangle yellow"
-        }
-        else if (position == currentPosition){
-            return "Rectangle green"
-        }
-        else{
-            return "Rectangle violet"
-        }
-    }
-    func checkLastQuestion(_ index: Int) -> String{
+    private func checkLastQuestion(_ index: Int) -> String{
         if(index + 1 == 1){
             return ""
         } else {
@@ -102,16 +64,22 @@ class ProgressViewController: UIViewController {
     @objc func toBackView() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func setCurrentPosition(_ index: Int) {
+        currentPosition = (question?.countQustion())! - index
+        print(currentPosition)
+    }
+    
 }
 
 extension ProgressViewController{
-    func setupConstraints(){
+    private func setupConstraints(){
         view.addSubview(stack)
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 10),
             stack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         view.addSubview(imageIcon)
         NSLayoutConstraint.activate([

@@ -18,10 +18,11 @@ final class CQuestions {
                                 ,"2000","4000","8000","16000","32000"
                                 ,"64000","125000","250000","500000"
                                 ,"1 Миллион"]
+    let checkPointPosition:[Int] = [5, 10]
     var player  = Player()
     
     private var questions:[Question] = []
-    private var currentPosition = 1 { didSet { player.questionLevel += 1 } }
+    private var currentPosition = 0 { didSet { player.questionLevel += 1 } }
     private var activeAnswer:[Int] = []
     //helper flags
     private var isMistake = false
@@ -148,12 +149,16 @@ final class CQuestions {
     func activeHelpers() -> [Int] {
         return []
     }
+    
     func getSumQuestion() -> String {
-        if (currentPosition == 1) {
-            return ""
-        }
-        let quNumber = "\(amountsOfWin[currentPosition - 2]) RUB"
-        return quNumber
+        return getSumQuestionText(currentPosition - 1)
+    }
+    func getSumQuestionText(_ index: Int) -> String {
+        return "\(amountsOfWin[index]) RUB"
+    }
+
+    func countQustion() -> Int {
+        return amountsOfWin.count
     }
     
 }
