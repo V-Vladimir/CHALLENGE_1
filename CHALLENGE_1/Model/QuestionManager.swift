@@ -29,7 +29,8 @@ final class CQuestions {
     private var isFiftyAndFiftyActive = false
     private var isPeoplesHall = false
     private var isCorrectLastQuestion = true
-    private var lastAnswerIndex = -1
+    var lastAnswerIndex = -1
+    var winPosition = 0
     
     init() {
         loadQuestions()
@@ -124,7 +125,7 @@ final class CQuestions {
     }
     
     func getActiveQuestion() -> Question {
-        return questions[currentPosition]
+        return questions[currentPosition - 1 ]
     }
     
     func getPosition() -> Int {
@@ -161,4 +162,24 @@ final class CQuestions {
         return amountsOfWin.count
     }
     
+    func getWinSumm() -> String {
+        if currentPosition == 0 {
+            return "0 Rub"
+        }
+        if currentPosition == amountsOfWin.count && lastAnswerIndex == getActiveQuestion().rightAnswerIndex {
+            return getSumQuestionText(currentPosition - 1)
+        }
+        if winPosition > 0 {
+            return getSumQuestionText(winPosition - 1)
+        }
+        
+        winPosition = currentPosition
+        repeat {
+            winPosition-=1
+            if winPosition == 0 {
+               return "0 Rub"
+            }
+        } while !checkPointPosition.contains(winPosition)
+        return getSumQuestionText(winPosition - 1)
+    }
 }

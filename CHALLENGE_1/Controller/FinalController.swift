@@ -11,6 +11,7 @@ import RealmSwift
 class FinalController: UIViewController {
     var delegate: FinalControllerDelegate?
     let finalView = FinalView()
+    var winSubText = ""
     private lazy var playAgainButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = #colorLiteral(red: 0.2319103479, green: 0.7549440265, blue: 0.2910608053, alpha: 1)
@@ -39,11 +40,14 @@ class FinalController: UIViewController {
         if isWin {
             finalView.textInformation.text =
             "Вы выйграли! вы ответили на все вопросы!"
-            finalView.finalResultText.text = "WIN"
+            finalView.finalResultText.text =  winSubText
         } else if !isWin {
             finalView.textInformation.text = " вы проиграли на \(questionNumber) вопросе \n \(money)"
-            finalView.finalResultText.text = "LOSE"
+            finalView.finalResultText.text =  winSubText
         }
+    }
+    func setWinText(_ text:String) {
+        winSubText = text
     }
     
     //MARK: - Selectors
