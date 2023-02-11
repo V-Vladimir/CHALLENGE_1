@@ -75,12 +75,11 @@ class WelocmeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //soundManager.playSound(urlSound: .mainSound)
+        soundManager.playSound(urlSound: .mainSound)
     }
     
     override func viewWillDisappear(_ boolFlag :Bool) {
         super.viewWillDisappear(boolFlag)
-        //soundManager.stop()
         //self.navigationController?.viewControllers.remove(at: 0)
     }
     
@@ -103,6 +102,7 @@ class WelocmeViewController: UIViewController {
     
     @objc
     private func navigationToMainView() {
+        soundManager.stop()
         let mainVC = RegistrationVC()
         self.navigationController?.pushViewController(mainVC, animated: true)
     }

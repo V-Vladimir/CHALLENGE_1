@@ -39,8 +39,10 @@ final class ProgressViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ( stack.arrangedSubviews[currentPosition] as! ProgressButton).setCorrectStatus()
-        ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()
+        if currentPosition > 0 {
+            ( stack.arrangedSubviews[currentPosition] as! ProgressButton).setCorrectStatus()
+            ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()
+        }
     }
     private func makeLabels(){
         for i in 0..<(question?.countQustion())! {
