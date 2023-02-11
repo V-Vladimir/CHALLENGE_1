@@ -19,16 +19,14 @@ class ProgressViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIStackView())
-    
     let imageIcon: UIImageView = {
         $0.image = UIImage(named: "mainImage")
         $0.contentMode = .scaleAspectFit
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIImageView())
-    
-    let currentPosition = 4
-
+    var currentPosition = 0
+    var progressCells: [UIImageView] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addBackground()
@@ -36,8 +34,17 @@ class ProgressViewController: UIViewController {
         setupConstraints()
         self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
     }
-    
-    func makeLabels(){
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if(currentPosition == 2){
+            progressCells[amountsOfWin.count - currentPosition + 1].image = UIImage(named: "Rectangle green")
+        }
+        else{
+            progressCells[amountsOfWin.count - currentPosition + 1].image = UIImage(named: "Rectangle green")
+            progressCells[amountsOfWin.count - currentPosition + 2].image = UIImage(named: checkColorOfRectangle(amountsOfWin.count - currentPosition + 2))
+        }
+    }
+    private func makeLabels(){
         for i in 0..<amountsOfWin.count {
             //create question cell
             let questionCell = UIImageView()
@@ -46,8 +53,9 @@ class ProgressViewController: UIViewController {
             questionCell.contentMode = .scaleToFill
             questionCell.translatesAutoresizingMaskIntoConstraints = false
             questionCell.widthAnchor.constraint(equalToConstant: width * (1 - CGFloat(5) * 0.035)).isActive = true
-            
             //create label and subView it on question cell
+//            progressCell.setProgressCell(checkColorOfRectangle(i))
+//            let questionCell = progressCell.getProgressCell()
             let labelTextNumberOfQuestion = UILabel()
             labelTextNumberOfQuestion.text = "Вопрос \(amountsOfWin.count - i)"
             labelTextNumberOfQuestion.textColor = .white
@@ -72,12 +80,12 @@ class ProgressViewController: UIViewController {
             
             questionCell.trailingAnchor.constraint(equalToSystemSpacingAfter: labelAmountOfMoney.trailingAnchor, multiplier: 3).isActive = true
             labelAmountOfMoney.centerYAnchor.constraint(equalTo: questionCell.centerYAnchor).isActive = true
-            
-            stack.addArrangedSubview(questionCell)
+            progressCells.append(questionCell)
+            stack.addArrangedSubview(progressCells[i])
         }
     }
 
-    func checkColorOfRectangle(_ index: Int) -> String{
+    private func checkColorOfRectangle(_ index: Int) -> String{
         let position = amountsOfWin.count - index
         if(position == 5) || (position == 10){
             return "Rectangle blue"
@@ -85,14 +93,11 @@ class ProgressViewController: UIViewController {
         else if (position == 15){
             return "Rectangle yellow"
         }
-        else if (position == currentPosition){
-            return "Rectangle green"
-        }
         else{
             return "Rectangle violet"
         }
     }
-    func checkLastQuestion(_ index: Int) -> String{
+    private func checkLastQuestion(_ index: Int) -> String{
         if(index + 1 == 1){
             return ""
         } else {
@@ -102,10 +107,11 @@ class ProgressViewController: UIViewController {
     @objc func toBackView() {
         self.navigationController?.popViewController(animated: true)
     }
+    
 }
 
 extension ProgressViewController{
-    func setupConstraints(){
+    private func setupConstraints(){
         view.addSubview(stack)
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 10),

@@ -179,9 +179,9 @@ class MainViewController: UIViewController {
     @objc func pushAnswerButton(_ sender:AnswerButton) {
         if self.question.checkAnswer(sender.tag) {
             _ = self.question.nextQuestion()
-            self.navigationController?.pushViewController(progressView, animated: true)
             
-            //present(progressView, animated: true)
+            progressView.currentPosition = question.getPosition()
+            self.navigationController!.pushViewController(progressView, animated: true)
         } else {
             soundManager.answer(urlSound: .answerWrong)
             if !self.question.isMakeMistake() {
@@ -189,14 +189,18 @@ class MainViewController: UIViewController {
                 //toDo animation in 2-3 sec
                 question.activeMistakeHelp()
                 _ = self.question.nextQuestion()
+                progressView.currentPosition = question.getPosition()
                 self.navigationController!.pushViewController(progressView, animated: true)
             } else {
                loseGame()
+
             }
             //toDo animation in 2-3 sec
             var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
             navStackArray.insert(finalVC, at: navStackArray.count)
             navStackArray.insert(progressView, at: navStackArray.count)
+            progressView.currentPosition = question.getPosition()
+
             self.navigationController!.setViewControllers(navStackArray, animated:true)
         }
     }
