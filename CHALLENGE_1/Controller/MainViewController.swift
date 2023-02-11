@@ -11,8 +11,9 @@ import RealmSwift
 class MainViewController: UIViewController {
     private let localRealm = try! Realm()
     private var playerModel = PlayerModel()
-    private var seconds = 30
+//    private var seconds = 30
     private var timer: Timer?
+    private var soundManager = SoundManager()
     
     var question = CQuestions()
     private let giveMoneyButton = GiveMyMoneyButton("0")
@@ -20,7 +21,7 @@ class MainViewController: UIViewController {
     private var mistakeButton:HelperButton?
 
     //var preMadeSounds = PreMadeSounds()
-    private var soundManager = SoundManager()
+    
     let finalVC = FinalController()
     
     let baseStack: UIStackView = {
@@ -109,7 +110,7 @@ class MainViewController: UIViewController {
         view.backgroundColor = .gray
         uzerIntefaseConstrates()
         for button in answerButtons {
-            button.addTarget(self, action: #selector(pushAnswerButton), for: .touchUpInside)
+            button.addTarget(self, action: #selector(finishQuestionTimer), for: .touchUpInside)
         }
         giveMoneyButton.addTarget(self, action: #selector(pushMoney), for: .touchUpInside)
         
@@ -119,40 +120,92 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadCurrentQuestion()
-        startTimer()
+        startQuestionTimer()
         
+        //startTimer()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        soundManager.mistakePlay()
-        timer?.invalidate()
+        //soundManager.mistakePlay()
+//        timer?.invalidate()
     }
     
     //MARK: Timer
-    func startTimer() {
-        soundManager.playSound(urlSound: .timeGoing)
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timeGone), userInfo: nil, repeats: true)
-        seconds = 10
-        
+    @objc func startQuestionTimer() {
+        isEnableUserInteraction(true)
+        let duration = 6.0
+        timer?.invalidate()
+        soundManager.answer(urlSound: .timeGoing)
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(duration), target: self, selector: #selector(finishQuestionTimer), userInfo: nil, repeats: false)
     }
-
-    @objc func timeGone()  {
-        seconds -= 1
-        print(seconds)
-        if seconds == 0 {
-            soundManager.player.stop()
-            soundManager.playSound(urlSound: .answerWrong)
-            timer?.invalidate()
-            loseGame()
+    
+    @objc func finishQuestionTimer(_ sender:NSObject) {
+        isEnableUserInteraction(false)
+        if ((sender as? AnswerButton) != nil) {
+            _ = self.question.checkAnswer((sender as! AnswerButton).tag)
+            (sender as! AnswerButton).setSelectStatus()
+        }
+        timer?.invalidate()
+        soundManager.answer(urlSound: .answerAccepted)
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(checkAnswerTimer), userInfo: nil, repeats: false)
+    }
+    
+    @objc func checkAnswerTimer() {
+        let duration = 3.0
+        timer?.invalidate()
+        let buttonIndex = question.lastIndexQuestion()
+        // if button Index <0 then timer has worked
+        if (buttonIndex < 0) {
+            if !self.question.isMakeMistake() {
+                mistakeButton!.setDisableImage()
+                question.activeMistakeHelp()
+                soundManager.answer(urlSound: .answerWrong)
+                timer = Timer.scheduledTimer(timeInterval: TimeInterval(duration), target: self, selector: #selector(startQuestionTimer), userInfo: nil, repeats: false)
+                return
+            }
+            soundManager.answer(urlSound: .answerWrong)
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(duration), target: self, selector: #selector(gameOver), userInfo: nil, repeats: false)
+            return
+        }
+        
+        if (question.statusLastQuestion()) {
+            soundManager.answer(urlSound: .answerCorrect)
+            answerButtons[buttonIndex].setCorrectStatus()
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(duration), target: self, selector: #selector(nextQuestionController), userInfo: nil, repeats: false)
+        } else {
+            soundManager.answer(urlSound: .answerWrong)
+            answerButtons[buttonIndex].setMistakeStatus()
+            
+            if self.question.isMakeMistake() {
+                timer = Timer.scheduledTimer(timeInterval: TimeInterval(duration), target: self, selector: #selector(gameOver), userInfo: nil, repeats: false)
+                return
+            }
+            mistakeButton!.setDisableImage()
+            question.activeMistakeHelp()
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(duration), target: self, selector: #selector(startQuestionTimer), userInfo: nil, repeats: false)
         }
     }
-   
+    
+    @objc func nextQuestionController() {
+        soundManager.stop()
+        _ = self.question.nextQuestion()
+        self.navigationController?.pushViewController(progressView, animated: true)
+    }
+    
+    @objc func gameOver() {
+        var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
+        finalVC.showResult(isWin: false, questionNumber: question.getPosition())
+        navStackArray.insert(finalVC, at: navStackArray.count)
+        navStackArray.insert(progressView, at: navStackArray.count)
+        self.navigationController!.setViewControllers(navStackArray, animated:true)
+    }
+        
     func loadCurrentQuestion() {
         let question = self.question.getActiveQuestion()
         questionLabel.text = question.question
         quatinNumberLabel.text = "Qusetion \(self.question.getPosition())"
-        for index in Range(0...3) {
+        for index in Range(0...(answerButtons.count-1)) {
             answerButtons[index].setText(question.answers[index])
         }
         giveMoneyButton.setText(self.question.getSumQuestion())
@@ -166,8 +219,8 @@ class MainViewController: UIViewController {
         alertController.addAction(cancelAction)
 
         let destroyAction = UIAlertAction(title: "Transfer", style: .destructive) { [weak self] (action) in
-            
             guard let strongLink = self else { return }
+            strongLink.timer?.invalidate()
             var navStackArray : [UIViewController]! = [strongLink.navigationController!.viewControllers[0]]
             navStackArray.insert(strongLink.finalVC, at: navStackArray.count)
             strongLink.navigationController!.setViewControllers(navStackArray, animated:true)
@@ -175,30 +228,9 @@ class MainViewController: UIViewController {
         alertController.addAction(destroyAction)
         self.present(alertController, animated: true)
     }
-        
-    @objc func pushAnswerButton(_ sender:AnswerButton) {
-        if self.question.checkAnswer(sender.tag) {
-            _ = self.question.nextQuestion()
-            self.navigationController?.pushViewController(progressView, animated: true)
-            
-            //present(progressView, animated: true)
-        } else {
-            soundManager.answer(urlSound: .answerWrong)
-            if !self.question.isMakeMistake() {
-                mistakeButton!.setDisableImage() //<--- toDo
-                //toDo animation in 2-3 sec
-                question.activeMistakeHelp()
-                _ = self.question.nextQuestion()
-                self.navigationController!.pushViewController(progressView, animated: true)
-            } else {
-               loseGame()
-            }
-            //toDo animation in 2-3 sec
-            var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
-            navStackArray.insert(finalVC, at: navStackArray.count)
-            navStackArray.insert(progressView, at: navStackArray.count)
-            self.navigationController!.setViewControllers(navStackArray, animated:true)
-        }
+    
+    func isEnableUserInteraction(_ flag:Bool) {
+        let _ = self.view.subviews.map { $0.isUserInteractionEnabled = flag }
     }
 
     func loseGame() {
@@ -275,7 +307,6 @@ class MainViewController: UIViewController {
     private func resetPlayerModel() {
         question.player.reset()
     }
-    
 }
 
 //MARK: - Setting delegate

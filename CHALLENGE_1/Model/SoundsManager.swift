@@ -24,17 +24,16 @@ enum SoundsName {
 }
 
 class SoundManager {
-    private let question = CQuestions()
-    var player = AVAudioPlayer()
+    //private let question = CQuestions()
+    private var player = AVAudioPlayer()
    
-    func mistakePlay() {
-        if !question.isMakeMistake() {
-            playSound(urlSound: .answerCorrect)
-        } else if question.isMakeMistake() {
-            playSound(urlSound: .answerWrong)
-        }
-    }
-    
+//    func mistakePlay() {
+//        if !question.isMakeMistake() {
+//            playSound(urlSound: .answerCorrect)
+//        } else if question.isMakeMistake() {
+//            playSound(urlSound: .answerWrong)
+//        }
+//    }
     
     func playSound(urlSound: SoundsName) {
         do {
@@ -50,10 +49,12 @@ class SoundManager {
             player.stop()
             player = try AVAudioPlayer(contentsOf: urlSound.sound)
             player.play()
-            
         } catch {
             print("error url Sound")
         }
     }
     
-        }
+    func stop() {
+        player.stop()
+    }
+}

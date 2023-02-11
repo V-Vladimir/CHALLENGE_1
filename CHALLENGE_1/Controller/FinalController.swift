@@ -35,13 +35,13 @@ class FinalController: UIViewController {
         delegate?.saveResults(controller: self)
     }
 
-    func showResult(isWin: Bool, questionNumber: Int) {
+    func showResult(isWin: Bool, questionNumber: Int,_ money: Int = 0) {
         if isWin {
             finalView.textInformation.text =
             "Вы выйграли! вы ответили на все вопросы!"
             finalView.finalResultText.text = "WIN"
         } else if !isWin {
-            finalView.textInformation.text = " вы проиграли на \(questionNumber) вопросе"
+            finalView.textInformation.text = " вы проиграли на \(questionNumber) вопросе \n \(money)"
             finalView.finalResultText.text = "LOSE"
         }
     }

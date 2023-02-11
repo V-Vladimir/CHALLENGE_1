@@ -27,6 +27,8 @@ final class CQuestions {
     private var isMistake = false
     private var isFiftyAndFiftyActive = false
     private var isPeoplesHall = false
+    private var isCorrectLastQuestion = true
+    private var lastAnswerIndex = -1
     
     init() {
         loadQuestions()
@@ -72,8 +74,18 @@ final class CQuestions {
         return activeAnswer
     }
     
+    func statusLastQuestion() -> Bool {
+        return isCorrectLastQuestion
+    }
+    
+    func lastIndexQuestion() -> Int {
+        return lastAnswerIndex
+    }
+     
     func checkAnswer(_ index:Int) -> Bool {
-        return (index == getActiveQuestion().rightAnswerIndex) ? true : false
+        lastAnswerIndex = index
+        isCorrectLastQuestion = (lastAnswerIndex == getActiveQuestion().rightAnswerIndex) ? true : false
+        return isCorrectLastQuestion
     }
     
     func getPeoplePercent() -> [Int] {
@@ -119,6 +131,8 @@ final class CQuestions {
     }
     
     func nextQuestion() -> Question {
+        lastAnswerIndex = -1
+        isCorrectLastQuestion = false
         currentPosition+=1
         activeAnswer = []
         return getActiveQuestion()
