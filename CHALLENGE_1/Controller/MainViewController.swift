@@ -11,18 +11,20 @@ import RealmSwift
 class MainViewController: UIViewController {
     private let localRealm = try! Realm()
     private var playerModel = PlayerModel()
-    private var seconds = 30
-    private var timer: Timer?
     
+    private var seconds = 35
+    private var timer: Timer?
+
+    private var isWinGame = false
+    private var namePlayer = " "
+    private var currentLevel = 0
     var question = CQuestions()
+   
     private let giveMoneyButton = GiveMyMoneyButton("0")
     private var progressView = ProgressViewController()
     private var mistakeButton:HelperButton?
-
-    //var preMadeSounds = PreMadeSounds()
     private var soundManager = SoundManager()
     let finalVC = FinalController()
-    
     let baseStack: UIStackView = {
         $0.axis = .vertical
         //$0.alignment = .center
@@ -114,6 +116,8 @@ class MainViewController: UIViewController {
         giveMoneyButton.addTarget(self, action: #selector(pushMoney), for: .touchUpInside)
         
         finalVC.delegate = self
+        namePlayer = question.player.name
+        currentLevel = question.player.questionLevel
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,17 +127,29 @@ class MainViewController: UIViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        soundManager.mistakePlay()
-        timer?.invalidate()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        soundManager.player.stop()
+       playResult()
+        }
+    
+    
+    func playResult() {
+        if !self.question.isMakeMistake() {
+            soundManager.playSound(urlSound: .answerCorrect)
+            timer?.invalidate()
+    
+        } else {
+            soundManager.playSound(urlSound: .answerWrong)
+            timer?.invalidate()
+        }
     }
     
     //MARK: Timer
     func startTimer() {
         soundManager.playSound(urlSound: .timeGoing)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timeGone), userInfo: nil, repeats: true)
-        seconds = 10
+        seconds = 35
         
     }
 
@@ -164,26 +180,25 @@ class MainViewController: UIViewController {
             print("Go back")
         }
         alertController.addAction(cancelAction)
-
         let destroyAction = UIAlertAction(title: "Transfer", style: .destructive) { [weak self] (action) in
-            
             guard let strongLink = self else { return }
             var navStackArray : [UIViewController]! = [strongLink.navigationController!.viewControllers[0]]
             navStackArray.insert(strongLink.finalVC, at: navStackArray.count)
             strongLink.navigationController!.setViewControllers(navStackArray, animated:true)
         }
         alertController.addAction(destroyAction)
+        
         self.present(alertController, animated: true)
     }
         
     @objc func pushAnswerButton(_ sender:AnswerButton) {
         if self.question.checkAnswer(sender.tag) {
+          isWinGame = true
             _ = self.question.nextQuestion()
             self.navigationController?.pushViewController(progressView, animated: true)
             
             //present(progressView, animated: true)
         } else {
-            soundManager.answer(urlSound: .answerWrong)
             if !self.question.isMakeMistake() {
                 mistakeButton!.setDisableImage() //<--- toDo
                 //toDo animation in 2-3 sec
@@ -275,14 +290,26 @@ class MainViewController: UIViewController {
     private func resetPlayerModel() {
         question.player.reset()
     }
-    
+   
 }
 
 //MARK: - Setting delegate
-extension MainViewController: FinalControllerDelegate {
+extension MainViewController: FinalControllerDelegate   {
     
     func saveResults(controller: FinalController) {
         createModel()
         saveModel()
+    }
+    
+    func isWin() -> Bool {
+        return isWinGame
+    }
+    
+    
+    func showLostResult() -> String {
+        return " \(namePlayer).Вы проиграли на \(currentLevel) вопросе"
+    }
+    func takeMoney() -> String {
+        return "\(namePlayer) Вы забрали деньги. Cумма выйграша: \(question.getSumQuestion())"
     }
 }

@@ -11,6 +11,7 @@ import RealmSwift
 class FinalController: UIViewController {
     var delegate: FinalControllerDelegate?
     let finalView = FinalView()
+    
     private lazy var playAgainButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = #colorLiteral(red: 0.2319103479, green: 0.7549440265, blue: 0.2910608053, alpha: 1)
@@ -33,19 +34,19 @@ class FinalController: UIViewController {
         view.addSubview(playAgainButton)
         setConstraints()
         delegate?.saveResults(controller: self)
+        showResult(isWin: delegate!.isWin())
     }
 
-    func showResult(isWin: Bool, questionNumber: Int) {
+    func showResult(isWin: Bool) {
         if isWin {
             finalView.textInformation.text =
             "Вы выйграли! вы ответили на все вопросы!"
             finalView.finalResultText.text = "WIN"
         } else if !isWin {
-            finalView.textInformation.text = " вы проиграли на \(questionNumber) вопросе"
+            finalView.textInformation.text = delegate?.showLostResult()
             finalView.finalResultText.text = "LOSE"
         }
     }
-    
     //MARK: - Selectors
    
     @objc  func buttonTapped() {
@@ -73,4 +74,8 @@ extension FinalController {
 //MARK: - Delegate
 protocol FinalControllerDelegate {
     func saveResults(controller: FinalController)
+    
+    func showLostResult()  -> String
+    func isWin() -> Bool
+func takeMoney() -> String
 }

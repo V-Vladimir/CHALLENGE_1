@@ -27,13 +27,13 @@ class SoundManager {
     private let question = CQuestions()
     var player = AVAudioPlayer()
    
-    func mistakePlay() {
-        if !question.isMakeMistake() {
-            playSound(urlSound: .answerCorrect)
-        } else if question.isMakeMistake() {
-            playSound(urlSound: .answerWrong)
-        }
-    }
+//    func mistakePlay() {
+//        if question.isMakeMistake() {
+//            playSound(urlSound: .answerCorrect)
+//        } else if !question.isMakeMistake() {
+//            playSound(urlSound: .answerWrong)
+//        }
+//    }
     
     
     func playSound(urlSound: SoundsName) {
