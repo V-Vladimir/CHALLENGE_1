@@ -23,10 +23,6 @@ final class HelperButton: UIButton {
         nameOffImage = imageNameOff
         
         setImageView()
-//        imageOff = imageNameOff
-//        var button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setImage(UIImage(named: imageName), for: .normal)
     }
     
     private func setImageView() {

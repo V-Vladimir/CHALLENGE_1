@@ -8,7 +8,7 @@
 import UIKit
 final class ProgressViewController: UIViewController {
     private var question:CQuestions? = nil
-    private var finalVC = FinalController()
+    private var finalVC:FinalController?
     let stack: UIStackView = {
         $0.axis = .vertical
         //$0.alignment = .center
@@ -29,6 +29,7 @@ final class ProgressViewController: UIViewController {
     convenience init(_ question: CQuestions) {
         self.init(nibName:nil, bundle:nil)
         self.question = question
+        finalVC = FinalController(question)
     }
     
     override func viewDidLoad() {
@@ -43,6 +44,9 @@ final class ProgressViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if currentPosition <= 0 {
+            return
+        }
         let buttonPast = ( stack.arrangedSubviews[currentPosition] as! ProgressButton)
         let buttonPresent = ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton)
         if(playerLost){
@@ -67,6 +71,9 @@ final class ProgressViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        if currentPosition <= 0 {
+            return
+        }
         let buttonPast = ( stack.arrangedSubviews[currentPosition] as! ProgressButton)
         let buttonPresent = ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton)
         buttonPast.labelMoneyOrNext.text = ""
@@ -84,26 +91,37 @@ final class ProgressViewController: UIViewController {
         (stack.arrangedSubviews.first as! ProgressButton).setSelectStatus()
     }
     @objc func toBackView() {
-        self.navigationController?.pushViewController(finalVC, animated: true)
+        self.navigationController?.pushViewController(finalVC!, animated: true)
         
     }
-    @objc func changeToLastVC(_ sender: UIButton){
-        if sender.tag == currentPosition{
-            self.navigationController?.pushViewController(finalVC, animated: true) // need to rename finalVC to finalWinVC
-            print("Выбрал забрать деньги")
+    @objc func changeToLastVC(_ sender: ProgressButton){
+        if question!.isFinish {
+            self.navigationController?.pushViewController(finalVC!, animated: true)
+            return
         }
-        if sender.tag == currentPosition - 1 {
+        if sender.labelMoneyOrNext.text == "Money" {
+            question!.winPosition = (question?.countQustion())! - currentPosition
+            self.navigationController?.pushViewController(finalVC!, animated: true) // need to rename finalVC to finalWinVC
+            print("Выбрал забрать деньги")
+            return
+        }
+        if sender.labelMoneyOrNext.text == "Next" {
             self.navigationController?.popViewController(animated: true)
             print("перешел на след вопрос")
+            return
         }
-        if((sender.tag == question!.checkPointPosition[1])) && (currentPosition < 10 ){
-            self.navigationController?.pushViewController(finalVC, animated: true)
-            print("Выбрал несгораемую 1000 сумму")
-        }
-        else if((sender.tag == question!.checkPointPosition[1])) && (currentPosition < 5 ){
-            self.navigationController?.pushViewController(finalVC, animated: true)
-            print("выбрал 32000 сумму")
-        }
+        self.navigationController?.popViewController(animated: true)
+//        if sender.tag == currentPosition - 1 {
+//
+//        }
+//        if((sender.tag == question!.checkPointPosition[1])) && (currentPosition < 10 ){
+//            self.navigationController?.pushViewController(finalVC!, animated: true)
+//            print("Выбрал несгораемую 1000 сумму")
+//        }
+//        else if((sender.tag == question!.checkPointPosition[1])) && (currentPosition < 5 ){
+//            self.navigationController?.pushViewController(finalVC!, animated: true)
+//            print("выбрал 32000 сумму")
+//        }
     }
   
     

@@ -20,17 +20,19 @@ final class CQuestions {
                                 ,"1 Миллион"]
     let checkPointPosition:[Int] = [5, 10]
     var player  = Player()
+    var playerName = ""
     
     private var questions:[Question] = []
-    private var currentPosition = 0 { didSet { player.questionLevel += 1 } }
+    private var currentPosition = 0 { didSet { player.questionLevel += 1 } } //0
     private var activeAnswer:[Int] = []
     //helper flags
-    private var isMistake = false
+    private var isMistake = false // false
     private var isFiftyAndFiftyActive = false
     private var isPeoplesHall = false
     private var isCorrectLastQuestion = true
     var lastAnswerIndex = -1
     var winPosition = 0
+    var isFinish = false
     
     init() {
         loadQuestions()
@@ -133,6 +135,9 @@ final class CQuestions {
     }
     
     func nextQuestion() -> Question {
+        if playerName.isEmpty{
+            playerName = player.name
+        }
         lastAnswerIndex = -1
         isCorrectLastQuestion = false
         currentPosition+=1
@@ -188,5 +193,9 @@ final class CQuestions {
             }
         } while !checkPointPosition.contains(winPosition)
         return getSumQuestionText(winPosition - 1)
+    }
+    
+    func isWin() ->Bool {
+        return true
     }
 }

@@ -18,17 +18,18 @@ class MainViewController: UIViewController {
     var question = CQuestions()
     private let giveMoneyButton = GiveMyMoneyButton("0")
     private var progressView:ProgressViewController?
+    private var finalVC:FinalController?
     private var mistakeButton:HelperButton?
 
     //var preMadeSounds = PreMadeSounds()
     
-    let finalVC = FinalController()
+   
     
     convenience init() {
         self.init(nibName:nil, bundle:nil)
         progressView = ProgressViewController(question)
+        finalVC = FinalController(question)
     }
-    
     
     let baseStack: UIStackView = {
         $0.axis = .vertical
@@ -120,7 +121,7 @@ class MainViewController: UIViewController {
         }
         //giveMoneyButton.addTarget(self, action: #selector(pushMoney), for: .touchUpInside)
         
-        finalVC.delegate = self
+        finalVC!.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -199,11 +200,11 @@ class MainViewController: UIViewController {
     @objc func nextQuestionController() {
         soundManager.stop()
         if (question.getPosition()) == question.countQustion() {
+            question.winPosition = question.countQustion()
             var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
-            finalVC.setWinText(question.getWinSumm())
-            finalVC.showResult(isWin: true, questionNumber: question.getPosition())
+            //finalVC!.setWinText(question.getWinSumm())
             
-            navStackArray.insert(finalVC, at: navStackArray.count)
+            navStackArray.insert(finalVC!, at: navStackArray.count)
             self.navigationController!.setViewControllers(navStackArray, animated:true)
             return
         }
@@ -213,11 +214,11 @@ class MainViewController: UIViewController {
     }
     
     @objc func gameOver() {
+        question.isFinish = true
         var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
-        finalVC.setWinText(question.getWinSumm())
-        finalVC.showResult(isWin: false, questionNumber: question.getPosition())
+        //inalVC!.setWinText(question.getWinSumm())
         progressView?.playerLost = true 
-        navStackArray.insert(finalVC, at: navStackArray.count)
+        navStackArray.insert(finalVC!, at: navStackArray.count)
         navStackArray.insert(progressView!, at: navStackArray.count)
         self.navigationController!.setViewControllers(navStackArray, animated:true)
     }

@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 
 class FinalController: UIViewController {
+    private var question:CQuestions? = nil
     var delegate: FinalControllerDelegate?
     let finalView = FinalView()
     var winSubText = ""
@@ -24,6 +25,11 @@ class FinalController: UIViewController {
         return button
     }()
     
+    convenience init(_ question: CQuestions) {
+        self.init(nibName:nil, bundle:nil)
+        self.question = question
+    }
+    
     //load view from FinalView
     override func loadView() {
         view = finalView
@@ -35,17 +41,32 @@ class FinalController: UIViewController {
         setConstraints()
         delegate?.saveResults(controller: self)
     }
-
-    func showResult(isWin: Bool, questionNumber: Int,_ money: Int = 0) {
-        if isWin {
-            finalView.textInformation.text =
-            "Вы выйграли! вы ответили на все вопросы!"
-            finalView.finalResultText.text =  winSubText
-        } else if !isWin {
-            finalView.textInformation.text = " вы проиграли на \(questionNumber) вопросе \n \(money)"
-            finalView.finalResultText.text =  winSubText
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showResult()
     }
+
+    func showResult() {
+        if question!.winPosition == question!.countQustion() {
+            finalView.textInformation.text = "\(question!.playerName) Вы победитель."
+        } else
+        if (question!.winPosition == 0) {
+            finalView.textInformation.text = showLostResult()
+        } else {
+            finalView.textInformation.text = takeMoney()
+        }
+        finalView.finalResultText.text =  question!.getWinSumm()
+    }
+    
+    func showLostResult() -> String {
+        return "\(question!.playerName).Вы проиграли на \(question!.getPosition()) вопросе";
+    }
+    
+    func takeMoney() -> String {
+        return "\(question!.playerName) Вы забрали деньги на \(question!.getPosition())."
+    }
+
+    
     func setWinText(_ text:String) {
         winSubText = text
     }

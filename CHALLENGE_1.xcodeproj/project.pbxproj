@@ -15,7 +15,6 @@
 		56C4FDAB299505C0002B8FAF /* answerAccepted.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 56C4FDA7299505C0002B8FAF /* answerAccepted.mp3 */; };
 		56C4FDAD299508E2002B8FAF /* mainSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 56C4FDAC299508E2002B8FAF /* mainSound.mp3 */; };
 		C3A13DB3298FC64600AE2302 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A13DB2298FC64600AE2302 /* MainViewController.swift */; };
-		C3A13DB5298FD79F00AE2302 /* GradientsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A13DB4298FD79F00AE2302 /* GradientsColors.swift */; };
 		CC715943298F80CB00400F0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715942298F80CB00400F0B /* AppDelegate.swift */; };
 		CC715945298F80CB00400F0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715944298F80CB00400F0B /* SceneDelegate.swift */; };
 		CC715947298F80CB00400F0B /* WelocmeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC715946298F80CB00400F0B /* WelocmeViewController.swift */; };
@@ -60,7 +59,6 @@
 		56C4FDA7299505C0002B8FAF /* answerAccepted.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = answerAccepted.mp3; sourceTree = "<group>"; };
 		56C4FDAC299508E2002B8FAF /* mainSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mainSound.mp3; sourceTree = "<group>"; };
 		C3A13DB2298FC64600AE2302 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		C3A13DB4298FD79F00AE2302 /* GradientsColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientsColors.swift; sourceTree = "<group>"; };
 		CC71593F298F80CB00400F0B /* CHALLENGE_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CHALLENGE_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC715942298F80CB00400F0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC715944298F80CB00400F0B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 			children = (
 				18512B3F298FD17700F71511 /* ProgressViewController.swift */,
 				C3A13DB2298FC64600AE2302 /* MainViewController.swift */,
-				C3A13DB4298FD79F00AE2302 /* GradientsColors.swift */,
 				CC715946298F80CB00400F0B /* WelocmeViewController.swift */,
 				D85E54A729903D1F00BE7980 /* RuleViewController.swift */,
 				CC71595D2991245700400F0B /* FinalController.swift */,
@@ -376,7 +373,6 @@
 				CC71595E2991245700400F0B /* FinalController.swift in Sources */,
 				CC715945298F80CB00400F0B /* SceneDelegate.swift in Sources */,
 				C3A13DB3298FC64600AE2302 /* MainViewController.swift in Sources */,
-				C3A13DB5298FD79F00AE2302 /* GradientsColors.swift in Sources */,
 				CC7159682992CB0F00400F0B /* QuestionManager.swift in Sources */,
 				D85E54A629901E9500BE7980 /* String + Extensions.swift in Sources */,
 				D8FFD734299597F900FFCED5 /* UIViewController + Extensions.swift in Sources */,
