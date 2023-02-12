@@ -8,13 +8,7 @@
 import UIKit
 
 final class ProgressButton : AnswerButton {
-    //MARK: Функция Градиента
-//    override func applyGradients() {
-//        gradient.locations = [0.0, 0.5, 1.0]
-//        gradient.cornerRadius = 16
-//        gradient.frame = self.bounds
-//        self.layer.insertSublayer(gradient, at: 0)
-//    }
+    
 }
     
 class AnswerButton : UIButton {
@@ -32,7 +26,15 @@ class AnswerButton : UIButton {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UILabel())
-    
+    let labelMoneyOrNext: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = ""
+        label.contentMode = .scaleAspectFit
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     convenience init(frame:CGRect, text:String) {
         self.init(frame: frame)
     }
@@ -50,6 +52,7 @@ class AnswerButton : UIButton {
 
         self.addSubview(labelTag)
         self.addSubview(textAnswer)
+        self.addSubview(labelMoneyOrNext)
         setDefaultStatus()
         setText(text)
     }
@@ -83,6 +86,8 @@ class AnswerButton : UIButton {
         labelTag.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
         textAnswer.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
         textAnswer.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        labelMoneyOrNext.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        labelMoneyOrNext.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.applyGradients()
     }
     

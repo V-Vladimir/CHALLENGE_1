@@ -43,14 +43,18 @@ final class ProgressViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let buttonPast = ( stack.arrangedSubviews[currentPosition] as! ProgressButton)
+        let buttonPresent = ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton)
         if(playerLost){
-            ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setMistakeStatus()
+            buttonPresent.setMistakeStatus()
             self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
         }
         else{
             if currentPosition > 0 {
-                ( stack.arrangedSubviews[currentPosition] as! ProgressButton).setCorrectStatus()
-                ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()
+                buttonPast.setCorrectStatus()
+                buttonPast.labelMoneyOrNext.text = "Money"
+                buttonPresent.setSelectStatus()
+                buttonPresent.labelMoneyOrNext.text = "Next"
             }
             if(currentPosition == 11){ ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()}
             else if (currentPosition == 6){ ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()}
@@ -58,11 +62,15 @@ final class ProgressViewController: UIViewController {
                 for item in question!.checkPointPosition {
                     ( stack.arrangedSubviews[item] as! ProgressButton).setMistakeStatus()
                 }
-                if(playerLost){
-                    
-                }
             }
         }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let buttonPast = ( stack.arrangedSubviews[currentPosition] as! ProgressButton)
+        let buttonPresent = ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton)
+        buttonPast.labelMoneyOrNext.text = ""
+        buttonPresent.labelMoneyOrNext.text = ""
     }
     private func makeLabels(){
         for i in 0..<(question?.countQustion())! {
@@ -97,6 +105,7 @@ final class ProgressViewController: UIViewController {
             print("выбрал 32000 сумму")
         }
     }
+  
     
     func setCurrentPosition(_ index: Int) {
         currentPosition = (question?.countQustion())! - index
