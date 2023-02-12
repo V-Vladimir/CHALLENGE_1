@@ -8,6 +8,7 @@
 import UIKit
 final class ProgressViewController: UIViewController {
     private var question:CQuestions? = nil
+    private var finalVC = FinalController()
     let stack: UIStackView = {
         $0.axis = .vertical
         //$0.alignment = .center
@@ -23,7 +24,7 @@ final class ProgressViewController: UIViewController {
         return $0
     }(UIImageView())
     var currentPosition = 0
-    var progressCells: [UIImageView] = []
+    var playerLost = false
     
     convenience init(_ question: CQuestions) {
         self.init(nibName:nil, bundle:nil)
@@ -35,13 +36,32 @@ final class ProgressViewController: UIViewController {
         self.view.addBackground()
         makeLabels()
         setupConstraints()
-        self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
+        for item in 0..<(question?.countQustion())! {
+            (stack.arrangedSubviews[item] as! ProgressButton).addTarget(self, action: #selector(changeToLastVC), for: .touchUpInside)
+        }
+        //self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if currentPosition > 0 {
-            ( stack.arrangedSubviews[currentPosition] as! ProgressButton).setCorrectStatus()
-            ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()
+        if(playerLost){
+            ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setMistakeStatus()
+            self.view.addTapGesture(tapNumber: 1, target: self, action: #selector(toBackView))
+        }
+        else{
+            if currentPosition > 0 {
+                ( stack.arrangedSubviews[currentPosition] as! ProgressButton).setCorrectStatus()
+                ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()
+            }
+            if(currentPosition == 11){ ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()}
+            else if (currentPosition == 6){ ( stack.arrangedSubviews[currentPosition - 1] as! ProgressButton).setSelectStatus()}
+            else {
+                for item in question!.checkPointPosition {
+                    ( stack.arrangedSubviews[item] as! ProgressButton).setMistakeStatus()
+                }
+                if(playerLost){
+                    
+                }
+            }
         }
     }
     private func makeLabels(){
@@ -55,21 +75,35 @@ final class ProgressViewController: UIViewController {
         }
         (stack.arrangedSubviews.first as! ProgressButton).setSelectStatus()
     }
-
-    private func checkLastQuestion(_ index: Int) -> String{
-        if(index + 1 == 1){
-            return ""
-        } else {
-            return "RUB"
-        }
-    }
     @objc func toBackView() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.pushViewController(finalVC, animated: true)
+        
+    }
+    @objc func changeToLastVC(_ sender: UIButton){
+        if sender.tag == currentPosition{
+            self.navigationController?.pushViewController(finalVC, animated: true) // need to rename finalVC to finalWinVC
+            print("Выбрал забрать деньги")
+        }
+        if sender.tag == currentPosition - 1 {
+            self.navigationController?.popViewController(animated: true)
+            print("перешел на след вопрос")
+        }
+        if((sender.tag == question!.checkPointPosition[1])) && (currentPosition < 10 ){
+            self.navigationController?.pushViewController(finalVC, animated: true)
+            print("Выбрал несгораемую 1000 сумму")
+        }
+        else if((sender.tag == question!.checkPointPosition[1])) && (currentPosition < 5 ){
+            self.navigationController?.pushViewController(finalVC, animated: true)
+            print("выбрал 32000 сумму")
+        }
     }
     
     func setCurrentPosition(_ index: Int) {
         currentPosition = (question?.countQustion())! - index
-        print(currentPosition)
+    }
+    func setLostPosition(_ index: Int) {
+        currentPosition = (question?.countQustion())! - index
+        playerLost = true
     }
     
 }

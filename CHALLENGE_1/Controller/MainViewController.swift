@@ -216,7 +216,7 @@ class MainViewController: UIViewController {
         var navStackArray : [UIViewController]! = [self.navigationController!.viewControllers[0]]
         finalVC.setWinText(question.getWinSumm())
         finalVC.showResult(isWin: false, questionNumber: question.getPosition())
-        
+        progressView?.playerLost = true 
         navStackArray.insert(finalVC, at: navStackArray.count)
         navStackArray.insert(progressView!, at: navStackArray.count)
         self.navigationController!.setViewControllers(navStackArray, animated:true)

@@ -53,7 +53,7 @@ class FinalController: UIViewController {
     //MARK: - Selectors
    
     @objc  func buttonTapped() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.pushViewController(WelocmeViewController(), animated: true)
     }
 }
 

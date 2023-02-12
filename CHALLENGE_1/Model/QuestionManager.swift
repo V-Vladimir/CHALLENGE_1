@@ -155,7 +155,14 @@ final class CQuestions {
         return getSumQuestionText(currentPosition - 1)
     }
     func getSumQuestionText(_ index: Int) -> String {
-        return "\(amountsOfWin[index]) RUB"
+        return "\(amountsOfWin[index]) \(checkLastQuestion(index))"
+    }
+    private func checkLastQuestion(_ index: Int) -> String{
+        if(index == amountsOfWin.count - 1){
+            return ""
+        } else {
+            return "RUB"
+        }
     }
 
     func countQustion() -> Int {
