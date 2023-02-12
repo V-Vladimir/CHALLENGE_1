@@ -9,6 +9,9 @@ import UIKit
 import RealmSwift
 
 class FinalController: UIViewController {
+    private let localRealm = try! Realm()
+    private var playerModel = PlayerModel()
+    
     private var question:CQuestions? = nil
     var delegate: FinalControllerDelegate?
     let finalView = FinalView()
@@ -39,14 +42,15 @@ class FinalController: UIViewController {
         super.viewDidLoad()
         view.addSubview(playAgainButton)
         setConstraints()
-        delegate?.saveResults(controller: self)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         showResult()
     }
 
     func showResult() {
+        saveResults()
         if question!.winPosition == question!.countQustion() {
             finalView.textInformation.text = "\(question!.playerName) Вы победитель."
         } else
@@ -75,6 +79,28 @@ class FinalController: UIViewController {
    
     @objc  func buttonTapped() {
         self.navigationController?.pushViewController(WelocmeViewController(), animated: true)
+    }
+    
+    //MARK: - Setup for Realm
+    private func createModel() {
+        playerModel.playerName = question!.player.name
+        playerModel.levelQuestion = question!.player.questionLevel
+        playerModel.date = question!.player.date
+    }
+    
+    private func saveModel() {
+        RealmManager.shared.savePlayerModel(playerModel)
+        playerModel = PlayerModel()
+        resetPlayerModel()
+    }
+    
+    private func resetPlayerModel() {
+        question!.player.reset()
+    }
+    
+    func saveResults() {
+        createModel()
+        saveModel()
     }
 }
 

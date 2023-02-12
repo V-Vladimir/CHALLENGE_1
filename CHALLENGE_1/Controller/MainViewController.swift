@@ -9,8 +9,6 @@ import UIKit
 import RealmSwift
 
 class MainViewController: UIViewController {
-    private let localRealm = try! Realm()
-    private var playerModel = PlayerModel()
 //    private var seconds = 30
     private var timer: Timer?
     private var soundManager = SoundManager()
@@ -121,7 +119,7 @@ class MainViewController: UIViewController {
         }
         //giveMoneyButton.addTarget(self, action: #selector(pushMoney), for: .touchUpInside)
         
-        finalVC!.delegate = self
+        //finalVC!.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -294,30 +292,10 @@ class MainViewController: UIViewController {
             
         ])
     }
-    
-    //MARK: - Setup for Realm
-    private func createModel() {
-        playerModel.playerName = question.player.name
-        playerModel.levelQuestion = question.player.questionLevel
-        playerModel.date = question.player.date
-    }
-    
-    private func saveModel() {
-        RealmManager.shared.savePlayerModel(playerModel)
-        playerModel = PlayerModel()
-        resetPlayerModel()
-    }
-    
-    private func resetPlayerModel() {
-        question.player.reset()
-    }
 }
 
-//MARK: - Setting delegate
-extension MainViewController: FinalControllerDelegate {
-    
-    func saveResults(controller: FinalController) {
-        createModel()
-        saveModel()
-    }
-}
+////MARK: - Setting delegate
+//extension MainViewController: FinalControllerDelegate {
+//    
+//
+//}
