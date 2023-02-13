@@ -307,7 +307,7 @@ extension MainViewController: FinalControllerDelegate   {
     
     
     func showLostResult() -> String {
-        return " \(namePlayer).Вы проиграли на \(currentLevel) вопросе"
+        return " \(question.player.name).Вы проиграли на \(currentLevel) вопросе"
     }
     func takeMoney() -> String {
         return "\(namePlayer) Вы забрали деньги. Cумма выйграша: \(question.getSumQuestion())"

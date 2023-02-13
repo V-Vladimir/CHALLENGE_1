@@ -15,6 +15,9 @@ class RealmManager {
     
     private let localRealm = try! Realm()
     
+    
+    /// <#Description#>
+    /// - Parameter model: <#model description#>
     func  savePlayerModel(_ model: PlayerModel) {
         try! localRealm.write {
             localRealm.add(model)

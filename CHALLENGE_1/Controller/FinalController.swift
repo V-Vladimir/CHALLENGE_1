@@ -77,5 +77,5 @@ protocol FinalControllerDelegate {
     
     func showLostResult()  -> String
     func isWin() -> Bool
-func takeMoney() -> String
+    func takeMoney() -> String
 }
